@@ -5,6 +5,12 @@ orientation and other personal traits, centred on the work of
 **Michal Kosinski** (Stanford Graduate School of Business). The end product is
 an explainer video (see [`video/`](video/)).
 
+## Live pages
+
+- Site: https://barts83eu.github.io/facial-analysis-lefty-people-2026/
+- Report: https://barts83eu.github.io/facial-analysis-lefty-people-2026/report/
+- Update: edit `site/` or `report/`, then `scripts/build-pages.sh && scripts/deploy-pages.sh`
+
 ## Credits
 
 | Role | Who |

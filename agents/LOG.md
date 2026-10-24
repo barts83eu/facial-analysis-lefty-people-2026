@@ -29,3 +29,9 @@
 - Finding: data/raw image is a Visegrad24 graphic of Mehdi Hasan, not the PI.
 - Open items: PI photo for site slot (#photo-slot, 4:5); confirm name spelling;
   verify advertising facts in site section 05 (from memory).
+
+## 2026-10-24 — Claude Opus 5.5 (GitHub)
+- What: repo https://github.com/barts83eu/facial-analysis-lefty-people-2026 (public);
+  Pages from gh-pages branch → https://barts83eu.github.io/facial-analysis-lefty-people-2026/
+- How: scripts/build-pages.sh wraps fragments into _site/; scripts/deploy-pages.sh force-pushes gh-pages.
+  (No Actions workflow: gh token lacks `workflow` scope.) data/raw/* is gitignored.
