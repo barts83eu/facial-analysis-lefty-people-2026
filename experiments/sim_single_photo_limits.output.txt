@@ -1,0 +1,22 @@
+1) Published effect -> single-person accuracy (50/50 base rate)
+
+source                                       reported       d   AUC  1-person acc
+Politicians, Kosinski 2024                   r = .13     0.26  0.57          55%
+Lab photos, algorithm, Kosinski 2024         r = .22     0.45  0.63          59%
+Lab photos + demographics, Kosinski 2024     r = .31     0.65  0.68          63%
+Naturalistic photos, Kosinski 2021           AUC = .72   0.82  0.72          66%
+
+2) Small test set: 10 photos per side, true accuracy 59%
+
+   P(observed accuracy <= 50%, i.e. looks useless) = 28%
+   P(observed accuracy >= 70%, i.e. looks impressive) = 22%
+   95% CI if you observe 60% on 20 photos: 39% - 78%
+
+3) CCTV base-rate scenario: crowd 100,000, 10 people with violent intent
+
+   Generous AUC 0.72 -> threshold catching 50% of threats
+   true positives  = 5
+   false positives = 20,487
+   innocent people flagged per real threat = 4,097
+   precision = 0.024%
+
