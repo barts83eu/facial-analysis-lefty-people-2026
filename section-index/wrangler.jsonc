@@ -1,0 +1,19 @@
+{
+  // budotsmedia.com/ghostinthemachine/: the section index page and its media (25 Oct 2026).
+  // Each research file under /ghostinthemachine/<slug>/ has its own Worker (e.g. ../wrangler.jsonc);
+  // the rest of budotsmedia.com stays with the site's Worker budotsmedia-260818.
+  // Deploy from this folder: npx wrangler deploy (live at once).
+  "name": "ghostinthemachine-index",
+  "account_id": "1ddb1d70501c190c2bb95be0108aa771",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "./site", "html_handling": "auto-trailing-slash", "not_found_handling": "none" },
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "budotsmedia.com/ghostinthemachine", "zone_name": "budotsmedia.com" },
+    { "pattern": "budotsmedia.com/ghostinthemachine/", "zone_name": "budotsmedia.com" },
+    { "pattern": "budotsmedia.com/ghostinthemachine/media/*", "zone_name": "budotsmedia.com" },
+    { "pattern": "www.budotsmedia.com/ghostinthemachine", "zone_name": "budotsmedia.com" },
+    { "pattern": "www.budotsmedia.com/ghostinthemachine/", "zone_name": "budotsmedia.com" },
+    { "pattern": "www.budotsmedia.com/ghostinthemachine/media/*", "zone_name": "budotsmedia.com" }
+  ]
+}

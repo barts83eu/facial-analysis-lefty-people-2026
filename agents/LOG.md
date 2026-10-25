@@ -59,3 +59,18 @@
   (朝鲜族 for the Korean ethnic group in the Dalian Minzu paper; "Expression of Concern" as 关注声明).
   Fixed two EN wording mismatches it found (Hausladen 2025, Rasmussen 2023) in EN and ZH. All four pages live on
   budotsmedia.com and GitHub Pages.
+
+## 2026-10-25 — Claude Opus 5.5 (meme in hero)
+- What: internet political-compass meme (PI-supplied, author unknown) as the hero visual of site EN and ZH,
+  captioned as opinion, not measurement; ASCII logo + logo image moved to the footer.
+- Files: site/assets/political-compass-meme.webp, site/index.html, site/zh/index.html,
+  agents/claude-opus-5-5/shots/2026-10-25_meme-hero_{desktop,phone}.png
+- Open items: deploy (npx wrangler deploy) not yet run, needs PI approval; link from budotsmedia.com/bart/
+  (served by the main Worker budotsmedia-260818, source not on the mounted disks; peer session bart-26 may own it).
+
+## 2026-10-25 — Claude Opus 5.5 (section index)
+- What: https://budotsmedia.com/ghostinthemachine/ section index, own Worker `ghostinthemachine-index` with exact routes
+  for /ghostinthemachine, /ghostinthemachine/ and /ghostinthemachine/media/*; layout and stylesheet copied from /uas/.
+  Card images are screenshots of the four live pages; share image og-ghostinthemachine.jpg (1200 × 630).
+- Files: section-index/ (wrangler.jsonc, site/ghostinthemachine/index.html, media/*.jpg), README.md, .gitignore
+- Open items: a top-bar link needs the main Worker budotsmedia-260818 (source on the D2 SSD, not mounted).

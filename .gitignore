@@ -9,3 +9,4 @@ _cf/
 .wrangler/
 data/owner/
 agents/claude-opus-5-5/shots/
+section-index/.wrangler/

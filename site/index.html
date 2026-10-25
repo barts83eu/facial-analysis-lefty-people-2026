@@ -66,6 +66,10 @@ p { margin: 0; }
 .hero-art { display: grid; gap: .5rem; justify-items: center; }
 .ascii { font: 700 5px/5px var(--mono); color: var(--phosphor); white-space: pre; margin: 0; text-shadow: 0 0 6px rgba(255,180,58,.6); }
 .logo-img { width: 180px; max-width: 100%; mix-blend-mode: screen; filter: sepia(1) saturate(3.2) hue-rotate(-12deg) brightness(1.05); }
+.meme { margin: 0; width: clamp(260px, 38vw, 460px); max-width: 100%; display: grid; gap: .5rem; }
+.meme img { width: 100%; height: auto; display: block; border: 1px solid var(--line); box-shadow: 0 0 28px rgba(255,180,58,.18); }
+.meme figcaption { max-width: 46ch; }
+@media (max-width: 560px) { .meme { width: 100%; } }
 
 /* Stats */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
@@ -111,8 +115,10 @@ footer .inner { padding-block: 3rem; }
       <p>The answer from ten years of Stanford research: <span class="hl">a weak signal across millions of faces</span>, close to a coin flip for any one person.</p>
     </div>
     <div class="hero-art">
-      <pre class="ascii" id="ascii-logo" aria-label="Budots Media Philippines logo rendered as text"></pre>
-      <img class="logo-img" id="logo" src="assets/budots-logo.jpg" alt="Budots Media Philippines">
+      <figure class="meme">
+        <img src="assets/political-compass-meme.webp" width="789" height="789" alt="Internet political-compass meme: a 20 by 20 grid with authoritarian–libertarian and economic left–right axes, filled with logos, flags and faces of public figures">
+        <figcaption class="tiny">Political compass of the internet · meme, author unknown · placements are opinion; this page tests whether faces carry that signal</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -281,6 +287,10 @@ footer .inner { padding-block: 3rem; }
   <div class="inner">
     <div class="console">
       <span class="tiny">budotsmedia.com · ghost in the machine · 2026 · <a href="https://github.com/barts83eu/facial-analysis-lefty-people-2026">source on GitHub</a></span>
+    </div>
+    <div class="hero-art">
+      <pre class="ascii" id="ascii-logo" aria-label="Budots Media Philippines logo rendered as text"></pre>
+      <img class="logo-img" id="logo" src="assets/budots-logo.jpg" alt="Budots Media Philippines">
     </div>
   </div>
 </footer>

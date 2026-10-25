@@ -10,6 +10,8 @@ an explainer video (see [`video/`](video/)).
 - budotsmedia.com: https://budotsmedia.com/ghostinthemachine/facial-recognition-politics/ (report: `…/report/`)
   — Cloudflare Worker `ghostinthemachine-facial-recognition-politics` (`wrangler.jsonc`);
   update with `scripts/build-budotsmedia.sh && npx wrangler deploy`
+- Section index: https://budotsmedia.com/ghostinthemachine/ — Worker `ghostinthemachine-index`
+  (`section-index/`; edit `section-index/site/ghostinthemachine/index.html`, then `cd section-index && npx wrangler deploy`)
 - Site: https://barts83eu.github.io/facial-analysis-lefty-people-2026/
 - Report: https://barts83eu.github.io/facial-analysis-lefty-people-2026/report/
 - Update: edit `site/` or `report/`, then `scripts/build-pages.sh && scripts/deploy-pages.sh`
