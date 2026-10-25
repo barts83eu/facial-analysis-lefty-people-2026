@@ -90,6 +90,7 @@ p { margin: 0; }
 .card { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem; align-items: center; }
 .photo { width: 216px; max-width: 100%; aspect-ratio: 4 / 5; border: 1px dashed var(--phosphor-dim); display: grid; place-items: center; background: repeating-linear-gradient(45deg, var(--screen) 0 8px, var(--void) 8px 16px); }
 .photo .tiny16 { color: var(--phosphor-dim); text-align: center; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 @media (max-width: 560px) { .card { grid-template-columns: 1fr; } }
 
 footer .inner { padding-block: 3rem; }
@@ -213,9 +214,9 @@ footer .inner { padding-block: 3rem; }
       <span class="tiny">06 · research team</span>
     </div>
     <div class="card">
-      <div class="photo" id="photo-slot"><span class="tiny16">PHOTO<br>216 × 270</span></div>
+      <div class="photo" id="photo-slot"><img src="assets/owner-face-recognition.webp" width="294" height="380" alt="Bart Sakwerda in a CCTV frame with face-detection boxes"></div>
       <div class="console">
-        <h2>Bartek Sakwerda</h2>
+        <h2>Bart Sakwerda</h2>
         <p>Principal investigator · Budots Media Philippines. Security, CCTV and digital-twin projects.</p>
         <p class="prompt">credits --orchestration</p>
         <p>Research workflow orchestrated by <strong>Claude Opus 5.5</strong> (Anthropic): literature and GitHub survey, simulation, this site. Kimi and ChatGPT Codex are invited to verify.</p>

@@ -7,3 +7,4 @@ video/renders/*
 _site/
 _cf/
 .wrangler/
+data/owner/
