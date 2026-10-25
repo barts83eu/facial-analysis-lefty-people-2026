@@ -35,3 +35,10 @@
   Pages from gh-pages branch → https://barts83eu.github.io/facial-analysis-lefty-people-2026/
 - How: scripts/build-pages.sh wraps fragments into _site/; scripts/deploy-pages.sh force-pushes gh-pages.
   (No Actions workflow: gh token lacks `workflow` scope.) data/raw/* is gitignored.
+
+## 2026-10-25 — Claude Opus 5.5 (budotsmedia.com)
+- What: published site + report at https://budotsmedia.com/ghostinthemachine/facial-recognition-politics/
+  via its own Cloudflare Worker (same pattern as the /uas/ pages); GitHub Pages copy unchanged.
+- Files: scripts/build-budotsmedia.sh, wrangler.jsonc, .gitignore (_cf/, .wrangler/), README.md
+- Open items: /ghostinthemachine/ index page and nav link live in the main site's Worker (budotsmedia-260818),
+  whose source is not on the mounted disks.

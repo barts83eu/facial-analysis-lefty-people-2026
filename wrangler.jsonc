@@ -1,0 +1,14 @@
+{
+  // budotsmedia.com/ghostinthemachine/facial-recognition-politics: site + report as static assets (25 Oct 2026).
+  // The rest of budotsmedia.com stays with the site's Worker budotsmedia-260818.
+  // Build _cf/ with scripts/build-budotsmedia.sh, then deploy with npx wrangler deploy (live at once).
+  "name": "ghostinthemachine-facial-recognition-politics",
+  "account_id": "1ddb1d70501c190c2bb95be0108aa771",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "./_cf", "html_handling": "auto-trailing-slash", "not_found_handling": "404-page" },
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "budotsmedia.com/ghostinthemachine/facial-recognition-politics*", "zone_name": "budotsmedia.com" },
+    { "pattern": "www.budotsmedia.com/ghostinthemachine/facial-recognition-politics*", "zone_name": "budotsmedia.com" }
+  ]
+}
