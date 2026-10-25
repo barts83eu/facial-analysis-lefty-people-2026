@@ -69,3 +69,69 @@ it — we need regulation."
 | Signal is mostly facial *structure* | Weak/contested — self-presentation explains a large share in naturalistic photos |
 | Signal enables reliable *individual* classification | **Not supported** — see `02-methods-and-metrics.md` |
 | Signal is a population-level privacy risk | Supported — this is Kosinski's main argument |
+
+## 7. Additions, 2026-10-25
+
+Search notes with numbers and status for each source:
+`agents/claude-opus-5-5/research-2026-10-25-new-sources.md`. Keys refer to
+`references/bibliography.md`.
+
+### 7.1 Political orientation outside the US
+- [Rasmussen2023] 3,323 Danish candidates: 61% accuracy. Predictions tracked
+  smiling and, for women, attractiveness; heat maps show the model also used
+  areas outside the face.
+- [Lindholm2025] 7,080 Danish politicians: model scores for attractiveness and
+  trustworthiness correlate with ballot position and votes (success, not ideology).
+- No published replication of [Kosinski2024] on a new lab sample was found.
+
+### 7.2 Personality
+- [Kachur2020] 12,447 volunteers, mean r = .24 with self-reported Big Five.
+  Three of five authors worked for the data provider.
+- [Guenzel2026NBER] reuses the Kachur model on LinkedIn photos of about 96,000
+  MBA graduates; "Photo Big 5" predicts pay and seniority. Authors warn against
+  screening use.
+- [Hu2017SciRep] 3D faces, 834 Han Chinese adults: face shape explains
+  0.67–3.95% of personality variance.
+- [Xu2021IEEEAccess] (NWPU Xi'an) and [CaiLiu2022] (CAS Institute of Psychology):
+  Chinese samples; binned-class accuracy and a small video sample (N = 82),
+  so not comparable with the correlations above.
+- Human raters: [Jaeger2024EJP] impressions not accurate and over-confident;
+  [Foo2022PSPB] meta-analysis, trustworthiness r = .14 at face level.
+  [LiuWenZuo2019] (ZH review) calls accuracy "moderate" and context-dependent.
+- Benchmark: [HindsJoinson2024] computer prediction from all digital footprints,
+  pooled ρ = .30. Face-only results sit below this.
+
+### 7.3 Sexual orientation
+- [Leuner2019] (author John Leuner) replicated on 20,910 new photos: 68% / 77%;
+  a model on blurred images still reached 63% / 72%.
+- [Gelman2018Gaydar] the classifier measures dating-site self-presentation.
+- No peer-reviewed replication on a new population (2020–2026) and no test of
+  vision-language models for sexual orientation was found.
+
+### 7.4 Vision-language models
+- [Jeon2026PA] GPT-4o, GPT-4o-mini and LLaVA label identical ads with women as
+  more liberal (b = .41; survey benchmark .15). Race effect depends on model;
+  Gemini refused.
+- [Hausladen2025FAccT] CLIP social judgments shift more with expression than with
+  age, and with lighting about as much as with age.
+
+### 7.5 Cambridge Analytica
+- CA asked Stillwell for myPersonality data; he refused. Kogan's GSR app then
+  collected data on up to 87 million users ([ICO2018Report]).
+- [ICO2020Letter] CA's models were "well recognised processes using commonly
+  available technology"; real-world accuracy on new individuals "was likely much
+  lower". GSR data could not have been used in the Brexit referendum.
+- Effect of psychological targeting: [Matz2017PNAS] up to +40% clicks; challenged
+  by [Eckles2018PNAS]; [Tappin2023PNAS] finds extra targeting attributes add
+  little. LLM-written tailoring: [Simchon2024], [Matz2024SciRep].
+
+### 7.6 China
+- Law: [PIPL2021] Art. 28–29 (biometrics are sensitive data, separate consent);
+  [SPC2021FaceRec] (face analysis in public places in breach of law infringes
+  personality rights); [CAC2025FaceRecMeasures] in force 1 Jun 2025, Art. 2(2)
+  exempts R&D and algorithm training. None names political views or ethnicity.
+- Research: [WuZhang2016] criminality (SJTU), reply in v3 and [ThePaper2017WuXiaolin];
+  [Wang2018WIREs] ethnicity recognition (Dalian Minzu + Curtin), under an
+  Expression of Concern; personality work at CAS, Fudan and NWPU (7.2).
+- Deployment reports: [Treasury2021SenseTime], [IPVM2020HuaweiMegvii],
+  [IPVM2020Uniview], [Context2021Patents], [Mozur2019NYT] (partly verified).

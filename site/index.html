@@ -105,7 +105,7 @@ footer .inner { padding-block: 3rem; }
   <div class="layer" data-speed="-0.15" aria-hidden="true"><span class="ghost" style="right:-2vw; top:38%">AUC</span></div>
   <div class="inner">
     <div class="console">
-      <span class="tiny">Budots Media Philippines · research file 2026-10-24</span>
+      <span class="tiny">Budots Media Philippines · research file 2026-10-25 · <a href="zh/" lang="zh-Hans" hreflang="zh-Hans">中文</a></span>
       <h1>Can a face reveal your politics?</h1>
       <p class="prompt cursor">./verdict --subject=faces --target=political_orientation</p>
       <p>The answer from ten years of Stanford research: <span class="hl">a weak signal across millions of faces</span>, close to a coin flip for any one person.</p>
@@ -185,23 +185,63 @@ footer .inner { padding-block: 3rem; }
   </div>
 </section>
 
+<!-- OTHER TRAITS -->
+<section class="band">
+  <div class="layer" data-speed="0.25" aria-hidden="true"><span class="ghost" style="right:-3vw; top:25%">r=.24</span></div>
+  <div class="inner">
+    <div class="console">
+      <span class="tiny">05 · personality &amp; sexual orientation</span>
+      <h2>The same pattern for other traits</h2>
+      <p>Studies of personality and sexual orientation from faces show the same pattern: small effects in large samples, and most of the signal comes from self-presentation.</p>
+    </div>
+    <div class="rows console">
+      <div class="row"><b>Selfies → Big Five</b><span>Kachur et al. 2020: 12,447 volunteers, mean <strong>r = .24</strong>. The data came from the employer of three of the five authors.</span></div>
+      <div class="row"><b>3D face shape</b><span>Hu et al. 2017 (Shanghai, Fudan): 834 Han Chinese adults. Face shape explains <strong>0.7–4%</strong> of personality variance.</span></div>
+      <div class="row"><b>Human judges</b><span>Jaeger et al. 2024: personality impressions from faces are <strong>not accurate</strong>, and people overestimate their accuracy. Trustworthiness meta-analysis: r = .14.</span></div>
+      <div class="row"><b>Hiring and pay</b><span>NBER 2026: "Photo Big 5" scores from LinkedIn photos of <strong>96,000</strong> MBA graduates predict pay and seniority. The authors warn against using it in hiring.</span></div>
+      <div class="row"><b>Sexual orientation</b><span>Wang &amp; Kosinski 2018: 81% / 74% pairwise. Leuner 2019: a model on <strong>blurred</strong> photos still reached 63% / 72%, so much of the signal is not facial structure.</span></div>
+      <div class="row"><b>Chatbots with vision</b><span>Jeon et al. 2026: GPT-4o, GPT-4o-mini and LLaVA rated the same campaign ad as <strong>more liberal</strong> when it showed a woman. The models apply demographic stereotypes.</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- ADVERTISING & PROFILING -->
 <section class="band">
   <div class="layer" data-speed="0.22" aria-hidden="true"><span class="ghost" style="left:-2vw; top:30%">ADS</span></div>
   <div class="inner">
     <div class="console">
-      <span class="tiny">05 · advertising &amp; political profiling</span>
+      <span class="tiny">06 · advertising &amp; political profiling</span>
       <h2>Where it is used today</h2>
       <p>Profiling for advertising and politics works through <strong>digital footprints</strong>: likes, posts and browsing. Faces are used for identity and demographics. No deployed system is documented that targets political ads by face.</p>
     </div>
     <div class="rows console">
       <div class="row"><b>Psychological targeting</b><span>Matz, Kosinski et al. (PNAS 2017): ads matched to personality inferred from Facebook Likes reached <strong>3.5 million</strong> people and produced up to <strong>40% more clicks</strong> and <strong>50% more purchases</strong>.</span></div>
-      <div class="row"><b>Cambridge Analytica</b><span>Data from up to <strong>87 million</strong> Facebook users fed psychographic political ads (exposed 2018). Facebook then paid a <strong>$5 billion</strong> FTC penalty (2019).</span></div>
+      <div class="row"><b>Cambridge Analytica</b><span>Kogan's quiz app harvested data on up to <strong>87 million</strong> Facebook users after Stillwell refused CA access to myPersonality (ICO 2018). The UK regulator later found CA's models used "commonly available technology" and that their real-world accuracy "was likely much lower" than claimed (ICO 2020). Facebook paid a <strong>$5 billion</strong> FTC penalty (2019).</span></div>
       <div class="row"><b>Billboards &amp; retail</b><span>"Audience analytics" cameras estimate age, gender and emotion to measure or switch ads. A UK station trial in 2024 reportedly used Amazon Rekognition this way.</span></div>
       <div class="row"><b>Face search</b><span>Clearview AI scraped billions of web photos for police face search and was fined by several European regulators.</span></div>
       <div class="row"><b>Retreats</b><span>Meta shut down Facebook face recognition in 2021 and deleted over <strong>1 billion</strong> face templates. HireVue dropped facial analysis from hiring interviews in 2021.</span></div>
       <div class="row"><b>Pseudoscience</b><span>Startups such as Faception have marketed "terrorist" or "high IQ" face classifiers without published validation.</span></div>
-      <div class="row"><b>Law</b><span>EU AI Act Art. 5(1)(g) bans inferring political opinions from biometrics. In the US: Illinois BIPA, Texas CUBI, California CPRA and FTC enforcement.</span></div>
+      <div class="row"><b>Law</b><span>EU AI Act Art. 5(1)(g) bans inferring political opinions from biometrics. China: PIPL treats biometrics as sensitive data; the 2025 face-recognition Measures exempt R&amp;D and algorithm training. US: Illinois BIPA, Texas CUBI, California CPRA and FTC enforcement.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO BUILDS IT -->
+<section class="band">
+  <div class="layer" data-speed="0.22" aria-hidden="true"><span class="ghost" style="left:-2vw; top:15%">SDK</span></div>
+  <div class="inner">
+    <div class="console">
+      <span class="tiny">07 · who does this research</span>
+      <h2>Companies and labs building trait classifiers</h2>
+      <p>The face models with documented real-world use classify <strong>ethnicity</strong>, not politics. Most reported cases are Chinese surveillance vendors.</p>
+    </div>
+    <div class="rows console">
+      <div class="row"><b>SenseTime</b><span>US Treasury, 2021: software that "can determine a target's ethnicity", with a focus on Uyghurs. SenseTime called this unfounded.</span></div>
+      <div class="row"><b>Huawei, Megvii</b><span>A 2018 test report listed a "Uyghur alert" (IPVM 2020). Huawei called it a test; Megvii said it does not label ethnic groups.</span></div>
+      <div class="row"><b>Hikvision, Dahua, Uniview</b><span>Uyghur detection in cameras, analytics and an SDK (IPVM 2019–2023).</span></div>
+      <div class="row"><b>Police procurement</b><span>NYT 2019: one city ran <strong>500,000</strong> checks for Uyghur faces in a month.</span></div>
+      <div class="row"><b>Chinese universities</b><span>Shanghai Jiao Tong (criminality, 2016), Dalian Minzu (ethnicity, under an Expression of Concern), CAS Institute of Psychology, Fudan and NWPU Xi'an (personality).</span></div>
+      <div class="row"><b>Elsewhere</b><span>Stanford (Kosinski), Denmark (ideology from candidate photos, 61%), Russia/UK (Kachur, selfies), Israel (Faception).</span></div>
     </div>
   </div>
 </section>
@@ -211,7 +251,7 @@ footer .inner { padding-block: 3rem; }
   <div class="layer" data-speed="0.3" aria-hidden="true"><pre class="lograin" id="rain4"></pre></div>
   <div class="inner">
     <div class="console">
-      <span class="tiny">06 · research team</span>
+      <span class="tiny">08 · research team</span>
     </div>
     <div class="card">
       <div class="photo" id="photo-slot"><img src="assets/owner-face-recognition.webp" width="294" height="380" alt="Bart Sakwerda in a CCTV frame with face-detection boxes"></div>
@@ -225,12 +265,22 @@ footer .inner { padding-block: 3rem; }
   </div>
 </section>
 
+<!-- SOURCES -->
+<section class="band">
+  <div class="inner">
+    <div class="console">
+      <span class="tiny">09 · sources</span>
+      <h2>Sources by topic</h2>
+      <p style="font-size:.85rem; color:var(--phosphor-dim)">Each entry was opened online on 24–25 Oct 2026 unless tagged. Probabilities come from the project simulation (experiments/sim_single_photo_limits.py). Full list with status: <a href="https://github.com/barts83eu/facial-analysis-lefty-people-2026/blob/main/references/bibliography.md">references/bibliography.md</a>.</p>
+<!--#include sources-en-->
+    </div>
+  </div>
+</section>
+
 <footer class="band">
   <div class="inner">
     <div class="console">
-      <span class="tiny">sources</span>
-      <p style="font-size:.85rem; color:var(--phosphor-dim)">Kosinski 2021, <i>Sci. Reports</i> 11:100 · Kosinski, Khambatta &amp; Wang 2024, <i>Am. Psychologist</i> (<a href="https://arxiv.org/abs/2303.16343v4">arXiv 2303.16343</a>) · Wang &amp; Kosinski 2018, <i>JPSP</i> · Matz, Kosinski, Nave &amp; Stillwell 2017, <i>PNAS</i> · Agüera y Arcas, Mitchell &amp; Todorov, <a href="https://ethicsatwork.nd.edu/resources/physiognomys-new-clothes/">Physiognomy's New Clothes</a>. Probabilities come from the project simulation (experiments/sim_single_photo_limits.py). The advertising entries are from memory; verify them before broadcast.</p>
-      <span class="tiny">budotsmedia.com · 2026</span>
+      <span class="tiny">budotsmedia.com · ghost in the machine · 2026 · <a href="https://github.com/barts83eu/facial-analysis-lefty-people-2026">source on GitHub</a></span>
     </div>
   </div>
 </footer>

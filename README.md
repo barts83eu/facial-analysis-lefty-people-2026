@@ -41,8 +41,10 @@ docs/
   02-methods-and-metrics.md   AUC vs accuracy, r vs variance, single-photo limits
   03-critiques-and-confounds.md
   04-open-questions.md
+sources/
+  sources.en.html, sources.zh.html   grouped source list included into both pages at build time
 references/
-  bibliography.md             annotated, with verification status
+  bibliography.md             annotated, grouped by topic, with verification status
   references.bib              BibTeX
   github-survey.md            related code/datasets on GitHub
 agents/
@@ -58,9 +60,13 @@ video/
   README.md  script/  storyboard/  assets/  renders/
 ```
 
-## Status (2026-10-24)
+## Status (2026-10-25)
 
 - [x] Literature review v1, GitHub survey v1, methods notes, ethics scope
 - [x] Simulation of single-photo prediction limits
-- [ ] Cross-check of citations by a second agent (Kimi / Codex)
+- [x] Published at budotsmedia.com/ghostinthemachine/facial-recognition-politics/
+- [x] 62 new sources (personality, sexual orientation, VLMs, Cambridge Analytica,
+      Chinese law, research and companies; 9 in Chinese); DOIs checked; grouped sources on both pages
+- [x] Chinese versions of site and report (`/zh/`)
+- [ ] Cross-check of citations by a second agent (Kimi / Codex); US law entries still from memory
 - [ ] Video script → storyboard → render

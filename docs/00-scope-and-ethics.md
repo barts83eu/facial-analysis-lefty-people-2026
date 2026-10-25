@@ -39,6 +39,14 @@
 The rule rests on points 1–4, not on any one jurisdiction's law. Law is
 listed below for context only, because the video should cover it.
 
+## Cambridge Analytica and myPersonality data (decided 2026-10-25)
+
+The project links to the public record (ICO, FTC, DCMS documents) and does not
+seek, download or mirror the profiles harvested by Kogan's GSR app or the
+myPersonality dataset. Both are personal data collected or exposed without the
+consent of the people in them; the FTC ordered deletion and the ICO destroyed
+seized copies. Leaked CA documents ("Hindsight Files") are cited, not mirrored.
+
 ## Regulatory context (background, not the basis of the rule)
 
 | Jurisdiction | Relevant law |

@@ -42,3 +42,20 @@
 - Files: scripts/build-budotsmedia.sh, wrangler.jsonc, .gitignore (_cf/, .wrangler/), README.md
 - Open items: /ghostinthemachine/ index page and nav link live in the main site's Worker (budotsmedia-260818),
   whose source is not on the mounted disks.
+
+## 2026-10-25 — Claude Opus 5.5 (sources, Chinese, photo)
+- What: literature search (subagent) → 62 new sources, 9 in Chinese, DOIs of existing entries checked;
+  bibliography regrouped into 8 topics; grouped source list on site and report; new sections on
+  personality / sexual orientation / VLMs, Cambridge Analytica and who builds trait classifiers;
+  Chinese translation of site and report (subagent); owner photo from the Road to Unfreedom artifact
+  (img/owner-face-recognition.webp) in the site photo slot; site name "Bart Sakwerda".
+- Files: references/bibliography.md, references/references.bib, sources/*, site/index.html, site/zh/,
+  report/index.html, report/zh/, docs/00, docs/01 (§7), docs/04 (disputes 1–6), scripts/build-*.sh, README.md,
+  agents/claude-opus-5-5/research-2026-10-25-new-sources.md
+- Decision: Cambridge Analytica / myPersonality data is linked through the official record only (docs/00).
+- Open items: US law entries (from memory); blocked sources (GLAAD/HRC, NYT 2019, Wylie transcript,
+  Helsinki thesis); the "with/without make-up" image the PI pasted has not reached the disk.
+- Addendum (same day): Chinese pages site/zh/, report/zh/, sources/sources.zh.html translated by a subagent
+  (朝鲜族 for the Korean ethnic group in the Dalian Minzu paper; "Expression of Concern" as 关注声明).
+  Fixed two EN wording mismatches it found (Hausladen 2025, Rasmussen 2023) in EN and ZH. All four pages live on
+  budotsmedia.com and GitHub Pages.

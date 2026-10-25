@@ -96,7 +96,8 @@ footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; display: grid; 
     <div class="meta">
       <span>PI: Bart Sakwerda</span>
       <span>Orchestration: Claude Opus 5.5</span>
-      <span>Updated 2026-10-24</span>
+      <span>Updated 2026-10-25</span>
+      <span><a href="zh/" lang="zh-Hans" hreflang="zh-Hans">中文版</a></span>
     </div>
   </header>
 
@@ -115,8 +116,29 @@ footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; display: grid; 
           <tr><td>Kosinski 2021, <i>Scientific Reports</i></td><td class="num">1.09 M</td><td class="num">AUC .72</td><td>Dating-site and Facebook photos. "72%" is pairwise: pick the liberal from one liberal and one conservative. Humans scored .55.</td></tr>
           <tr><td>Kosinski, Khambatta &amp; Wang 2024, <i>American Psychologist</i></td><td class="num">591</td><td class="num">r = .22</td><td>Lab photos with neutral expression, hair back and no makeup. Humans scored r = .21. Explains about 5% of the variation.</td></tr>
           <tr><td>Same paper, politicians</td><td class="num">3,401</td><td class="num">r = .13</td><td>Out-of-sample check on real politicians' photos. The weakest result.</td></tr>
-          <tr><td>Wang &amp; Kosinski 2018, <i>JPSP</i></td><td class="num">dating site</td><td class="num">AUC .81 / .74</td><td>Sexual orientation, men and women. Critics showed grooming and camera angle explain much of it.</td></tr>
+          <tr><td>Rasmussen, Ludeke &amp; Klemmensen 2023, <i>Scientific Reports</i></td><td class="num">3,323</td><td class="num">61%</td><td>Danish election candidates, the main non-US sample. Predictions tracked smiling and, for women, attractiveness; the model also used areas outside the face.</td></tr>
+          <tr><td>Wang &amp; Kosinski 2018, <i>JPSP</i></td><td class="num">35,326</td><td class="num">AUC .81 / .74</td><td>Sexual orientation, men and women. Critics showed grooming and camera angle explain much of it.</td></tr>
           <tr><td>Kosinski 2017, <i>Psychological Science</i></td><td class="num">large</td><td class="num">null</td><td>Facial width-to-height ratio does not predict behaviour. Kosinski's own result against physiognomy.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>Personality, sexual orientation and AI models</h2>
+    <p class="col">Studies of other traits show the same pattern: small effects in large samples, and a signal that tracks self-presentation and demographics.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Study</th><th>Sample</th><th>Reported</th><th>What it shows</th></tr></thead>
+        <tbody>
+          <tr><td>Kachur et al. 2020, <i>Scientific Reports</i></td><td class="num">12,447</td><td class="num">mean r = .24</td><td>Big Five from selfies. The data came from the employer of three of the five authors.</td></tr>
+          <tr><td>Hu et al. 2017, <i>Scientific Reports</i></td><td class="num">834</td><td class="num">0.7–4% var.</td><td>3D face scans of Han Chinese adults (CAS-MPG Shanghai, Fudan). Face shape explains very little of personality.</td></tr>
+          <tr><td>Jaeger et al. 2024, <i>Eur. J. Personality</i></td><td class="num">646 raters</td><td class="num">not accurate</td><td>Preregistered: human personality impressions from faces are not accurate, and people overestimate their accuracy.</td></tr>
+          <tr><td>Foo et al. 2022, <i>PSPB</i> (meta-analysis)</td><td class="num">—</td><td class="num">r = .14</td><td>Trustworthiness from faces: "unlikely to be of practical utility".</td></tr>
+          <tr><td>Guenzel et al. 2026, NBER</td><td class="num">≈ 96,000</td><td class="num">—</td><td>"Photo Big 5" from LinkedIn photos (Kachur model) predicts MBA graduates' pay and seniority. The authors warn against use in hiring.</td></tr>
+          <tr><td>Leuner 2019, arXiv</td><td class="num">20,910</td><td class="num">68% / 77%</td><td>Replication of the sexual-orientation study. A model on blurred photos still reached 63% / 72%, so much of the signal is not facial structure.</td></tr>
+          <tr><td>Jeon et al. 2026, <i>Political Analysis</i></td><td class="num">8,000 / model</td><td class="num">b = .41</td><td>GPT-4o, GPT-4o-mini and LLaVA rated identical ads with women as more liberal; the survey gap is .15. Gemini refused.</td></tr>
+          <tr><td>Hausladen et al. 2025, FAccT</td><td class="num">synthetic</td><td class="num">—</td><td>CLIP's social judgments of faces shift more with expression than with age, and with lighting about as much as with age.</td></tr>
         </tbody>
       </table>
     </div>
@@ -208,6 +230,22 @@ footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; display: grid; 
   </section>
 
   <section class="stack">
+    <h2>Cambridge Analytica and psychographic targeting</h2>
+    <ul class="clean col">
+      <li><b>Origin.</b> Kosinski, Stillwell and Graepel (2013) showed that Facebook Likes predict personality and politics. Cambridge Analytica first asked Stillwell for the myPersonality data; he refused, citing data protection. Aleksandr Kogan then collected data on up to 87 million users through his own quiz app (ICO 2018).</li>
+      <li><b>What the regulator found.</b> The ICO's 2020 letter calls CA's methods "well recognised processes using commonly available technology" and says real-world accuracy on new people "was likely much lower". GSR data could not have been used in the Brexit referendum.</li>
+      <li><b>Does targeting work?</b> Matz et al. 2017 reported up to 40% more clicks; Eckles et al. 2018 showed Facebook's ad delivery undermines that comparison. Tappin et al. 2023 found targeting on more than one attribute added nothing. Generative AI now writes personality-matched messages at scale (Simchon et al. 2024; Matz et al. 2024).</li>
+      <li><b>Data.</b> Public: ICO, FTC and DCMS records. Not public: the harvested profiles (deletion ordered by the FTC, seized copies destroyed by the ICO) and myPersonality (sharing stopped in 2018). The project links to the official record only.</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h2>Who builds trait classifiers</h2>
+    <p class="col">The face models with documented deployment classify ethnicity, not politics. Reported cases: SenseTime (US Treasury 2021, Uyghur identification), a Huawei–Megvii "Uyghur alert" test (IPVM 2020), Uyghur detection by Hikvision, Dahua and Uniview (IPVM), and police procurement in 16 provinces (NYT 2019). Chinese university work includes Shanghai Jiao Tong (criminality, 2016), Dalian Minzu (ethnicity, Expression of Concern), and personality studies at the CAS Institute of Psychology, CAS-MPG Shanghai with Fudan, and NWPU Xi'an. Outside China: Stanford (Kosinski), the University of Southern Denmark, the Kachur group (Russia/UK) and Faception (Israel).</p>
+    <p class="col">China's law treats biometrics as sensitive personal information (PIPL 2021, Art. 28–29). The 2025 face-recognition Measures exempt R&amp;D and algorithm training (Art. 2(2)), so face-to-trait research falls only under the PIPL.</p>
+  </section>
+
+  <section class="stack">
     <h2>What the model may really be seeing</h2>
     <div class="tbl">
       <table>
@@ -238,6 +276,8 @@ footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; display: grid; 
           <li>Effect-size simulation (E1)</li>
           <li>CCTV and base-rate analysis</li>
           <li>GitHub survey, bibliography and BibTeX</li>
+          <li>62 new sources, 9 in Chinese; DOIs checked (25 Oct)</li>
+          <li>Chinese translation of the site and report</li>
           <li>Shared rules for Claude, Kimi and Codex</li>
           <li>Video outline (9 sections)</li>
         </ul>
@@ -245,9 +285,9 @@ footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; display: grid; 
       <div class="todo stack">
         <h3>Open</h3>
         <ul>
-          <li>Second agent verifies from-memory citations</li>
           <li>Check Kosinski's data-availability statements</li>
-          <li>Look for replications of the 2024 study</li>
+          <li>Find a replication of the 2024 study (none found on 25 Oct)</li>
+          <li>Verify the US law entries and the blocked sources</li>
           <li>Video script, storyboard and render</li>
         </ul>
       </div>
@@ -263,6 +303,8 @@ data/raw/    received photo, not classified</div>
   <footer>
     <span class="label">Credits</span>
     <p>Principal investigator: <b>Bart Sakwerda</b>. Research orchestration, literature and GitHub survey, simulation: <b>Claude Opus 5.5</b> (Anthropic). Planned contributors: Kimi, ChatGPT Codex.</p>
-    <p>Key sources: Kosinski 2021 (<a href="https://www.gsb.stanford.edu/index%2ephp/node/615923">Stanford GSB</a>), Kosinski, Khambatta &amp; Wang 2024 (<a href="https://arxiv.org/abs/2303.16343v4">arXiv 2303.16343</a>), Agüera y Arcas, Mitchell &amp; Todorov (<a href="https://ethicsatwork.nd.edu/resources/physiognomys-new-clothes/">Physiognomy's New Clothes</a>), Leuner 2019 (<a href="https://arxiv.org/pdf/1902.10739">arXiv 1902.10739</a>). Full list in <span class="mono">references/bibliography.md</span>.</p>
+    <h2 id="sources">Sources</h2>
+    <p>Sources are grouped by topic below. Each entry was opened online on 24–25 Oct 2026 unless tagged. Full list with status: <a href="https://github.com/barts83eu/facial-analysis-lefty-people-2026/blob/main/references/bibliography.md">references/bibliography.md</a>.</p>
+<!--#include sources-en-->
   </footer>
 </div>
