@@ -92,3 +92,10 @@
   section-index/ (build.sh, wrangler.jsonc assets → _out, index.html, media/road-to-unfreedom.jpg), .gitignore
 - Also committed in this commit: the meme-hero work by the other Claude session (25 Oct) and Codex's site/codex-v1/
   (27 Oct), both already deployed by Codex.
+
+## 2026-10-27 — Claude Opus 5.5 (design system)
+- What: the site's style saved as a claude.ai Design System, "DESIGN SYS: AMBER PHOSPHOR TERMINAL"
+  (short name `amber-terminal`), https://claude.ai/artifact/V3fQjK6i6VGuRa9WaWNVUZ (private until shared).
+  Tokens copied from site/index.html; components Prompt, ConsoleBand, StatGrid, AsciiBars, Rows, PhotoSlot,
+  SourceList; cover. Registered in ~/llm-context (skills/style/SKILL.md, AGENTS.md), pushed.
+- Files: design-system/amber-terminal/project/*

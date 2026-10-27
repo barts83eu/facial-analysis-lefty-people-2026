@@ -1,0 +1,24 @@
+<!-- @dsCard height=320 -->
+<style>
+  .cv { position: relative; width: 960px; height: 320px; background: var(--void); overflow: hidden; }
+  .cv svg { position: absolute; left: 0; top: 0; }
+  .b-phosphor { fill: var(--phosphor); } .b-dim { fill: var(--phosphor-dim); } .b-cyan { fill: var(--cyan); } .b-alert { fill: var(--alert); }
+  .cut { fill: var(--void); rx: var(--radius-0); }
+  .cv .name { position: absolute; left: 48px; bottom: 64px; max-width: 864px; margin: 0; font: 400 64px/.95 var(--font-title); letter-spacing: .03em; text-transform: uppercase; color: var(--phosphor); }
+  .cv .tag { position: absolute; left: 48px; bottom: 28px; max-width: 440px; margin: 0; font: 400 13px/1.4 var(--font-mono); color: var(--phosphor-dim); }
+</style>
+<div class="cv">
+  <svg width="960" height="112" viewBox="0 0 960 112" aria-hidden="true">
+    <!-- blocks: phosphor 448×112, phosphor-dim 224×112, cyan 176×112, alert 112×112 (widths in 16px steps, space-4), radius-0 corners
+         arrangement: top-band skeleton (name too wide for the side zone); a strip of unequal bands, weighted by identity: amber ink first, the dim amber, the cyan link colour, the one alert
+         pattern: "precise, technical, mono" row; 36 block-cursor squares cut from the amber block in void, the terminal's block cursor repeated as a grid
+         scales: squares space-2 (8px) at a space-4 (16px) pitch, three rows, radius-0 -->
+    <rect class="b-phosphor" x="0" y="0" width="448" height="112"/>
+    <rect class="b-dim" x="448" y="0" width="224" height="112"/>
+    <rect class="b-cyan" x="672" y="0" width="176" height="112"/>
+    <rect class="b-alert" x="848" y="0" width="112" height="112"/>
+    <rect class="cut" x="48" y="32" width="8" height="8"/><rect class="cut" x="64" y="32" width="8" height="8"/><rect class="cut" x="80" y="32" width="8" height="8"/><rect class="cut" x="96" y="32" width="8" height="8"/><rect class="cut" x="112" y="32" width="8" height="8"/><rect class="cut" x="128" y="32" width="8" height="8"/><rect class="cut" x="144" y="32" width="8" height="8"/><rect class="cut" x="160" y="32" width="8" height="8"/><rect class="cut" x="176" y="32" width="8" height="8"/><rect class="cut" x="192" y="32" width="8" height="8"/><rect class="cut" x="208" y="32" width="8" height="8"/><rect class="cut" x="224" y="32" width="8" height="8"/><rect class="cut" x="48" y="48" width="8" height="8"/><rect class="cut" x="64" y="48" width="8" height="8"/><rect class="cut" x="80" y="48" width="8" height="8"/><rect class="cut" x="96" y="48" width="8" height="8"/><rect class="cut" x="112" y="48" width="8" height="8"/><rect class="cut" x="128" y="48" width="8" height="8"/><rect class="cut" x="144" y="48" width="8" height="8"/><rect class="cut" x="160" y="48" width="8" height="8"/><rect class="cut" x="176" y="48" width="8" height="8"/><rect class="cut" x="192" y="48" width="8" height="8"/><rect class="cut" x="208" y="48" width="8" height="8"/><rect class="cut" x="224" y="48" width="8" height="8"/><rect class="cut" x="48" y="64" width="8" height="8"/><rect class="cut" x="64" y="64" width="8" height="8"/><rect class="cut" x="80" y="64" width="8" height="8"/><rect class="cut" x="96" y="64" width="8" height="8"/><rect class="cut" x="112" y="64" width="8" height="8"/><rect class="cut" x="128" y="64" width="8" height="8"/><rect class="cut" x="144" y="64" width="8" height="8"/><rect class="cut" x="160" y="64" width="8" height="8"/><rect class="cut" x="176" y="64" width="8" height="8"/><rect class="cut" x="192" y="64" width="8" height="8"/><rect class="cut" x="208" y="64" width="8" height="8"/><rect class="cut" x="224" y="64" width="8" height="8"/>
+  </svg>
+  <p class="name">Amber Phosphor Terminal</p>
+  <p class="tag">Research results printed as program output.</p>
+</div>
