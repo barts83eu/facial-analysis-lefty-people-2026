@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Facial recognition &amp; political inference — Codex v1 | Budots Media</title>
+<meta name="theme-color" content="#0b0a07">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;700&family=Silkscreen&display=swap">
+<style>
+/* Codex v1 — Amber Phosphor Terminal, remixed from site/index.html.
+   Same palette and type roles; an aggregate study explorer replaces the meme. */
+:root{--void:#0b0a07;--screen:#14110b;--phosphor:#ffb43a;--dim:#c1a67b;--cyan:#6fd6e8;--alert:#ff6b4a;--line:#3a2f1c;--title:"Bebas Neue","Arial Narrow",Impact,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;--tiny:"Silkscreen",monospace;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:6rem;background:var(--void)}body{margin:0;background:var(--void);color:#e8dcca;font:400 14px/1.75 var(--mono)}body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:repeating-linear-gradient(90deg,transparent 0 79px,#ffb43a04 79px 80px)}::selection{background:var(--phosphor);color:var(--void)}a{color:inherit;text-underline-offset:5px}button,a,input,summary{-webkit-tap-highlight-color:transparent}a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--cyan);outline-offset:5px}button{font:inherit;cursor:pointer}button:disabled{cursor:default}svg{overflow:visible}h1,h2,h3,p,figure{margin:0}h1,h2,h3{font-family:var(--title);font-weight:400;line-height:.98;letter-spacing:.02em;text-transform:uppercase}h2{font-size:clamp(2.8rem,5vw,4.7rem);color:var(--phosphor)}h3{font-size:1.9rem;color:var(--phosphor)}p+p{margin-top:1rem}strong{color:var(--phosphor);font-weight:500}a:hover{color:var(--cyan)}.wrap{width:min(1320px,calc(100% - 96px));margin-inline:auto}.tiny{font:400 8px/1.8 var(--tiny);letter-spacing:.07em;text-transform:uppercase;-webkit-font-smoothing:none}.muted{color:var(--dim)}.skip{position:fixed;top:-6rem;left:1rem;padding:1rem;background:var(--cyan);color:var(--void);z-index:100}.skip:focus{top:1rem}.topbar{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:#0b0a07f5}.topbar .wrap{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:2rem}.wordmark{display:flex;align-items:center;gap:12px;text-decoration:none}.brand-icon{width:30px;height:34px;color:var(--phosphor)}.wordmark b{display:block;font:400 22px/1 var(--title);letter-spacing:.06em;color:var(--phosphor)}.wordmark span{display:block;color:var(--dim);margin-top:6px}.nav{display:flex;gap:28px;align-items:center;font-size:11px}.nav a{text-decoration:none}.version{padding:5px 9px;border:1px solid var(--line);color:var(--phosphor);white-space:nowrap}.hero{padding:42px 0 0}.fileline{display:flex;justify-content:space-between;gap:1rem;color:var(--dim);border-bottom:1px solid var(--line);padding-bottom:17px}.fileline .status{color:var(--cyan)}.status::before{content:"";display:inline-block;width:5px;height:5px;margin-right:8px;background:var(--cyan)}.hero-grid{display:grid;grid-template-columns:1.07fr 1fr;gap:7%;align-items:center;padding:43px 0 47px}.eyebrow{display:flex;align-items:center;gap:10px;color:var(--phosphor);margin-bottom:22px}.eyebrow::before{content:"";width:24px;height:1px;background:currentColor}h1{font-size:clamp(4.2rem,7.5vw,7.5rem);color:var(--phosphor)}h1 span{display:block;color:#e8dcca}.hero-copy>p{margin-top:24px;max-width:47ch;color:var(--dim);font-size:13px}.hero-actions{display:flex;flex-wrap:wrap;gap:22px;align-items:center;margin-top:29px}.button{display:inline-flex;align-items:center;justify-content:space-between;gap:25px;padding:13px 18px;border:1px solid var(--phosphor);background:var(--phosphor);color:var(--void);font-size:11px;text-decoration:none}.button:hover{background:#ffd28a;color:var(--void)}.text-link{font-size:11px}.terminal{border:1px solid #6b4b24;background:var(--screen);position:relative}.terminal::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 3px,#0000000c 3px 4px)}.terminal-bar{padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);color:var(--dim)}.terminal-bar .lights{display:flex;gap:5px}.lights i{width:5px;height:5px;border:1px solid var(--phosphor)}.lights i:first-child{background:var(--phosphor)}.terminal-body{padding:25px 26px 20px}.terminal-label{color:var(--dim);font-size:11px}.result-line{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin:8px 0 17px}.hero-number{font:400 clamp(5rem,7vw,7rem)/1 var(--title);color:var(--phosphor);letter-spacing:-.02em}.hero-number small{font-size:.48em;margin-left:3px}.result-meta{border-left:1px solid var(--line);padding-left:18px;color:var(--dim);font-size:10px}.result-meta b{font-weight:400;color:var(--cyan)}.case-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}.case-grid span{height:13px;background:#85602e}.case-grid .gain{background:var(--cyan)}.case-grid .miss{background:repeating-linear-gradient(135deg,#322a20 0 2px,#17140f 2px 4px);border:1px solid #4d4231}.legend{display:flex;justify-content:space-between;gap:12px;margin:15px 0;color:var(--dim);font-size:9px}.legend span{display:flex;align-items:center;gap:6px}.legend i{height:5px;width:5px;background:var(--phosphor)}.legend .cyan{background:var(--cyan)}.legend .outline{background:transparent;border:1px solid var(--dim)}.study-switch{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;z-index:1}.study-switch button{border:0;padding:12px 5px;background:var(--screen);color:var(--dim);font-size:10px;line-height:1.5}.study-switch button[aria-pressed="true"]{background:var(--phosphor);color:var(--void)}.terminal-note{padding:12px 18px;color:var(--dim);font-size:9px;line-height:1.7}.terminal-note a{color:var(--cyan)}.metrics{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.metric{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:18px;padding:24px 30px;border-left:1px solid var(--line)}.metric:first-child{padding-left:0;border:0}.metric:last-child{padding-right:0}.metric .number{font:400 46px/1 var(--title);color:var(--phosphor);white-space:nowrap}.metric p{font-size:10px;line-height:1.7;color:var(--dim)}.metric .tiny{color:var(--phosphor);display:block;margin-bottom:3px}.section{padding:80px 0;border-bottom:1px solid var(--line)}.section-head{display:grid;grid-template-columns:1fr 1fr;gap:7%;align-items:end;margin-bottom:34px}.section-head .tiny{display:block;color:var(--dim);margin-bottom:16px}.section-head>p{color:var(--dim);font-size:12px;max-width:50ch}.section-index{color:var(--cyan);margin-right:9px}.study-table{width:100%;border-collapse:collapse;text-align:left;font-size:11px;line-height:1.7}.study-table th{font-size:9px;font-weight:400;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:14px 18px;border-bottom:1px solid var(--line)}.study-table td{padding:23px 18px;border-bottom:1px solid var(--line);vertical-align:middle}.study-table td:first-child,.study-table th:first-child{padding-left:0}.study-table td:last-child,.study-table th:last-child{padding-right:0}.study-table td:first-child{width:27%}.study-name{font-size:13px;color:#e8dcca;display:block}.study-table small{display:block;font-size:10px;color:var(--dim);margin-top:6px}.study-table .score{font:400 34px/1 var(--title);color:var(--phosphor);white-space:nowrap}.study-table a{color:var(--cyan)}.study-table tr.selected td{background:#ffb43a07}.table-note{font-size:10px;color:var(--dim);max-width:100ch;margin-top:20px}.explainer{display:grid;grid-template-columns:.95fr 1fr;gap:10%;align-items:center}.variance-plot{display:flex;align-items:center;gap:34px}.variance-ring{width:190px;flex-shrink:0}.variance-ring text{font-family:var(--title);fill:var(--phosphor)}.variance-plot p{font-size:11px;color:var(--dim)}.variance-plot .big-label{display:block;font:400 30px/1 var(--title);color:#e8dcca;margin-bottom:10px}.explainer-copy>p{font-size:12px;color:var(--dim);margin-top:20px}.method-toggle{margin-top:25px;border-top:1px solid var(--line);padding-top:16px}.method-toggle summary{cursor:pointer;color:var(--cyan);font-size:11px}.method-toggle p{margin-top:12px;font-size:11px;color:var(--dim)}.factor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}.factor{padding:28px;background:var(--screen)}.factor .tiny{display:block;margin-bottom:22px;color:var(--cyan)}.factor p{font-size:11px;color:var(--dim);margin-top:13px}.reading-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.reading-card{padding:28px;border:1px solid var(--line);display:grid;gap:16px;align-content:start}.reading-card .tiny{color:var(--cyan)}.reading-card p{font-size:11px;color:var(--dim)}.reading-card a{color:var(--cyan);font-size:11px;justify-self:start}.source-intro{display:flex;justify-content:space-between;align-items:center;gap:2rem;margin-bottom:30px}.source-intro p{max-width:72ch;font-size:11px;color:var(--dim)}.sources{color:var(--dim)}.sources summary{color:#e8dcca;font-size:12px;padding:8px 0}.sources a{color:var(--cyan)}.sources li{font-size:11px}.sources .note{font-size:10px!important}.team{display:grid;grid-template-columns:100px 1fr auto;gap:28px;align-items:center;margin:48px 0;padding-top:32px;border-top:1px solid var(--line)}.team img{width:100px;height:124px;object-fit:cover;filter:sepia(.3);border:1px solid var(--line)}.team .tiny{color:var(--dim);display:block;margin-bottom:10px}.team h3{font-size:2rem}.team p{color:var(--dim);font-size:10px;margin-top:10px;max-width:70ch}.iteration{align-self:start;color:var(--cyan);border:1px solid var(--line);padding:8px 12px}footer .wrap{display:flex;justify-content:space-between;gap:2rem;align-items:center;padding-block:25px}footer .tiny{color:var(--dim)}footer a{color:var(--cyan)}.footer-links{display:flex;gap:22px;font-size:10px}.noscript{border:1px solid var(--line);padding:12px;color:var(--dim);font-size:11px}.study-switch{display:none}.js .study-switch{display:grid}
+@media(min-width:1500px){.hero-grid{padding-block:60px}.hero{padding-top:50px}}
+@media(max-width:1050px){.wrap{width:calc(100% - 56px)}.hero-grid{gap:5%}h1{font-size:clamp(4rem,8vw,6rem)}.metric{padding-inline:18px;gap:12px}.metric .number{font-size:38px}.variance-plot{gap:22px}.variance-ring{width:145px}.nav{gap:20px}.factor{padding:23px}}
+@media(max-width:760px){html{scroll-padding-top:5.5rem}.wrap{width:calc(100% - 36px)}.topbar .wrap{min-height:68px;gap:10px}.wordmark b{font-size:19px}.wordmark span{font-size:7px}.brand-icon{width:23px}.nav{gap:12px}.nav .desktop-nav{display:none}.version{font-size:7px}.hero{padding-top:24px}.fileline{font-size:7px;gap:18px}.fileline .status{max-width:13ch;text-align:right}.hero-grid{grid-template-columns:1fr;gap:32px;padding-block:29px 32px}.eyebrow{margin-bottom:17px}h1{font-size:clamp(4.1rem,15vw,6.7rem)}.hero-copy>p{max-width:54ch;margin-top:20px}.hero-actions{margin-top:23px}.terminal-body{padding:22px}.hero-number{font-size:6rem}.case-grid span{height:14px}.metrics{grid-template-columns:1fr}.metric,.metric:first-child,.metric:last-child{grid-template-columns:80px 1fr;padding:18px 0;border-left:0;border-top:1px solid var(--line);gap:20px}.metric:first-child{border:0}.metric .number{font-size:40px}.section{padding-block:48px}.section-head{grid-template-columns:1fr;gap:20px;margin-bottom:25px}.section-head>p{max-width:65ch}h2{font-size:3.2rem}.factor-grid{grid-template-columns:1fr 1fr}.factor{padding:22px}.factor .tiny{margin-bottom:17px}.explainer{grid-template-columns:1fr;gap:35px}.variance-plot{gap:25px}.variance-ring{width:155px}.reading-grid{grid-template-columns:1fr}.study-table th,.study-table td{padding:16px 8px}.study-table td:first-child{width:36%}.study-table .score{font-size:27px}.study-name{font-size:11px}.study-table .population{display:none}.study-table small{font-size:9px}.source-intro{align-items:start;flex-direction:column;gap:20px}.team{grid-template-columns:72px 1fr;gap:18px}.team img{width:72px;height:94px}.team h3{font-size:1.7rem}.iteration{grid-column:2;justify-self:start}footer .wrap{align-items:start;flex-direction:column;gap:16px}.footer-links{gap:18px}.sources ol{padding-left:1.2rem!important}.sources summary{font-size:11px}.terminal-label{font-size:10px}}
+@media(max-width:370px){.hero-actions{gap:17px}.factor-grid{grid-template-columns:1fr}.terminal-body{padding:17px}.case-grid{gap:5px}.legend{font-size:8px;gap:8px}.result-meta{padding-left:10px;font-size:9px}.nav{gap:8px}.wordmark b{font-size:17px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../" aria-label="Ghost in the Machine — original edition">
+      <svg class="brand-icon" viewBox="0 0 30 34" fill="none" aria-hidden="true"><path d="M1 9V1h8M21 1h8v8M29 25v8h-8M9 33H1v-8" stroke="currentColor"/><path d="M8 12h3m8 0h3M10 23h10M15 14v5h3" stroke="currentColor"/><path d="M6 6h18v22H6z" stroke="currentColor" opacity=".25"/></svg>
+      <div><b>Ghost in the Machine</b><span class="tiny">Budots Media · Research series</span></div>
+    </a>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="desktop-nav" href="#evidence">Evidence</a>
+      <a class="desktop-nav" href="#sources">Sources</a>
+      <a href="../report/">Full report ↗</a>
+      <span class="version tiny">Codex / v1</span>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="fileline tiny"><span>Research file 001 / Facial recognition</span><span class="status">Published research + simulation</span></div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow tiny">Political orientation from photos</div>
+        <h1 id="hero-title">Facial recognition<span>&amp; political</span>inference</h1>
+        <p>Published studies find a statistical signal across groups. The controlled-photo result explains about <strong>5% of the variation</strong> in political orientation.</p>
+        <p>Explore what those effect sizes imply under a simple simulation — and how much uncertainty remains.</p>
+        <div class="hero-actions"><a class="button" href="#evidence">Examine the evidence <span aria-hidden="true">↓</span></a><a class="text-link" href="../">Original edition ↗</a></div>
+      </div>
+      <figure class="terminal" aria-labelledby="explorer-title">
+        <div class="terminal-bar"><span class="tiny" id="explorer-title">01 / Study explorer</span><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span></div>
+        <div class="terminal-body">
+          <p class="terminal-label" id="study-label">Controlled lab photos · 2024</p>
+          <div class="result-line" aria-live="polite" aria-atomic="true">
+            <div class="hero-number"><span id="accuracy">59</span><small>%</small></div>
+            <div class="result-meta">Simulated accuracy<br><b><span id="correct">59</span> correct / <span id="incorrect">41</span> wrong</b><br>per 100 balanced cases</div>
+          </div>
+          <div class="case-grid" id="case-grid" aria-hidden="true"></div>
+          <div class="legend"><span><i></i>50 chance baseline</span><span><i class="cyan"></i><span id="gain">9</span> beyond chance</span><span><i class="outline"></i>Wrong</span></div>
+        </div>
+        <div class="study-switch" role="group" aria-label="Choose a study result">
+          <button type="button" data-study="lab" aria-pressed="true">Lab photos<br>2024</button>
+          <button type="button" data-study="politicians" aria-pressed="false">Politicians<br>2024</button>
+          <button type="button" data-study="everyday" aria-pressed="false">Everyday photos<br>2021</button>
+        </div>
+        <figcaption class="terminal-note">Illustration from summary statistics. Equal-size groups, equal-variance Gaussian scores. <a href="#method">Read the assumptions ↓</a></figcaption>
+        <noscript><p class="noscript">Showing the lab-photo estimate. All three results are available in the evidence table below.</p></noscript>
+      </figure>
+    </div>
+    <div class="metrics" aria-label="Controlled lab study at a glance">
+      <div class="metric"><span class="number">591</span><p><span class="tiny">Controlled photographs</span>Neutral expression, hair back, no makeup.</p></div>
+      <div class="metric"><span class="number">r = .22</span><p><span class="tiny">Reported correlation</span>Algorithm score vs political orientation.</p></div>
+      <div class="metric"><span class="number">~5%</span><p><span class="tiny">Variance explained</span>For the controlled-photo result, r² = .0484.</p></div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="evidence" aria-labelledby="evidence-title">
+    <div class="section-head">
+      <div><span class="tiny"><span class="section-index">01</span> The published results</span><h2 id="evidence-title">Three settings.<br>Different signals.</h2></div>
+      <p>The studies report different metrics. The last column translates them using the project's simulation assumptions so they can be compared on one scale.</p>
+    </div>
+    <table class="study-table">
+      <caption class="tiny muted" style="text-align:left;padding-bottom:10px">Published metrics and model-derived accuracy estimates</caption>
+      <thead><tr><th scope="col">Photographs</th><th scope="col" class="population">Study sample</th><th scope="col">Reported</th><th scope="col">Simulated</th></tr></thead>
+      <tbody>
+        <tr data-study-row="everyday"><td><span class="study-name">Everyday photos</span><small>2021 · <a href="https://doi.org/10.1038/s41598-020-79310-1">Scientific Reports ↗</a></small></td><td class="population">1,085,795 photos<small>Dating sites + Facebook</small></td><td><span class="score">.72</span><small>AUC · pairwise ranking</small></td><td><span class="score">66%</span><small>34 wrong per 100</small></td></tr>
+        <tr data-study-row="lab" class="selected"><td><span class="study-name">Controlled lab photos</span><small>2024 · <a href="https://doi.org/10.1037/amp0001295">American Psychologist ↗</a></small></td><td class="population">591 participants<small>Controlled presentation</small></td><td><span class="score">.22</span><small>r · correlation</small></td><td><span class="score">59%</span><small>41 wrong per 100</small></td></tr>
+        <tr data-study-row="politicians"><td><span class="study-name">Politicians' photos</span><small>2024 · <a href="https://doi.org/10.1037/amp0001295">American Psychologist ↗</a></small></td><td class="population">3,401 politicians<small>External photograph sample</small></td><td><span class="score">.13</span><small>r · correlation</small></td><td><span class="score">55%</span><small>45 wrong per 100</small></td></tr>
+      </tbody>
+    </table>
+    <p class="table-note">The percentages are rounded outputs of the project's Gaussian conversion, not measured classification accuracies from these experiments. AUC measures ranking across pairs; it is not the percentage of individual people labelled correctly.</p>
+  </section>
+
+  <section class="section wrap" id="method" aria-labelledby="method-title">
+    <div class="explainer">
+      <figure class="variance-plot">
+        <svg class="variance-ring" viewBox="0 0 200 200" role="img" aria-labelledby="ring-title ring-desc">
+          <title id="ring-title">4.84 percent of variance explained</title><desc id="ring-desc">A ring chart of the controlled-photo correlation squared: 4.84 percent explained and 95.16 percent unexplained by this result.</desc>
+          <circle cx="100" cy="100" r="83" fill="none" stroke="#3a2f1c" stroke-width="13"/>
+          <circle cx="100" cy="100" r="83" fill="none" stroke="#6fd6e8" stroke-width="13" pathLength="100" stroke-dasharray="4.84 95.16" transform="rotate(-90 100 100)"/>
+          <text x="100" y="113" text-anchor="middle" font-size="55">4.84%</text>
+        </svg>
+        <figcaption><span class="big-label">Variance<br>explained</span><p>Controlled lab photos<br>r² = .22 × .22<br><span style="color:var(--cyan)">4.84% explained</span><br>95.16% unexplained</p></figcaption>
+      </figure>
+      <div class="explainer-copy">
+        <span class="tiny muted"><span class="section-index">02</span> Reading the numbers</span>
+        <h2 id="method-title" style="margin-top:17px">A group effect<br>leaves uncertainty.</h2>
+        <p>A correlation of .22 does not mean 22% accuracy. Squaring it gives about 5% of variance explained. The simulation then models how overlapping score distributions affect a binary decision.</p>
+        <p>Even in this balanced scenario, the lab-photo estimate produces about <strong>41 incorrect calls per 100</strong>. It does not establish a person's politics from their photo.</p>
+        <details class="method-toggle">
+          <summary>Simulation method and assumptions</summary>
+          <p>The project assumes two equally common groups with normally distributed scores and equal variance. It converts r to d using d = 2r / √(1 − r²), then accuracy = Φ(d / 2). For AUC, d = √2 × Φ⁻¹(AUC). Φ is the standard normal cumulative distribution function.</p>
+          <p>The 100 cells illustrate rounded expected counts; they are not observations, identities, or individual predictions. These model assumptions do not validate use on new populations or CCTV footage.</p>
+          <p><a href="https://github.com/barts83eu/facial-analysis-lefty-people-2026/blob/main/experiments/sim_single_photo_limits.py">Inspect the project simulation ↗</a></p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="factors" aria-labelledby="factors-title">
+    <div class="section-head"><div><span class="tiny"><span class="section-index">03</span> Interpreting the signal</span><h2 id="factors-title">What a photo<br>contains</h2></div><p>The project's review distinguishes facial structure from presentation, demographics and photographic conditions. A model can use all of them.</p></div>
+    <div class="factor-grid">
+      <article class="factor"><span class="tiny">01 / Presentation</span><h3>Head pose</h3><p>The 2021 study reported differences in how directly people faced the camera.</p></article>
+      <article class="factor"><span class="tiny">02 / Presentation</span><h3>Expression</h3><p>Expression was associated with the signal in everyday photos. The lab study used neutral expressions.</p></article>
+      <article class="factor"><span class="tiny">03 / Presentation</span><h3>Grooming</h3><p>Hair, glasses, makeup and facial hair can carry information about self-presentation.</p></article>
+      <article class="factor"><span class="tiny">04 / Population</span><h3>Demographics</h3><p>Adding demographic variables raised the 2024 lab result from r = .22 to r = .31.</p></article>
+      <article class="factor"><span class="tiny">05 / Measurement</span><h3>Photo conditions</h3><p>Lighting, framing and platform style are part of an image. They are distinct from facial structure.</p></article>
+      <article class="factor"><span class="tiny">06 / Study design</span><h3>Sample selection</h3><p>Dating-site photos, controlled lab portraits and politicians' photos represent different settings.</p></article>
+    </div>
+    <p class="table-note">See the <a href="#sources">political-orientation studies and critiques below</a> for the underlying research.</p>
+  </section>
+
+  <section class="section wrap" aria-labelledby="context-title">
+    <div class="section-head"><div><span class="tiny"><span class="section-index">04</span> The wider research</span><h2 id="context-title">Identity, traits<br>&amp; targeting</h2></div><p>The complete report covers related trait studies, advertising, surveillance, critiques and the regulatory record.</p></div>
+    <div class="reading-grid">
+      <article class="reading-card"><span class="tiny">Research context</span><h3>Other trait claims</h3><p>The review covers personality, sexual orientation and the effects of demographic stereotypes in vision-language models, with study limitations and critiques.</p><a href="#sources">Browse the grouped research ↓</a></article>
+      <article class="reading-card"><span class="tiny">Deployment context</span><h3>Digital profiling</h3><p>The report examines digital-footprint targeting, Cambridge Analytica, face-search systems and companies marketing trait classifiers.</p><a href="../report/">Read the complete report ↗</a></article>
+    </div>
+  </section>
+
+  <section class="section wrap" id="sources" aria-labelledby="sources-title">
+    <div class="section-head"><div><span class="tiny"><span class="section-index">05</span> References</span><h2 id="sources-title">Inspect the sources</h2></div><p>Research compiled on 24–25 October 2026. This iteration reuses the project's source list and preserves its verification labels.</p></div>
+    <div class="source-intro"><p>Expand a topic for papers, official records and critical responses. The bibliography records which references were verified, partly verified or still need checking.</p><a class="text-link" href="https://github.com/barts83eu/facial-analysis-lefty-people-2026/blob/main/references/bibliography.md">Annotated bibliography ↗</a></div>
+<!-- Grouped sources, English. Included into site/index.html and report/index.html at build time (include line: "#include sources-en").
+     Canonical list with status: references/bibliography.md. Chinese version: sources/sources.zh.html. -->
+<style>
+.sources { display: grid; gap: .6rem; }
+.sources details { border-top: 1px solid currentColor; border-color: color-mix(in srgb, currentColor 25%, transparent); padding: .55rem 0 .2rem; }
+.sources summary { cursor: pointer; font-weight: 700; list-style-position: outside; }
+.sources summary small { font-weight: 400; opacity: .7; }
+.sources ol { margin: .5rem 0 .6rem; padding-left: 1.4rem; display: grid; gap: .45rem; font-size: .88rem; line-height: 1.5; }
+.sources li span { opacity: .78; }
+.sources .tag { display: inline-block; font-size: .7rem; line-height: 1.3; padding: 0 .35em; border: 1px solid currentColor; opacity: .8; margin-left: .3em; vertical-align: 1px; }
+.sources .note { font-size: .82rem; opacity: .78; margin: .2rem 0 0; }
+</style>
+<div class="sources">
+
+<details open>
+<summary>Political orientation from faces <small>· 5</small></summary>
+<ol>
+<li>Kosinski, M. (2021). Facial recognition technology can expose political orientation from naturalistic facial images. <i>Scientific Reports</i> 11, 100. <a href="https://doi.org/10.1038/s41598-020-79310-1">doi</a> <span>— 1,085,795 dating-site and Facebook photos (US, UK, Canada); pairwise AUC .72, human raters .55.</span></li>
+<li>Kosinski, M., Khambatta, P., &amp; Wang, Y. (2024). Facial recognition technology and human raters can predict political orientation from images of expressionless faces even when controlling for demographics and self-presentation. <i>American Psychologist</i> 79(7), 942–955. <a href="https://doi.org/10.1037/amp0001295">doi</a> · <a href="https://arxiv.org/abs/2303.16343v4">arXiv</a> <span>— 591 lab photos: algorithm r = .22, humans r = .21, r = .31 with age, gender and ethnicity; 3,401 politicians r = .13.</span></li>
+<li>Rasmussen, S. H. R., Ludeke, S. G., &amp; Klemmensen, R. (2023). Using deep learning to predict ideology from facial photographs. <i>Scientific Reports</i> 13, 5257. <a href="https://doi.org/10.1038/s41598-023-31796-1">doi</a> <span>— 3,323 Danish candidates, 61% accuracy. Predictions tracked smiling and, for women, attractiveness; the model also used areas outside the face.</span></li>
+<li>Lindholm, A., Hjorth, F., &amp; Schuessler, J. (2025). Facial finetuning: using pretrained image classification models to predict politicians' success. <i>Political Science Research and Methods</i> 13(4), 1031–1041. <a href="https://doi.org/10.1017/psrm.2024.38">doi</a> <span>— 7,080 Danish politicians; model scores for attractiveness and trustworthiness correlate with votes.</span></li>
+<li>Rule, N. O., &amp; Ambady, N. (2010). Democrats and Republicans can be differentiated from their faces. <i>PLoS ONE</i> 5(1), e8733. <a href="https://doi.org/10.1371/journal.pone.0008733">doi</a> <span>— human judges above chance on candidate photos.</span></li>
+</ol>
+</details>
+
+<details>
+<summary>Personality from faces <small>· 10</small></summary>
+<ol>
+<li>Kachur, A., Osin, E., Davydov, D., Shutilov, K., &amp; Novokshonov, A. (2020). Assessing the Big Five personality traits using real-life static facial images. <i>Scientific Reports</i> 10, 8487. <a href="https://doi.org/10.1038/s41598-020-65358-6">doi</a> <span>— 12,447 volunteers, 31,367 photos; mean r = .24 with self-reports. Three of the five authors worked for the company that supplied the data.</span></li>
+<li>Guenzel, M., Kogan, S., Niessner, M., &amp; Shue, K. (2026). AI personality extraction from faces: Labor market implications. NBER Working Paper 34808. <a href="https://www.nber.org/papers/w34808">NBER</a> <span>— LinkedIn photos of about 96,000 MBA graduates; "Photo Big 5" scores (Kachur model) predict pay, seniority and job moves. The authors warn against use in hiring.</span></li>
+<li>Hu, S., Xiong, J., Fu, P., et al. (2017). Signatures of personality on dense 3D facial images. <i>Scientific Reports</i> 7, 73. <a href="https://doi.org/10.1038/s41598-017-00071-5">doi</a> <span>— 3D scans of 834 Han Chinese adults (CAS-MPG Shanghai, Fudan); face shape explains 0.67–3.95% of personality variance.</span></li>
+<li>Xu, J., Tian, W., Lv, G., Liu, S., &amp; Fan, Y. (2021). Prediction of the Big Five personality traits using static facial images of college students with different academic backgrounds. <i>IEEE Access</i> 9, 76822–76832. <a href="https://doi.org/10.1109/ACCESS.2021.3076989">doi</a> <span>— Northwestern Polytechnical University, Xi'an; 13,347 student photo–questionnaire pairs; "above 70%" accuracy on binned classes, not comparable with correlations.</span></li>
+<li>Cai, L., &amp; Liu, X. (2022). Identifying Big Five personality traits based on facial behavior analysis. <i>Frontiers in Public Health</i> 10, 1001828. <a href="https://doi.org/10.3389/fpubh.2022.1001828">doi</a> <span>— Institute of Psychology, CAS; facial movement in 30-second videos, N = 82, r = .39–.48, no independent test sample.</span></li>
+<li>Jaeger, B., Sleegers, W. W. A., Stern, J., Penke, L., &amp; Jones, A. L. (2024). Testing perceivers' accuracy and accuracy awareness when forming personality impressions from faces. <i>European Journal of Personality</i> 38(6), 907–927. <a href="https://doi.org/10.1177/08902070231225728">doi</a> <span>— preregistered: human face impressions of personality are not accurate, and people overestimate their accuracy.</span></li>
+<li>Foo, Y. Z., Sutherland, C. A. M., Burton, N. S., Nakagawa, S., &amp; Rhodes, G. (2022). Accuracy in facial trustworthiness impressions: Kernel of truth or modern physiognomy? A meta-analysis. <i>Personality and Social Psychology Bulletin</i> 48(11), 1580–1596. <a href="https://doi.org/10.1177/01461672211048110">doi</a> <span>— face-level r = .14, "unlikely to be of practical utility".</span></li>
+<li>Hinds, J., &amp; Joinson, A. (2024). Digital data and personality: A systematic review and meta-analysis. <i>Psychological Bulletin</i> 150(6), 727–766. <a href="https://doi.org/10.1037/bul0000430">doi</a> <span>— benchmark across all digital footprints: computer prediction pooled ρ = .30 (42 studies).</span></li>
+<li>Kosinski, M. (2017). Facial width-to-height ratio does not predict self-reported behavioral tendencies. <i>Psychological Science</i> 28(11), 1675–1682. <a href="https://doi.org/10.1177/0956797617716929">doi</a> <span>— a null result from Kosinski himself.</span></li>
+<li>刘晨, 温芳芳, 佐斌 (2019). 以貌取人可行吗？——基于面孔的特质推理及准确性. 《心理科学》42(1), 150–156. <a href="https://jps.ecnu.edu.cn/CN/Y2019/V42/I1/150">jps.ecnu.edu.cn</a><span class="tag">中文</span> <span>— Central China Normal University review: face-based trait inference has "moderate accuracy" that depends on target, perceiver, culture and context.</span></li>
+</ol>
+</details>
+
+<details>
+<summary>Sexual orientation from faces <small>· 7</small></summary>
+<ol>
+<li>Wang, Y., &amp; Kosinski, M. (2018). Deep neural networks are more accurate than humans at detecting sexual orientation from facial images. <i>Journal of Personality and Social Psychology</i> 114(2), 246–257. <a href="https://doi.org/10.1037/pspa0000098">doi</a> <span>— 35,326 dating-site images; pairwise accuracy 81% (men) and 74% (women) from one image.</span></li>
+<li>Leuner, J. (2019). A replication study: Machine learning models are capable of predicting sexual orientation from facial images. <a href="https://arxiv.org/abs/1902.10739">arXiv 1902.10739</a> <span>— 20,910 new dating-site photos: 68% / 77%. A model on blurred photos still reached 63% / 72%, so much of the signal is not facial structure.</span></li>
+<li>Agüera y Arcas, B., Todorov, A., &amp; Mitchell, M. (2018). Do algorithms reveal sexual orientation or just expose our stereotypes? <i>Medium</i>. <a href="https://gwern.net/docs/www/medium.com/2b3924a875937ddbd65ab929c6d4a39d22ff7e3e.html">archive</a> <span>— glasses, makeup, facial hair and selfie angle differ between groups.</span></li>
+<li>Gelman, A., Mattson, G., &amp; Simpson, D. (2018). Gaydar and the fallacy of decontextualized measurement. <i>Sociological Science</i> 5, 270–280. <a href="https://doi.org/10.15195/v5.a12">doi</a> <span>— the classifier measures self-presentation on a dating site, not orientation in the population.</span></li>
+<li>GLAAD &amp; Human Rights Campaign (2017). Joint statement on the Stanford study.<span class="tag">unverified</span> <span>— called it "dangerous and flawed"; the primary page was not reachable, quotes come from press reports.</span></li>
+<li>积木 (2017). 看脸的世界？通过面部识别技术，AI 可以了解许多个人信息. 爱范儿. <a href="https://www.ifanr.com/909100">ifanr.com</a><span class="tag">中文</span> · 方嘉文 (2017). 你以为人工智能看出了"直"或"弯"？它只是看出了你的偏见. 爱范儿. <a href="https://www.ifanr.com/914194">ifanr.com</a><span class="tag">中文</span> <span>— Chinese coverage of the study and of the Western critiques.</span></li>
+<li>柯鸣 (2018). 性取向被识别后，AI伦理的边界又在哪里？ 36氪. <a href="https://www.36kr.com/p/1722704281601">36kr.com</a><span class="tag">中文</span> <span>— commentary on AI ethics after the study, with a Sun Yat-sen University relationship-recognition model.</span></li>
+</ol>
+<p class="note">No peer-reviewed replication on a new population (2020–2026) and no test of vision-language models for sexual orientation was found.</p>
+</details>
+
+<details>
+<summary>AI models and stereotypes <small>· 3</small></summary>
+<ol>
+<li>Jeon, S., Lee, M. H. J., Montgomery, J. M., &amp; Lai, C. K. (2026). From faces to politics: Vision-language models (sometimes) link visual demographic characteristics to ideological labels. <i>Political Analysis</i> 34(4), 613–621. <a href="https://doi.org/10.1017/pan.2026.10038">doi</a> <span>— GPT-4o, GPT-4o-mini and LLaVA rated identical ads with women as more liberal (b = .41 against a survey gap of .15); Gemini refused to rate faces.</span></li>
+<li>Hausladen, C. I., Knott, M., Camerer, C. F., &amp; Perona, P. (2025). Social perception of faces in a vision-language model. <i>FAccT '25</i>, 639–659. <a href="https://doi.org/10.1145/3715275.3732041">doi</a> · <a href="https://arxiv.org/abs/2408.14435">arXiv</a> <span>— CLIP's judgments shift with expression more than with age, and with lighting about as much as with age.</span></li>
+<li>Peterson, J. C., Uddenberg, S., Griffiths, T. L., Todorov, A., &amp; Suchow, J. W. (2022). Deep models of superficial face judgments. <i>PNAS</i> 119(17), e2115228119. <a href="https://doi.org/10.1073/pnas.2115228119">doi</a> · <a href="https://github.com/jcpeterson/omi">One Million Impressions</a> <span>— models how people judge synthetic faces.</span></li>
+</ol>
+</details>
+
+<details>
+<summary>Critiques and the history of physiognomy <small>· 7</small></summary>
+<ol>
+<li>Agüera y Arcas, B., Mitchell, M., &amp; Todorov, A. (2017). Physiognomy's new clothes. <i>Medium</i>. <a href="https://ethicsatwork.nd.edu/resources/physiognomys-new-clothes/">summary</a></li>
+<li>Stark, L., &amp; Hutson, J. (2022). Physiognomic artificial intelligence. <i>Fordham Intellectual Property, Media &amp; Entertainment Law Journal</i> 32(4). <a href="https://ir.lawnet.fordham.edu/iplj/vol32/iss4/2">Fordham</a> <span>— defines "physiognomic AI" and argues for legal bans.</span></li>
+<li>Andrews, M., Smart, A., &amp; Birhane, A. (2024). The reanimation of pseudoscience in machine learning and its ethical repercussions. <i>Patterns</i> 5(9), 101027. <a href="https://doi.org/10.1016/j.patter.2024.101027">doi</a> <span>— discusses Kosinski 2024, Wang &amp; Kosinski 2018, Wu &amp; Zhang 2016 and Kachur 2020.</span></li>
+<li>Todorov, A., Olivola, C. Y., Dotsch, R., &amp; Mende-Siedlecki, P. (2015). Social attributions from faces. <i>Annual Review of Psychology</i> 66, 519–545. <a href="https://doi.org/10.1146/annurev-psych-113011-143831">doi</a> · Todorov, A. (2017). <i>Face Value</i>. Princeton University Press.</li>
+<li>Wu, X., &amp; Zhang, X. (2016). Automated inference on criminality using face images. <a href="https://arxiv.org/abs/1611.04135">arXiv 1611.04135</a> <span>— Shanghai Jiao Tong University; ID photos of convicted men against web photos of others, a sampling confound. Version 3 (2017) is the authors' reply to critics.</span></li>
+<li>虞涵棋, 杨漾 (2017). 谷歌研究员质疑"看脸识罪犯"，交大教授撰文：我被扣帽子了. 澎湃新闻. <a href="https://m.thepaper.cn/newsDetail_forward_1685972">thepaper.cn</a><span class="tag">中文</span> <span>— Wu Xiaolin's response; reports 1,856 photos and 89% claimed accuracy.</span></li>
+<li>Eckles, D., Gordon, B. R., &amp; Johnson, G. A. (2018). Field studies of psychologically targeted ads face threats to internal validity. <i>PNAS</i> 115(23). <a href="https://doi.org/10.1073/pnas.1805363115">doi</a> <span>— Facebook's ad delivery means the Matz 2017 arms were not randomised comparisons.</span></li>
+</ol>
+</details>
+
+<details>
+<summary>Cambridge Analytica and psychographic targeting <small>· 14</small></summary>
+<ol>
+<li>Kosinski, M., Stillwell, D., &amp; Graepel, T. (2013). Private traits and attributes are predictable from digital records of human behavior. <i>PNAS</i> 110(15), 5802–5805. <a href="https://doi.org/10.1073/pnas.1218772110">doi</a> <span>— Facebook Likes predict personality, politics and sexual orientation.</span></li>
+<li>Youyou, W., Kosinski, M., &amp; Stillwell, D. (2015). Computer-based personality judgments are more accurate than those made by humans. <i>PNAS</i> 112(4), 1036–1040. <a href="https://doi.org/10.1073/pnas.1418680112">doi</a></li>
+<li>University of Cambridge Psychometrics Centre. myPersonality. <a href="https://www.psychometrics.cam.ac.uk/node/888">psychometrics.cam.ac.uk</a> <span>— "no longer active and data is no longer being shared"; over 6 million volunteers until 2012.</span></li>
+<li>Information Commissioner's Office (2018). <i>Investigation into the use of data analytics in political campaigns</i>. <a href="https://ico.org.uk/media2/migrated/2260271/investigation-into-the-use-of-data-analytics-in-political-campaigns-final-20181105.pdf">ICO (PDF)</a> <span>— up to 87 million Facebook users; Stillwell refused Cambridge Analytica access to myPersonality, so Kogan built his own app; £500,000 penalty for Facebook.</span></li>
+<li>Denham, E. (2020). Letter to the DCMS Committee on the ICO investigation. <a href="https://cy.ico.org.uk/media2/migrated/2618383/20201002_ico-o-ed-l-rtl-0181_to-julian-knight-mp.pdf">ICO (PDF)</a> <span>— the models were "well recognised processes using commonly available technology"; real-world accuracy on new people "was likely much lower"; GSR data could not have been used in the Brexit referendum.</span></li>
+<li>House of Commons DCMS Committee (2019). <i>Disinformation and 'fake news': Final Report</i>, HC 1791. <a href="https://dera.ioe.ac.uk/id/eprint/33370/1/1791.pdf">PDF</a> · Oral evidence of C. Wylie, 27 Mar 2018, HC 363. <a href="https://committees.parliament.uk/oralevidence/7803/html/">parliament.uk</a><span class="tag">partly verified</span></li>
+<li>US Federal Trade Commission (2019). Final settlement with Cambridge Analytica's former CEO and the app developer. <a href="https://www.ftc.gov/news-events/news/press-releases/2019/12/ftc-grants-final-approval-settlement-former-cambridge-analytica-ceo-app-developer-over-allegations">ftc.gov</a> · $5 billion penalty for Facebook. <a href="https://www.ftc.gov/news-events/news/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions-facebook">ftc.gov</a> <span>— the harvested data and derived models had to be deleted.</span></li>
+<li>Matz, S. C., Kosinski, M., Nave, G., &amp; Stillwell, D. J. (2017). Psychological targeting as an effective approach to digital mass persuasion. <i>PNAS</i> 114(48), 12714–12719. <a href="https://doi.org/10.1073/pnas.1710966114">doi</a> <span>— 3.5 million people reached; up to 40% more clicks and 50% more purchases.</span></li>
+<li>Tappin, B. M., Wittenberg, C., Hewitt, L. B., Berinsky, A. J., &amp; Rand, D. G. (2023). Quantifying the potential persuasive returns to political microtargeting. <i>PNAS</i> 120(25), e2216261120. <a href="https://doi.org/10.1073/pnas.2216261120">doi</a> <span>— targeting on more than one attribute added nothing; gains may not need large amounts of personal data.</span></li>
+<li>Simchon, A., Edwards, M., &amp; Lewandowsky, S. (2024). The persuasive effects of political microtargeting in the age of generative AI. <i>PNAS Nexus</i> 3(2), pgae035. <a href="https://doi.org/10.1093/pnasnexus/pgae035">doi</a> · Matz, S. C., et al. (2024). The potential of generative AI for personalized persuasion at scale. <i>Scientific Reports</i> 14, 4692. <a href="https://doi.org/10.1038/s41598-024-53755-0">doi</a></li>
+<li>Gibney, E. (2018). The scant science behind Cambridge Analytica's controversial marketing techniques. <i>Nature</i>. <a href="https://doi.org/10.1038/d41586-018-03880-4">doi</a> · Allen, J., &amp; Abbruzzese, J. (2018). Cambridge Analytica's effectiveness called into question. NBC News. <a href="https://www.nbcnews.com/politics/politics-news/cambridge-analytica-s-effectiveness-called-question-despite-alleged-facebook-data-n858256">nbcnews.com</a></li>
+<li>Bakir, V. (2020). Psychological operations in digital political campaigns: Assessing Cambridge Analytica's psychographic profiling and targeting. <i>Frontiers in Communication</i> 5, 67. <a href="https://doi.org/10.3389/fcomm.2020.00067">doi</a> · Hersh, E. D. (2015). <i>Hacking the Electorate</i>. Cambridge University Press. <a href="https://doi.org/10.1017/cbo9781316212783">doi</a></li>
+<li>Lomas, N. (2020). Latest Cambridge Analytica leaks ("Hindsight Files"). TechCrunch. <a href="https://techcrunch.com/2020/01/06/facebook-data-misuse-and-voter-manipulation-back-in-the-frame-with-latest-cambridge-analytica-leaks/">techcrunch.com</a> <span>— internal documents released by Brittany Kaiser; no public index found.</span></li>
+<li>DeepTech深科技 (2018). "剑桥分析"究竟如何通过"点赞"来影响投票倾向？ 安全内参. <a href="https://www.secrss.com/articles/1828">secrss.com</a><span class="tag">中文</span> <span>— Chinese explainer; notes that evidence the method swung elections is lacking.</span></li>
+</ol>
+<p class="note"><b>Data.</b> Public: the ICO, FTC and DCMS documents above. Not public: the profiles harvested by Kogan's app (deletion ordered by the FTC; seized copies destroyed by the ICO) and the myPersonality dataset (sharing stopped in 2018). This project links to the official record and does not use leaked copies.</p>
+</details>
+
+<details>
+<summary>Who builds it: companies and labs <small>· 9</small></summary>
+<ol>
+<li>US Treasury (10 Dec 2021). Sanctions on SenseTime. <a href="https://home.treasury.gov/news/press-releases/jy0526">treasury.gov</a> <span>— says its software "can determine a target's ethnicity, with a particular focus on identifying ethnic Uyghurs". SenseTime called the accusations unfounded.</span></li>
+<li>US Treasury (16 Dec 2021). Chinese military-industrial complex companies, incl. Megvii, Yitu, CloudWalk. <a href="https://home.treasury.gov/news/press-releases/jy0538">treasury.gov</a></li>
+<li>IPVM (2020). Huawei / Megvii "Uyghur alert" test report. <a href="https://ipvm.com/reports/huawei-megvii-uygur">ipvm.com</a> <span>— Huawei: "simply a test"; Megvii: not designed to label ethnic groups.</span></li>
+<li>Rollet, C. (2020). Uniview Uyghur recognition. IPVM. <a href="https://ipvm.com/reports/uniview-uyghur">ipvm.com</a> <span>— an SDK ethnicity code listing only Uyghurs; also cites Hikvision (2019) and Dahua (2020).</span></li>
+<li>Asher-Schapiro, A. (2021). Chinese tech patents tools that can detect, track Uighurs. Thomson Reuters Foundation. <a href="https://www.context.news/surveillance/chinese-tech-patents-tools-that-can-detect-track-uighurs">context.news</a> <span>— Huawei + CAS, Megvii and Alibaba patent filings; company replies included.</span></li>
+<li>Wang, C., Zhang, Q., Liu, W., Liu, Y., &amp; Miao, L. (2019). Facial feature discovery for ethnicity recognition. <i>WIREs Data Mining and Knowledge Discovery</i> 9(1), e1278. <a href="https://doi.org/10.1002/widm.1278">doi</a> · IPVM (2021) on its ethics. <a href="https://ipvm.com/reports/eth-rec-ethics">ipvm.com</a> <span>— Dalian Minzu University with Curtin University; 300 Uyghur, Tibetan and Korean students; Expression of Concern, no retraction registered.</span></li>
+<li>Mozur, P. (2019). One month, 500,000 face scans: How China is using A.I. to profile a minority. <i>The New York Times</i>. <a href="https://www.nytimes.com/2019/04/14/technology/china-surveillance-artificial-intelligence-racial-profiling.html">nytimes.com</a><span class="tag">partly verified</span></li>
+<li>Human Rights Watch (2017). China: Voice biometric collection threatens privacy. <a href="https://www.hrw.org/news/2017/10/22/china-voice-biometric-collection-threatens-privacy">hrw.org</a> <span>— iFlytek; voice, not face.</span></li>
+<li>Globes (2016). Israeli co Faception claims it can spot terrorists. <a href="https://en.globes.co.il/en/article-israeli-co-faception-claims-it-can-spot-terrorists-1001127220">globes.co.il</a> <span>— 15 "classifiers" at a claimed 80%, no published validation.</span></li>
+</ol>
+</details>
+
+<details>
+<summary>Law: EU, China, US <small>· 5</small></summary>
+<ol>
+<li>Regulation (EU) 2024/1689 (AI Act), Art. 5(1)(g). <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">EUR-Lex</a> <span>— bans biometric categorisation that infers race, political opinions, religion, sex life or sexual orientation.</span></li>
+<li>《中华人民共和国个人信息保护法》 (2021), Art. 28–29. <a href="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm">cac.gov.cn</a><span class="tag">中文</span> <span>— biometrics and religious belief are sensitive personal information; separate consent required. No named ban on inferring politics.</span></li>
+<li>最高人民法院关于审理使用人脸识别技术处理个人信息相关民事案件适用法律若干问题的规定, 法释〔2021〕15号. <a href="https://www.court.gov.cn/xinshidai/xiangqing/315851.html">court.gov.cn</a><span class="tag">中文</span> <span>— face verification, identification or analysis in public places in breach of law infringes personality rights.</span></li>
+<li>国家互联网信息办公室、公安部《人脸识别技术应用安全管理办法》 (2025), in force 1 June 2025. <a href="https://www.cac.gov.cn/2025-03/21/c_1744174262156096.htm">cac.gov.cn</a><span class="tag">中文</span> <span>— Art. 2(2) exempts R&amp;D and algorithm training; filing required above 100,000 people.</span></li>
+<li>US: Illinois BIPA, Texas CUBI, California CPRA, FTC enforcement (Rite Aid, 2023).<span class="tag">from memory</span></li>
+</ol>
+</details>
+
+</div>
+    <div class="team">
+      <img src="../assets/owner-face-recognition.webp" width="100" height="124" alt="Bart Sakwerda, project owner" loading="lazy">
+      <div><span class="tiny">Principal investigator / Project owner</span><h3>Bart Sakwerda</h3><p>Budots Media Philippines. Original research workflow, literature survey and simulation: Claude Opus 5.5. Design and interactive study comparison for this iteration: ChatGPT Codex.</p></div>
+      <span class="iteration tiny">v1 / 27 Oct 2026</span>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><span class="tiny">Budots Media · Ghost in the Machine · Codex v1</span><div class="footer-links"><a href="../">Original edition</a><a href="../zh/" lang="zh-Hans" hreflang="zh-Hans">中文</a><a href="https://github.com/barts83eu/facial-analysis-lefty-people-2026">GitHub ↗</a></div></div></footer>
+
+<script>
+(() => {
+  const studies = {
+    lab: { label: 'Controlled lab photos · 2024', accuracy: 59 },
+    politicians: { label: "Politicians’ photos · 2024", accuracy: 55 },
+    everyday: { label: 'Everyday photos · 2021', accuracy: 66 }
+  };
+  const buttons = Array.from(document.querySelectorAll('[data-study]'));
+  const cells = Array.from({ length: 100 }, () => document.createElement('span'));
+  document.getElementById('case-grid').append(...cells);
+  function selectStudy(key) {
+    const study = studies[key];
+    document.getElementById('study-label').textContent = study.label;
+    document.getElementById('accuracy').textContent = study.accuracy;
+    document.getElementById('correct').textContent = study.accuracy;
+    document.getElementById('incorrect').textContent = 100 - study.accuracy;
+    document.getElementById('gain').textContent = study.accuracy - 50;
+    cells.forEach((cell, i) => { cell.className = i < 50 ? '' : i < study.accuracy ? 'gain' : 'miss'; });
+    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.study === key)));
+    document.querySelectorAll('[data-study-row]').forEach(row => row.classList.toggle('selected', row.dataset.studyRow === key));
+  }
+  buttons.forEach(button => button.addEventListener('click', () => selectStudy(button.dataset.study)));
+  selectStudy('lab');
+  document.documentElement.classList.add('js');
+})();
+</script>
+
+</body>
+</html>

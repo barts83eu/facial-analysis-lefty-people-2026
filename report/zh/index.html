@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>人脸与政治倾向</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+/* Layout: single reading column (~68ch) of a lab report; figures break out to a wider measure. */
+:root {
+  --paper: #f2f4f6;
+  --sheet: #ffffff;
+  --ink: #18212b;
+  --muted: #5a6573;
+  --rule: #d5dbe2;
+  --signal: #1f5f8b;
+  --chance: #b5651d;
+  --ok: #2f7a4f;
+  --warn: #a8432f;
+  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", "Noto Sans SC", serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, "Noto Sans Mono", "Noto Sans SC", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #10161d; --sheet: #172029; --ink: #e4e9ee; --muted: #98a4b2;
+    --rule: #2a3542; --signal: #6fb1df; --chance: #e3a05c; --ok: #6cc391; --warn: #e88a76;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10161d; --sheet: #172029; --ink: #e4e9ee; --muted: #98a4b2;
+  --rule: #2a3542; --signal: #6fb1df; --chance: #e3a05c; --ok: #6cc391; --warn: #e88a76;
+  color-scheme: dark;
+}
+body {
+  background: var(--paper); color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 56rem; margin: 0 auto; padding-block: 2.5rem 4rem; display: grid; gap: 2.75rem; }
+.col { max-width: 68ch; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.55rem; font-weight: 700; }
+h3 { font-size: 1.1rem; font-weight: 500; }
+p { margin: 0; }
+.stack { display: grid; gap: 1rem; }
+.label { font: 600 0.72rem/1 var(--mono); letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+a { color: var(--signal); }
+a:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+header.top { display: grid; gap: 1rem; border-bottom: 1px solid var(--rule); padding-bottom: 1.75rem; }
+.lede { font-size: 1.2rem; color: var(--ink); }
+.meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font: 400 0.85rem/1.4 var(--mono); color: var(--muted); }
+.verdict {
+  background: var(--sheet); border: 1px solid var(--rule); border-left: 4px solid var(--warn);
+  padding: 1.25rem 1.4rem; display: grid; gap: 0.5rem;
+}
+.verdict strong { font-family: var(--display); font-size: 1.25rem; font-weight: 700; }
+figure { margin: 0; background: var(--sheet); border: 1px solid var(--rule); padding: 1.25rem 1.25rem 1rem; display: grid; gap: 0.75rem; min-width: 0; }
+figcaption { font-size: 0.9rem; color: var(--muted); }
+.chart { overflow-x: auto; }
+.chart svg { display: block; width: 100%; min-width: 520px; height: auto; }
+.chart text { font-family: var(--mono); font-size: 12px; fill: var(--ink); }
+.chart .muted { fill: var(--muted); }
+.twofig { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
+.stat { display: grid; gap: 0.25rem; }
+.stat .n { font: 600 2.1rem/1 var(--mono); font-variant-numeric: tabular-nums; }
+.stat .n.bad { color: var(--warn); }
+.stat .n.good { color: var(--ok); }
+.stat p { font-size: 0.92rem; color: var(--muted); }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; min-width: 34rem; }
+th, td { text-align: left; padding: 0.55rem 0.75rem 0.55rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font: 600 0.72rem/1.2 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pill { display: inline-block; font: 600 0.7rem/1 var(--mono); letter-spacing: 0.04em; padding: 0.3rem 0.5rem; border: 1px solid currentColor; border-radius: 3px; white-space: nowrap; }
+.pill.ok { color: var(--ok); } .pill.warn { color: var(--warn); } .pill.mid { color: var(--chance); }
+ul.clean { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.4rem; }
+.status { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.5rem; }
+.status ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.45rem; }
+.status li { display: flex; gap: 0.6rem; align-items: baseline; }
+.status li::before { content: "■"; font-size: 0.7rem; }
+.status .done li::before { color: var(--ok); }
+.status .todo li::before { color: var(--chance); }
+.files { font: 400 0.85rem/1.55 var(--mono); background: var(--sheet); border: 1px solid var(--rule); padding: 1rem 1.25rem; overflow-x: auto; white-space: pre; }
+footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; display: grid; gap: 0.75rem; font-size: 0.92rem; color: var(--muted); }
+
+/* zh-Hans overrides. The Latin faces have no CJK glyphs; Chinese falls through to Noto Sans SC. */
+body { line-height: 1.75; }
+h1, h2, h3 { line-height: 1.3; }
+h1 { letter-spacing: 0; }
+.label, th { letter-spacing: 0.02em; text-transform: none; }
+.label { line-height: 1.3; }
+.pill { letter-spacing: 0; }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <span class="label">研究工作区 · facial-analysis-lefty-people-2026</span>
+    <h1>人脸能否透露一个人的政治倾向？</h1>
+    <p class="lede col">本文回顾 Michal Kosinski（科辛斯基）在斯坦福大学开展的、根据人脸图像预测政治倾向的研究：这些研究发现了什么，这些数字对单张照片中的单个人意味着什么，以及其中是否有任何方法可用于 CCTV 安防。</p>
+    <div class="meta">
+      <span>首席研究员：Bart Sakwerda</span>
+      <span>编排：Claude Opus 5.5</span>
+      <span>更新于 2026-10-25</span>
+      <span><a href="../" lang="en" hreflang="en">English</a></span>
+    </div>
+  </header>
+
+  <section class="verdict col" aria-label="结论">
+    <span class="label">结论</span>
+    <strong>在大群体中存在微弱信号，对单个人而言接近抛硬币。</strong>
+    <p>人脸携带关于政治倾向的微弱统计信号。用一张照片判断一个人时，已发表的最佳结果大约三次中对两次。控制最严格的结果约有 59% 的时候正确。抛硬币的正确率为 50%。</p>
+  </section>
+
+  <section class="stack">
+    <h2>相关研究</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>研究</th><th>照片数</th><th>报告结果</th><th>结果说明</th></tr></thead>
+        <tbody>
+          <tr><td>Kosinski 2021, <i>Scientific Reports</i></td><td class="num">1.09 M</td><td class="num">AUC .72</td><td>约会网站和 Facebook 照片。“72%”是成对比较的结果：从一名自由派和一名保守派中选出自由派。人类得分为 .55。</td></tr>
+          <tr><td>Kosinski, Khambatta &amp; Wang 2024, <i>American Psychologist</i></td><td class="num">591</td><td class="num">r = .22</td><td>实验室照片：中性表情、头发后梳、不化妆。人类得分为 r = .21。约可解释 5% 的变异。</td></tr>
+          <tr><td>同一论文，政治人物</td><td class="num">3,401</td><td class="num">r = .13</td><td>对真实政治人物照片的样本外检验。结果最弱。</td></tr>
+          <tr><td>Rasmussen, Ludeke &amp; Klemmensen 2023, <i>Scientific Reports</i></td><td class="num">3,323</td><td class="num">61%</td><td>丹麦选举候选人，是主要的非美国样本。预测结果与微笑相关，女性候选人还与吸引力相关；模型还利用了面部以外的区域。</td></tr>
+          <tr><td>Wang &amp; Kosinski 2018, <i>JPSP</i></td><td class="num">35,326</td><td class="num">AUC .81 / .74</td><td>性取向，分男性和女性。批评者指出，外貌修饰和拍摄角度可以解释其中很大一部分。</td></tr>
+          <tr><td>Kosinski 2017, <i>Psychological Science</i></td><td class="num">大样本</td><td class="num">零结果</td><td>面部宽高比不能预测行为。这是 Kosinski 本人得出的、不支持相面术的结果。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>人格、性取向与 AI 模型</h2>
+    <p class="col">对其他特征的研究呈现同样的模式：大样本中效应很小，信号与自我呈现和人口学特征相关。</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>研究</th><th>样本</th><th>报告结果</th><th>结果说明</th></tr></thead>
+        <tbody>
+          <tr><td>Kachur et al. 2020, <i>Scientific Reports</i></td><td class="num">12,447</td><td class="num">平均 r = .24</td><td>根据自拍评估大五人格。数据来自五位作者中三人的雇主。</td></tr>
+          <tr><td>Hu et al. 2017, <i>Scientific Reports</i></td><td class="num">834</td><td class="num">0.7–4% 方差</td><td>汉族成年人的三维人脸扫描（中国科学院—马普学会计算生物学伙伴研究所 CAS-MPG，上海；复旦大学）。人脸形状对人格的解释力很低。</td></tr>
+          <tr><td>Jaeger et al. 2024, <i>Eur. J. Personality</i></td><td class="num">646 名评分者</td><td class="num">不准确</td><td>预注册研究：人类根据人脸形成的人格印象并不准确，而且人们高估了自己的准确度。</td></tr>
+          <tr><td>Foo et al. 2022, <i>PSPB</i>（元分析）</td><td class="num">—</td><td class="num">r = .14</td><td>根据人脸判断可信度：「不太可能具有实际用途」。</td></tr>
+          <tr><td>Guenzel et al. 2026, NBER</td><td class="num">≈ 96,000</td><td class="num">—</td><td>根据 LinkedIn 照片得出的“Photo Big 5”（照片大五人格）分数（Kachur 模型）可以预测 MBA 毕业生的薪酬和职级。作者警告不要将其用于招聘。</td></tr>
+          <tr><td>Leuner 2019, arXiv</td><td class="num">20,910</td><td class="num">68% / 77%</td><td>对性取向研究的重复研究。基于模糊照片的模型仍达到 63% / 72%，说明信号的很大一部分并非来自面部结构。</td></tr>
+          <tr><td>Jeon et al. 2026, <i>Political Analysis</i></td><td class="num">每个模型 8,000</td><td class="num">b = .41</td><td>GPT-4o、GPT-4o-mini 和 LLaVA 将出现女性的相同广告评为更偏自由派；调查中的差距为 .15。Gemini 拒绝评分。</td></tr>
+          <tr><td>Hausladen et al. 2025, FAccT</td><td class="num">合成人脸</td><td class="num">—</td><td>CLIP 对人脸的社会判断随表情变化的幅度大于随年龄变化的幅度，随光照变化的幅度与随年龄变化的幅度相当。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>一个人，一张照片</h2>
+    <p class="col">将已发表的分数换算为正确判定单个人的概率，并假定左派和右派人数相等。数值来自 <span class="mono">experiments/sim_single_photo_limits.py</span>。</p>
+    <figure>
+      <div class="chart">
+        <svg viewBox="0 0 640 250" role="img" aria-label="单人准确率：政治人物 55%，实验室照片 59%，实验室照片加人口学变量 63%，自然场景照片 66%。抛硬币 50%。">
+          <!-- x scale: 45% at x=250, 70% at x=620; 14.8 px per point -->
+          <g stroke="var(--rule)" stroke-width="1">
+            <line x1="250" y1="20" x2="250" y2="205"/>
+            <line x1="324" y1="20" x2="324" y2="205"/>
+            <line x1="398" y1="20" x2="398" y2="205"/>
+            <line x1="472" y1="20" x2="472" y2="205"/>
+            <line x1="546" y1="20" x2="546" y2="205"/>
+            <line x1="620" y1="20" x2="620" y2="205"/>
+          </g>
+          <line x1="324" y1="14" x2="324" y2="205" stroke="var(--chance)" stroke-width="2" stroke-dasharray="5 4"/>
+          <text x="330" y="14" style="fill: var(--chance)">抛硬币 50%</text>
+          <g class="muted">
+            <text x="250" y="226" text-anchor="middle" class="muted">45%</text>
+            <text x="324" y="226" text-anchor="middle" class="muted">50%</text>
+            <text x="398" y="226" text-anchor="middle" class="muted">55%</text>
+            <text x="472" y="226" text-anchor="middle" class="muted">60%</text>
+            <text x="546" y="226" text-anchor="middle" class="muted">65%</text>
+            <text x="620" y="226" text-anchor="middle" class="muted">70%</text>
+          </g>
+          <!-- rows: y = 50, 95, 140, 185 -->
+          <g>
+            <text x="0" y="46">政治人物 (2024)</text>
+            <text x="0" y="61" class="muted">r = .13</text>
+            <line x1="324" y1="50" x2="398" y2="50" stroke="var(--signal)" stroke-width="2"/>
+            <circle cx="398" cy="50" r="7" fill="var(--signal)"/>
+            <text x="412" y="54">55%</text>
+
+            <text x="0" y="91">实验室照片 (2024)</text>
+            <text x="0" y="106" class="muted">r = .22</text>
+            <line x1="324" y1="95" x2="457" y2="95" stroke="var(--signal)" stroke-width="2"/>
+            <circle cx="457" cy="95" r="7" fill="var(--signal)"/>
+            <text x="471" y="99">59%</text>
+
+            <text x="0" y="136">实验室 + 人口学变量 (2024)</text>
+            <text x="0" y="151" class="muted">r = .31</text>
+            <line x1="324" y1="140" x2="516" y2="140" stroke="var(--signal)" stroke-width="2"/>
+            <circle cx="516" cy="140" r="7" fill="var(--signal)"/>
+            <text x="530" y="144">63%</text>
+
+            <text x="0" y="181">日常照片 (2021)</text>
+            <text x="0" y="196" class="muted">AUC .72</text>
+            <line x1="324" y1="185" x2="561" y2="185" stroke="var(--signal)" stroke-width="2"/>
+            <circle cx="561" cy="185" r="7" fill="var(--signal)"/>
+            <text x="575" y="189">66%</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>最高的数字来自非受控照片，其中微笑、胡须、眼镜和拍摄角度起了很大作用。控制这些因素后，结果降至 59%。</figcaption>
+    </figure>
+
+    <div class="twofig">
+      <div class="stat">
+        <span class="label">每边 10 张照片的测试</span>
+        <span class="n mono">39–78%</span>
+        <p>观测值为 60% 时的 95% 区间。20 张照片无法区分微弱的真实效应与随机结果。</p>
+      </div>
+      <div class="stat">
+        <span class="label">同一测试，真实准确率 59%</span>
+        <span class="n mono">28% / 22%</span>
+        <p>纯粹由于运气，结果看起来无用（不高于 50%）或令人印象深刻（70% 及以上）的频率。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>CCTV 与公共场所安防</h2>
+    <p class="col">情景：一个 100,000 人的人群中有 10 人意图实施暴力。我们为人脸模型设定已发表的最佳分数（AUC .72），尽管没有任何研究表明它在识别暴力意图上能达到这一水平，并将阈值设为能识别出其中一半。</p>
+    <div class="twofig">
+      <div class="stat"><span class="label">被标记的真实威胁</span><span class="n good mono">5</span><p>10 人中的一半。</p></div>
+      <div class="stat"><span class="label">被标记的无辜者</span><span class="n bad mono">20,487</span><p>每个真实威胁约对应 4,100 人。精确率 0.024%。</p></div>
+    </div>
+    <ul class="clean col">
+      <li><b>政治倾向不等于威胁。</b>这些研究测量的是普通的左/右自我认同。暴力极端分子在各个阵营中都只占极少数。</li>
+      <li><b>CCTV 画面质量更差。</b>所有结果都基于清晰的正面照片。没有研究表明该信号在低分辨率、偏斜角度或运动模糊下仍然存在。</li>
+      <li><b>法律。</b>欧盟《人工智能法》（AI Act）第 5(1)(g) 条禁止根据生物特征推断政治观点。美国：伊利诺伊州 BIPA、得克萨斯州 CUBI、加利福尼亚州 CPRA、美国联邦贸易委员会（FTC）的执法（Rite Aid，2023）以及城市层面的禁令。</li>
+      <li><b>确有证据支持的用途：</b>人群密度与人流异常、遗留物品、打斗与跌倒检测、周界入侵，以及经授权的事后检索。</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h2>剑桥分析公司与心理画像定向投放</h2>
+    <ul class="clean col">
+      <li><b>起源。</b>Kosinski、Stillwell 和 Graepel（2013）表明，Facebook 点赞可以预测人格和政治倾向。剑桥分析公司最初向 Stillwell 索取 myPersonality 数据；他以数据保护为由拒绝。随后，Aleksandr Kogan 通过自己的问卷应用收集了多达 8700 万用户的数据（ICO 2018）。</li>
+      <li><b>监管机构的结论。</b>英国信息专员办公室（ICO）2020 年的信函称，CA 的方法是「使用普遍可得技术的、已被广泛认可的流程」，并称其对新对象的实际准确率「很可能低得多」。GSR 的数据不可能被用于英国脱欧公投。</li>
+      <li><b>定向投放是否有效？</b>Matz 等 2017 报告点击量最多增加 40%；Eckles 等 2018 指出，Facebook 的广告投放机制削弱了这一比较的有效性。Tappin 等 2023 发现，基于多个属性的定向并未带来额外效果。生成式 AI 如今可以大规模撰写与人格匹配的信息（Simchon 等 2024；Matz 等 2024）。</li>
+      <li><b>数据。</b>公开：ICO、FTC 和 DCMS 的记录。不公开：被收集的个人档案（FTC 下令删除，ICO 销毁了查获的副本）和 myPersonality（2018 年停止共享）。本项目只链接官方记录。</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h2>谁在开发特征分类器</h2>
+    <p class="col">有文献记录实际部署的人脸模型分类的是族裔，而不是政治倾向。已报道的案例：商汤科技（美国财政部 2021，维吾尔族识别）、华为与旷视科技的「维吾尔族警报」测试（IPVM 2020）、海康威视、大华和宇视的维吾尔族检测（IPVM），以及 16 个省份的警方采购（《纽约时报》2019）。中国高校的相关研究包括上海交通大学（犯罪性，2016）、大连民族大学（族裔，关注声明 Expression of Concern），以及中国科学院心理研究所、中国科学院—马普学会计算生物学伙伴研究所（上海）与复旦大学、西北工业大学（西安）的人格研究。中国以外：斯坦福大学（Kosinski）、南丹麦大学、Kachur 团队（俄罗斯/英国）和 Faception（以色列）。</p>
+    <p class="col">中国法律将生物识别信息列为敏感个人信息（《个人信息保护法》2021，第 28–29 条）。2025 年《人脸识别技术应用安全管理办法》豁免研发和算法训练（第 2 条第 2 款），因此根据人脸推断特征的研究只受《个人信息保护法》约束。</p>
+  </section>
+
+  <section class="stack">
+    <h2>模型实际看到的可能是什么</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>混杂因素</th><th>为何重要</th><th>2024 年是否控制？</th></tr></thead>
+        <tbody>
+          <tr><td>表情</td><td>在部分样本中，两组人的微笑程度不同</td><td><span class="pill ok">是</span></td></tr>
+          <tr><td>头部姿态、拍摄角度</td><td>自拍角度会改变下颌、鼻子和额头的视觉形状</td><td><span class="pill ok">是</span></td></tr>
+          <tr><td>外貌修饰</td><td>胡须、眼镜、妆容和发型随亚文化而不同</td><td><span class="pill ok">是</span></td></tr>
+          <tr><td>年龄、性别、族裔</td><td>同时与政治倾向和外貌相关</td><td><span class="pill mid">部分</span></td></tr>
+          <tr><td>抽样对象</td><td>志愿者和约会网站用户不能代表总体</td><td><span class="pill warn">否</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>GitHub 调研</h2>
+    <p class="col">没有公开仓库复现 Kosinski 从人脸到政治倾向的流程，他也没有公开这些图像。有用的发现：<a href="https://github.com/jcpeterson/omi">One Million Impressions</a>（研究人们如何<i>判断</i>人脸，使用合成人脸）、芝加哥人脸数据库（Chicago Face Database）工具，以及通用人脸库（<a href="https://github.com/deepinsight/insightface">InsightFace</a>、<a href="https://github.com/serengil/deepface">DeepFace</a>）。少数“相面”应用在没有任何验证的情况下作出宣称，可作为视频素材。</p>
+  </section>
+
+  <section class="stack">
+    <h2>进展</h2>
+    <div class="status">
+      <div class="done stack">
+        <h3>已完成</h3>
+        <ul>
+          <li>文献综述及批评意见</li>
+          <li>效应量模拟（E1）</li>
+          <li>CCTV 与基础比率分析</li>
+          <li>GitHub 调研、参考文献目录与 BibTeX</li>
+          <li>新增 62 条来源，其中 9 条为中文；DOI 已核对（10 月 25 日）</li>
+          <li>网站与报告的中文翻译</li>
+          <li>Claude、Kimi 和 Codex 的共用规则</li>
+          <li>视频大纲（9 个部分）</li>
+        </ul>
+      </div>
+      <div class="todo stack">
+        <h3>待办</h3>
+        <ul>
+          <li>核查 Kosinski 的数据可用性声明</li>
+          <li>寻找 2024 年研究的重复研究（截至 10 月 25 日未找到）</li>
+          <li>核实美国法律条目和无法访问的来源</li>
+          <li>视频脚本、分镜与渲染</li>
+        </ul>
+      </div>
+    </div>
+    <div class="files">docs/        00 范围 · 01 文献 · 02 指标 · 03 批评 · 04 待解决问题 · 05 CCTV
+references/  bibliography.md · references.bib · github-survey.md
+experiments/ sim_single_photo_limits.py（含输出）
+agents/      LOG.md · claude-opus-5-5/ · kimi/ · codex/
+video/       大纲 · 分镜 · 素材 · 渲染
+data/raw/    收到的照片，未做分类</div>
+  </section>
+
+  <footer>
+    <span class="label">致谢</span>
+    <p>首席研究员：<b>Bart Sakwerda</b>。研究编排、文献与 GitHub 调研、模拟：<b>Claude Opus 5.5</b>（Anthropic）。计划中的参与者：Kimi、ChatGPT Codex。</p>
+    <h2 id="sources">资料来源</h2>
+    <p>以下资料按主题分组。除带标签的条目外，每条资料均于 2026 年 10 月 24–25 日在线打开核对。含核实状态的完整列表：<a href="https://github.com/barts83eu/facial-analysis-lefty-people-2026/blob/main/references/bibliography.md">references/bibliography.md</a>。</p>
+<!-- Grouped sources, Simplified Chinese (zh-Hans). Included into site/zh/index.html and report/zh/index.html at build time (include line: "#include sources-zh").
+     Translation of sources/sources.en.html: citations unchanged, summaries, headings, notes and tags translated. Canonical list with status: references/bibliography.md. -->
+<style>
+.sources { display: grid; gap: .6rem; }
+.sources details { border-top: 1px solid currentColor; border-color: color-mix(in srgb, currentColor 25%, transparent); padding: .55rem 0 .2rem; }
+.sources summary { cursor: pointer; font-weight: 700; list-style-position: outside; }
+.sources summary small { font-weight: 400; opacity: .7; }
+.sources ol { margin: .5rem 0 .6rem; padding-left: 1.4rem; display: grid; gap: .45rem; font-size: .88rem; line-height: 1.5; }
+.sources li span { opacity: .78; }
+.sources .tag { display: inline-block; font-size: .7rem; line-height: 1.3; padding: 0 .35em; border: 1px solid currentColor; opacity: .8; margin-left: .3em; vertical-align: 1px; }
+.sources .note { font-size: .82rem; opacity: .78; margin: .2rem 0 0; }
+/* zh-Hans: CJK needs a looser line-height in the lists */
+.sources ol { line-height: 1.65; }
+</style>
+<div class="sources">
+
+<details open>
+<summary>从人脸推断政治倾向 <small>· 5 条</small></summary>
+<ol>
+<li>Kosinski, M. (2021). Facial recognition technology can expose political orientation from naturalistic facial images. <i>Scientific Reports</i> 11, 100. <a href="https://doi.org/10.1038/s41598-020-79310-1">doi</a> <span>— 1,085,795 张约会网站和 Facebook 照片（美国、英国、加拿大）；成对比较 AUC .72，人类评分者 .55。</span></li>
+<li>Kosinski, M., Khambatta, P., &amp; Wang, Y. (2024). Facial recognition technology and human raters can predict political orientation from images of expressionless faces even when controlling for demographics and self-presentation. <i>American Psychologist</i> 79(7), 942–955. <a href="https://doi.org/10.1037/amp0001295">doi</a> · <a href="https://arxiv.org/abs/2303.16343v4">arXiv</a> <span>— 591 张实验室照片：算法 r = .22，人类 r = .21，加入年龄、性别和族裔后 r = .31；3,401 名政治人物 r = .13。</span></li>
+<li>Rasmussen, S. H. R., Ludeke, S. G., &amp; Klemmensen, R. (2023). Using deep learning to predict ideology from facial photographs. <i>Scientific Reports</i> 13, 5257. <a href="https://doi.org/10.1038/s41598-023-31796-1">doi</a> <span>— 3,323 名丹麦候选人，准确率 61%。预测结果与微笑相关，对女性而言还与吸引力相关；模型也利用了面部以外的区域。</span></li>
+<li>Lindholm, A., Hjorth, F., &amp; Schuessler, J. (2025). Facial finetuning: using pretrained image classification models to predict politicians' success. <i>Political Science Research and Methods</i> 13(4), 1031–1041. <a href="https://doi.org/10.1017/psrm.2024.38">doi</a> <span>— 7,080 名丹麦政治人物；模型给出的吸引力和可信度分数与得票数相关。</span></li>
+<li>Rule, N. O., &amp; Ambady, N. (2010). Democrats and Republicans can be differentiated from their faces. <i>PLoS ONE</i> 5(1), e8733. <a href="https://doi.org/10.1371/journal.pone.0008733">doi</a> <span>— 人类评判者对候选人照片的判断高于随机水平。</span></li>
+</ol>
+</details>
+
+<details>
+<summary>从人脸推断人格 <small>· 10 条</small></summary>
+<ol>
+<li>Kachur, A., Osin, E., Davydov, D., Shutilov, K., &amp; Novokshonov, A. (2020). Assessing the Big Five personality traits using real-life static facial images. <i>Scientific Reports</i> 10, 8487. <a href="https://doi.org/10.1038/s41598-020-65358-6">doi</a> <span>— 12,447 名志愿者，31,367 张照片；与自评结果的平均 r = .24。五位作者中有三人任职于提供数据的公司。</span></li>
+<li>Guenzel, M., Kogan, S., Niessner, M., &amp; Shue, K. (2026). AI personality extraction from faces: Labor market implications. NBER Working Paper 34808. <a href="https://www.nber.org/papers/w34808">NBER</a> <span>— 约 96,000 名 MBA 毕业生的 LinkedIn 照片；“Photo Big 5”（照片大五人格）分数（Kachur 模型）可以预测薪酬、职级和工作变动。作者警告不要将其用于招聘。</span></li>
+<li>Hu, S., Xiong, J., Fu, P., et al. (2017). Signatures of personality on dense 3D facial images. <i>Scientific Reports</i> 7, 73. <a href="https://doi.org/10.1038/s41598-017-00071-5">doi</a> <span>— 834 名汉族成年人的三维扫描（中国科学院—马普学会计算生物学伙伴研究所 CAS-MPG，上海；复旦大学）；人脸形状可解释 0.67–3.95% 的人格方差。</span></li>
+<li>Xu, J., Tian, W., Lv, G., Liu, S., &amp; Fan, Y. (2021). Prediction of the Big Five personality traits using static facial images of college students with different academic backgrounds. <i>IEEE Access</i> 9, 76822–76832. <a href="https://doi.org/10.1109/ACCESS.2021.3076989">doi</a> <span>— 西北工业大学（西安）；13,347 组学生照片–问卷配对；在分档类别上的准确率「超过 70%」，不能与相关系数直接比较。</span></li>
+<li>Cai, L., &amp; Liu, X. (2022). Identifying Big Five personality traits based on facial behavior analysis. <i>Frontiers in Public Health</i> 10, 1001828. <a href="https://doi.org/10.3389/fpubh.2022.1001828">doi</a> <span>— 中国科学院心理研究所；分析 30 秒视频中的面部动作，N = 82，r = .39–.48，没有独立的测试样本。</span></li>
+<li>Jaeger, B., Sleegers, W. W. A., Stern, J., Penke, L., &amp; Jones, A. L. (2024). Testing perceivers' accuracy and accuracy awareness when forming personality impressions from faces. <i>European Journal of Personality</i> 38(6), 907–927. <a href="https://doi.org/10.1177/08902070231225728">doi</a> <span>— 预注册研究：人类根据人脸形成的人格印象并不准确，而且人们高估了自己的准确度。</span></li>
+<li>Foo, Y. Z., Sutherland, C. A. M., Burton, N. S., Nakagawa, S., &amp; Rhodes, G. (2022). Accuracy in facial trustworthiness impressions: Kernel of truth or modern physiognomy? A meta-analysis. <i>Personality and Social Psychology Bulletin</i> 48(11), 1580–1596. <a href="https://doi.org/10.1177/01461672211048110">doi</a> <span>— 人脸层面 r = .14，「不太可能具有实际用途」。</span></li>
+<li>Hinds, J., &amp; Joinson, A. (2024). Digital data and personality: A systematic review and meta-analysis. <i>Psychological Bulletin</i> 150(6), 727–766. <a href="https://doi.org/10.1037/bul0000430">doi</a> <span>— 涵盖所有类型数字足迹的基准：计算机预测的合并 ρ = .30（42 项研究）。</span></li>
+<li>Kosinski, M. (2017). Facial width-to-height ratio does not predict self-reported behavioral tendencies. <i>Psychological Science</i> 28(11), 1675–1682. <a href="https://doi.org/10.1177/0956797617716929">doi</a> <span>— Kosinski 本人得出的零结果。</span></li>
+<li>刘晨, 温芳芳, 佐斌 (2019). 以貌取人可行吗？——基于面孔的特质推理及准确性. 《心理科学》42(1), 150–156. <a href="https://jps.ecnu.edu.cn/CN/Y2019/V42/I1/150">jps.ecnu.edu.cn</a><span class="tag">中文原文</span> <span>— 华中师范大学的综述：面孔—特质推理具有「适度准确性」，其准确性取决于知觉对象、知觉者、文化和情境。</span></li>
+</ol>
+</details>
+
+<details>
+<summary>从人脸推断性取向 <small>· 7 条</small></summary>
+<ol>
+<li>Wang, Y., &amp; Kosinski, M. (2018). Deep neural networks are more accurate than humans at detecting sexual orientation from facial images. <i>Journal of Personality and Social Psychology</i> 114(2), 246–257. <a href="https://doi.org/10.1037/pspa0000098">doi</a> <span>— 35,326 张约会网站图片；基于一张图片，成对比较准确率为 81%（男性）和 74%（女性）。</span></li>
+<li>Leuner, J. (2019). A replication study: Machine learning models are capable of predicting sexual orientation from facial images. <a href="https://arxiv.org/abs/1902.10739">arXiv 1902.10739</a> <span>— 20,910 张新的约会网站照片：68% / 77%。基于模糊照片的模型仍达到 63% / 72%，说明信号的很大一部分并非来自面部结构。</span></li>
+<li>Agüera y Arcas, B., Todorov, A., &amp; Mitchell, M. (2018). Do algorithms reveal sexual orientation or just expose our stereotypes? <i>Medium</i>. <a href="https://gwern.net/docs/www/medium.com/2b3924a875937ddbd65ab929c6d4a39d22ff7e3e.html">archive</a> <span>— 两组人在眼镜、妆容、面部毛发和自拍角度上存在差异。</span></li>
+<li>Gelman, A., Mattson, G., &amp; Simpson, D. (2018). Gaydar and the fallacy of decontextualized measurement. <i>Sociological Science</i> 5, 270–280. <a href="https://doi.org/10.15195/v5.a12">doi</a> <span>— 该分类器测量的是约会网站上的自我呈现，而不是总体人群中的性取向。</span></li>
+<li>GLAAD &amp; Human Rights Campaign (2017). Joint statement on the Stanford study.<span class="tag">未核实</span> <span>— 称该研究「危险且有缺陷」；原始页面无法访问，引语来自媒体报道。</span></li>
+<li>积木 (2017). 看脸的世界？通过面部识别技术，AI 可以了解许多个人信息. 爱范儿. <a href="https://www.ifanr.com/909100">ifanr.com</a><span class="tag">中文原文</span> · 方嘉文 (2017). 你以为人工智能看出了"直"或"弯"？它只是看出了你的偏见. 爱范儿. <a href="https://www.ifanr.com/914194">ifanr.com</a><span class="tag">中文原文</span> <span>— 中文媒体对该研究及西方批评意见的报道。</span></li>
+<li>柯鸣 (2018). 性取向被识别后，AI伦理的边界又在哪里？ 36氪. <a href="https://www.36kr.com/p/1722704281601">36kr.com</a><span class="tag">中文原文</span> <span>— 该研究发表后关于 AI 伦理的评论，并提及中山大学的一个关系识别模型。</span></li>
+</ol>
+<p class="note">未找到针对新人群的同行评议重复研究（2020–2026），也未找到针对性取向的视觉语言模型测试。</p>
+</details>
+
+<details>
+<summary>AI 模型与刻板印象 <small>· 3 条</small></summary>
+<ol>
+<li>Jeon, S., Lee, M. H. J., Montgomery, J. M., &amp; Lai, C. K. (2026). From faces to politics: Vision-language models (sometimes) link visual demographic characteristics to ideological labels. <i>Political Analysis</i> 34(4), 613–621. <a href="https://doi.org/10.1017/pan.2026.10038">doi</a> <span>— GPT-4o、GPT-4o-mini 和 LLaVA 将出现女性的相同广告评为更偏自由派（b = .41，而调查中的差距为 .15）；Gemini 拒绝对人脸评分。</span></li>
+<li>Hausladen, C. I., Knott, M., Camerer, C. F., &amp; Perona, P. (2025). Social perception of faces in a vision-language model. <i>FAccT '25</i>, 639–659. <a href="https://doi.org/10.1145/3715275.3732041">doi</a> · <a href="https://arxiv.org/abs/2408.14435">arXiv</a> <span>— CLIP 的判断随表情变化的幅度大于随年龄变化的幅度，随光照变化的幅度与随年龄变化的幅度大致相当。</span></li>
+<li>Peterson, J. C., Uddenberg, S., Griffiths, T. L., Todorov, A., &amp; Suchow, J. W. (2022). Deep models of superficial face judgments. <i>PNAS</i> 119(17), e2115228119. <a href="https://doi.org/10.1073/pnas.2115228119">doi</a> · <a href="https://github.com/jcpeterson/omi">One Million Impressions</a> <span>— 对人们如何判断合成人脸进行建模。</span></li>
+</ol>
+</details>
+
+<details>
+<summary>批评意见与相面术的历史 <small>· 7 条</small></summary>
+<ol>
+<li>Agüera y Arcas, B., Mitchell, M., &amp; Todorov, A. (2017). Physiognomy's new clothes. <i>Medium</i>. <a href="https://ethicsatwork.nd.edu/resources/physiognomys-new-clothes/">summary</a></li>
+<li>Stark, L., &amp; Hutson, J. (2022). Physiognomic artificial intelligence. <i>Fordham Intellectual Property, Media &amp; Entertainment Law Journal</i> 32(4). <a href="https://ir.lawnet.fordham.edu/iplj/vol32/iss4/2">Fordham</a> <span>— 定义了“相面术式 AI”（physiognomic AI），并主张以法律予以禁止。</span></li>
+<li>Andrews, M., Smart, A., &amp; Birhane, A. (2024). The reanimation of pseudoscience in machine learning and its ethical repercussions. <i>Patterns</i> 5(9), 101027. <a href="https://doi.org/10.1016/j.patter.2024.101027">doi</a> <span>— 讨论了 Kosinski 2024、Wang &amp; Kosinski 2018、Wu &amp; Zhang 2016 和 Kachur 2020。</span></li>
+<li>Todorov, A., Olivola, C. Y., Dotsch, R., &amp; Mende-Siedlecki, P. (2015). Social attributions from faces. <i>Annual Review of Psychology</i> 66, 519–545. <a href="https://doi.org/10.1146/annurev-psych-113011-143831">doi</a> · Todorov, A. (2017). <i>Face Value</i>. Princeton University Press.</li>
+<li>Wu, X., &amp; Zhang, X. (2016). Automated inference on criminality using face images. <a href="https://arxiv.org/abs/1611.04135">arXiv 1611.04135</a> <span>— 上海交通大学；用已定罪男性的证件照对比其他人的网络照片，存在抽样混杂。第 3 版（2017）是作者对批评者的回应。</span></li>
+<li>虞涵棋, 杨漾 (2017). 谷歌研究员质疑"看脸识罪犯"，交大教授撰文：我被扣帽子了. 澎湃新闻. <a href="https://m.thepaper.cn/newsDetail_forward_1685972">thepaper.cn</a><span class="tag">中文原文</span> <span>— 武筱林的回应；报道称研究使用 1,856 张照片，宣称准确率为 89%。</span></li>
+<li>Eckles, D., Gordon, B. R., &amp; Johnson, G. A. (2018). Field studies of psychologically targeted ads face threats to internal validity. <i>PNAS</i> 115(23). <a href="https://doi.org/10.1073/pnas.1805363115">doi</a> <span>— 由于 Facebook 的广告投放机制，Matz 2017 的各组之间并非随机化比较。</span></li>
+</ol>
+</details>
+
+<details>
+<summary>剑桥分析公司与心理画像定向投放 <small>· 14 条</small></summary>
+<ol>
+<li>Kosinski, M., Stillwell, D., &amp; Graepel, T. (2013). Private traits and attributes are predictable from digital records of human behavior. <i>PNAS</i> 110(15), 5802–5805. <a href="https://doi.org/10.1073/pnas.1218772110">doi</a> <span>— Facebook 点赞可以预测人格、政治倾向和性取向。</span></li>
+<li>Youyou, W., Kosinski, M., &amp; Stillwell, D. (2015). Computer-based personality judgments are more accurate than those made by humans. <i>PNAS</i> 112(4), 1036–1040. <a href="https://doi.org/10.1073/pnas.1418680112">doi</a></li>
+<li>University of Cambridge Psychometrics Centre. myPersonality. <a href="https://www.psychometrics.cam.ac.uk/node/888">psychometrics.cam.ac.uk</a> <span>— 「已不再运行，数据也不再共享」；截至 2012 年有超过 600 万名志愿者参与。</span></li>
+<li>Information Commissioner's Office (2018). <i>Investigation into the use of data analytics in political campaigns</i>. <a href="https://ico.org.uk/media2/migrated/2260271/investigation-into-the-use-of-data-analytics-in-political-campaigns-final-20181105.pdf">ICO (PDF)</a> <span>— 多达 8700 万 Facebook 用户；Stillwell 拒绝剑桥分析公司使用 myPersonality，于是 Kogan 自行开发了应用；Facebook 被处以 £500,000 罚款。</span></li>
+<li>Denham, E. (2020). Letter to the DCMS Committee on the ICO investigation. <a href="https://cy.ico.org.uk/media2/migrated/2618383/20201002_ico-o-ed-l-rtl-0181_to-julian-knight-mp.pdf">ICO (PDF)</a> <span>— 这些模型是「使用普遍可得技术的、已被广泛认可的流程」；对新对象的实际准确率「很可能低得多」；GSR 的数据不可能被用于英国脱欧公投。</span></li>
+<li>House of Commons DCMS Committee (2019). <i>Disinformation and 'fake news': Final Report</i>, HC 1791. <a href="https://dera.ioe.ac.uk/id/eprint/33370/1/1791.pdf">PDF</a> · Oral evidence of C. Wylie, 27 Mar 2018, HC 363. <a href="https://committees.parliament.uk/oralevidence/7803/html/">parliament.uk</a><span class="tag">部分核实</span></li>
+<li>US Federal Trade Commission (2019). Final settlement with Cambridge Analytica's former CEO and the app developer. <a href="https://www.ftc.gov/news-events/news/press-releases/2019/12/ftc-grants-final-approval-settlement-former-cambridge-analytica-ceo-app-developer-over-allegations">ftc.gov</a> · $5 billion penalty for Facebook. <a href="https://www.ftc.gov/news-events/news/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions-facebook">ftc.gov</a> <span>— 被收集的数据及其衍生模型必须删除。</span></li>
+<li>Matz, S. C., Kosinski, M., Nave, G., &amp; Stillwell, D. J. (2017). Psychological targeting as an effective approach to digital mass persuasion. <i>PNAS</i> 114(48), 12714–12719. <a href="https://doi.org/10.1073/pnas.1710966114">doi</a> <span>— 覆盖 350 万人；点击量最多增加 40%，购买量最多增加 50%。</span></li>
+<li>Tappin, B. M., Wittenberg, C., Hewitt, L. B., Berinsky, A. J., &amp; Rand, D. G. (2023). Quantifying the potential persuasive returns to political microtargeting. <i>PNAS</i> 120(25), e2216261120. <a href="https://doi.org/10.1073/pnas.2216261120">doi</a> <span>— 基于多个属性的定向没有带来额外效果；获得说服效果未必需要大量个人数据。</span></li>
+<li>Simchon, A., Edwards, M., &amp; Lewandowsky, S. (2024). The persuasive effects of political microtargeting in the age of generative AI. <i>PNAS Nexus</i> 3(2), pgae035. <a href="https://doi.org/10.1093/pnasnexus/pgae035">doi</a> · Matz, S. C., et al. (2024). The potential of generative AI for personalized persuasion at scale. <i>Scientific Reports</i> 14, 4692. <a href="https://doi.org/10.1038/s41598-024-53755-0">doi</a></li>
+<li>Gibney, E. (2018). The scant science behind Cambridge Analytica's controversial marketing techniques. <i>Nature</i>. <a href="https://doi.org/10.1038/d41586-018-03880-4">doi</a> · Allen, J., &amp; Abbruzzese, J. (2018). Cambridge Analytica's effectiveness called into question. NBC News. <a href="https://www.nbcnews.com/politics/politics-news/cambridge-analytica-s-effectiveness-called-question-despite-alleged-facebook-data-n858256">nbcnews.com</a></li>
+<li>Bakir, V. (2020). Psychological operations in digital political campaigns: Assessing Cambridge Analytica's psychographic profiling and targeting. <i>Frontiers in Communication</i> 5, 67. <a href="https://doi.org/10.3389/fcomm.2020.00067">doi</a> · Hersh, E. D. (2015). <i>Hacking the Electorate</i>. Cambridge University Press. <a href="https://doi.org/10.1017/cbo9781316212783">doi</a></li>
+<li>Lomas, N. (2020). Latest Cambridge Analytica leaks ("Hindsight Files"). TechCrunch. <a href="https://techcrunch.com/2020/01/06/facebook-data-misuse-and-voter-manipulation-back-in-the-frame-with-latest-cambridge-analytica-leaks/">techcrunch.com</a> <span>— Brittany Kaiser 公布的内部文件；未找到公开索引。</span></li>
+<li>DeepTech深科技 (2018). "剑桥分析"究竟如何通过"点赞"来影响投票倾向？ 安全内参. <a href="https://www.secrss.com/articles/1828">secrss.com</a><span class="tag">中文原文</span> <span>— 中文解读文章；指出缺乏证据证明该方法改变了选举结果。</span></li>
+</ol>
+<p class="note"><b>数据。</b>公开：上述 ICO、FTC 和 DCMS 文件。不公开：Kogan 的应用收集的个人档案（FTC 下令删除；ICO 销毁了查获的副本）以及 myPersonality 数据集（2018 年停止共享）。本项目只链接官方记录，不使用泄露的副本。</p>
+</details>
+
+<details>
+<summary>谁在开发：公司与实验室 <small>· 9 条</small></summary>
+<ol>
+<li>US Treasury (10 Dec 2021). Sanctions on SenseTime. <a href="https://home.treasury.gov/news/press-releases/jy0526">treasury.gov</a> <span>— 称其软件「能够确定目标的族裔，尤其侧重于识别维吾尔族人」。商汤科技称相关指控毫无根据。</span></li>
+<li>US Treasury (16 Dec 2021). Chinese military-industrial complex companies, incl. Megvii, Yitu, CloudWalk. <a href="https://home.treasury.gov/news/press-releases/jy0538">treasury.gov</a></li>
+<li>IPVM (2020). Huawei / Megvii "Uyghur alert" test report. <a href="https://ipvm.com/reports/huawei-megvii-uygur">ipvm.com</a> <span>— 华为：「只是一项测试」；旷视科技：其设计并非用于标注族群。</span></li>
+<li>Rollet, C. (2020). Uniview Uyghur recognition. IPVM. <a href="https://ipvm.com/reports/uniview-uyghur">ipvm.com</a> <span>— 一款 SDK 中的族裔代码只列出了维吾尔族；报道还提到海康威视（2019）和大华（2020）。</span></li>
+<li>Asher-Schapiro, A. (2021). Chinese tech patents tools that can detect, track Uighurs. Thomson Reuters Foundation. <a href="https://www.context.news/surveillance/chinese-tech-patents-tools-that-can-detect-track-uighurs">context.news</a> <span>— 华为与中国科学院、旷视科技以及阿里巴巴的专利申请；附有公司回应。</span></li>
+<li>Wang, C., Zhang, Q., Liu, W., Liu, Y., &amp; Miao, L. (2019). Facial feature discovery for ethnicity recognition. <i>WIREs Data Mining and Knowledge Discovery</i> 9(1), e1278. <a href="https://doi.org/10.1002/widm.1278">doi</a> · IPVM (2021) on its ethics. <a href="https://ipvm.com/reports/eth-rec-ethics">ipvm.com</a> <span>— 大连民族大学与科廷大学合作；300 名维吾尔族、藏族和朝鲜族学生；已发布关注声明（Expression of Concern），未登记撤稿。</span></li>
+<li>Mozur, P. (2019). One month, 500,000 face scans: How China is using A.I. to profile a minority. <i>The New York Times</i>. <a href="https://www.nytimes.com/2019/04/14/technology/china-surveillance-artificial-intelligence-racial-profiling.html">nytimes.com</a><span class="tag">部分核实</span></li>
+<li>Human Rights Watch (2017). China: Voice biometric collection threatens privacy. <a href="https://www.hrw.org/news/2017/10/22/china-voice-biometric-collection-threatens-privacy">hrw.org</a> <span>— 科大讯飞；涉及声纹，而非人脸。</span></li>
+<li>Globes (2016). Israeli co Faception claims it can spot terrorists. <a href="https://en.globes.co.il/en/article-israeli-co-faception-claims-it-can-spot-terrorists-1001127220">globes.co.il</a> <span>— 15 个“分类器”，宣称准确率 80%，没有发表验证结果。</span></li>
+</ol>
+</details>
+
+<details>
+<summary>法律：欧盟、中国、美国 <small>· 5 条</small></summary>
+<ol>
+<li>Regulation (EU) 2024/1689 (AI Act), Art. 5(1)(g). <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">EUR-Lex</a> <span>— 禁止推断种族、政治观点、宗教、性生活或性取向的生物特征分类。</span></li>
+<li>《中华人民共和国个人信息保护法》 (2021), Art. 28–29. <a href="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm">cac.gov.cn</a><span class="tag">中文原文</span> <span>— 生物识别信息和宗教信仰属于敏感个人信息；须取得单独同意。没有明文禁止推断政治倾向。</span></li>
+<li>最高人民法院关于审理使用人脸识别技术处理个人信息相关民事案件适用法律若干问题的规定, 法释〔2021〕15号. <a href="https://www.court.gov.cn/xinshidai/xiangqing/315851.html">court.gov.cn</a><span class="tag">中文原文</span> <span>— 违反法律规定在公共场所进行人脸验证、辨识或分析，属于侵害人格权益。</span></li>
+<li>国家互联网信息办公室、公安部《人脸识别技术应用安全管理办法》 (2025), in force 1 June 2025. <a href="https://www.cac.gov.cn/2025-03/21/c_1744174262156096.htm">cac.gov.cn</a><span class="tag">中文原文</span> <span>— 第 2 条第 2 款豁免研发和算法训练；超过 100,000 人须备案。</span></li>
+<li>US: Illinois BIPA, Texas CUBI, California CPRA, FTC enforcement (Rite Aid, 2023).<span class="tag">凭记忆</span></li>
+</ol>
+</details>
+
+</div>
+  </footer>
+</div>
+
+</body>
+</html>

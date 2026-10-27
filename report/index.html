@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Faces and Politics</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: single reading column (~68ch) of a lab report; figures break out to a wider measure. */
+:root {
+  --paper: #f2f4f6;
+  --sheet: #ffffff;
+  --ink: #18212b;
+  --muted: #5a6573;
+  --rule: #d5dbe2;
+  --signal: #1f5f8b;
+  --chance: #b5651d;
+  --ok: #2f7a4f;
+  --warn: #a8432f;
+  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #10161d; --sheet: #172029; --ink: #e4e9ee; --muted: #98a4b2;
+    --rule: #2a3542; --signal: #6fb1df; --chance: #e3a05c; --ok: #6cc391; --warn: #e88a76;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10161d; --sheet: #172029; --ink: #e4e9ee; --muted: #98a4b2;
+  --rule: #2a3542; --signal: #6fb1df; --chance: #e3a05c; --ok: #6cc391; --warn: #e88a76;
+  color-scheme: dark;
+}
+body {
+  background: var(--paper); color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 56rem; margin: 0 auto; padding-block: 2.5rem 4rem; display: grid; gap: 2.75rem; }
+.col { max-width: 68ch; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.55rem; font-weight: 700; }
+h3 { font-size: 1.1rem; font-weight: 500; }
+p { margin: 0; }
+.stack { display: grid; gap: 1rem; }
+.label { font: 600 0.72rem/1 var(--mono); letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+a { color: var(--signal); }
+a:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+header.top { display: grid; gap: 1rem; border-bottom: 1px solid var(--rule); padding-bottom: 1.75rem; }
+.lede { font-size: 1.2rem; color: var(--ink); }
+.meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font: 400 0.85rem/1.4 var(--mono); color: var(--muted); }
+.verdict {
+  background: var(--sheet); border: 1px solid var(--rule); border-left: 4px solid var(--warn);
+  padding: 1.25rem 1.4rem; display: grid; gap: 0.5rem;
+}
+.verdict strong { font-family: var(--display); font-size: 1.25rem; font-weight: 700; }
+figure { margin: 0; background: var(--sheet); border: 1px solid var(--rule); padding: 1.25rem 1.25rem 1rem; display: grid; gap: 0.75rem; min-width: 0; }
+figcaption { font-size: 0.9rem; color: var(--muted); }
+.chart { overflow-x: auto; }
+.chart svg { display: block; width: 100%; min-width: 520px; height: auto; }
+.chart text { font-family: var(--mono); font-size: 12px; fill: var(--ink); }
+.chart .muted { fill: var(--muted); }
+.twofig { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
+.stat { display: grid; gap: 0.25rem; }
+.stat .n { font: 600 2.1rem/1 var(--mono); font-variant-numeric: tabular-nums; }
+.stat .n.bad { color: var(--warn); }
+.stat .n.good { color: var(--ok); }
+.stat p { font-size: 0.92rem; color: var(--muted); }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; min-width: 34rem; }
+th, td { text-align: left; padding: 0.55rem 0.75rem 0.55rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font: 600 0.72rem/1.2 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pill { display: inline-block; font: 600 0.7rem/1 var(--mono); letter-spacing: 0.04em; padding: 0.3rem 0.5rem; border: 1px solid currentColor; border-radius: 3px; white-space: nowrap; }
+.pill.ok { color: var(--ok); } .pill.warn { color: var(--warn); } .pill.mid { color: var(--chance); }
+ul.clean { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.4rem; }
+.status { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.5rem; }
+.status ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.45rem; }
+.status li { display: flex; gap: 0.6rem; align-items: baseline; }
+.status li::before { content: "■"; font-size: 0.7rem; }
+.status .done li::before { color: var(--ok); }
+.status .todo li::before { color: var(--chance); }
+.files { font: 400 0.85rem/1.55 var(--mono); background: var(--sheet); border: 1px solid var(--rule); padding: 1rem 1.25rem; overflow-x: auto; white-space: pre; }
+footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; display: grid; gap: 0.75rem; font-size: 0.92rem; color: var(--muted); }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <span class="label">Research workspace · facial-analysis-lefty-people-2026</span>
+    <h1>Can a face reveal someone's politics?</h1>
+    <p class="lede col">A review of Michal Kosinski's Stanford research on predicting political orientation from facial images: what the studies found, what the numbers mean for one person in one photo, and whether any of it works for CCTV security.</p>
+    <div class="meta">
+      <span>PI: Bart Sakwerda</span>
+      <span>Orchestration: Claude Opus 5.5</span>
+      <span>Updated 2026-10-25</span>
+      <span><a href="zh/" lang="zh-Hans" hreflang="zh-Hans">中文版</a></span>
+    </div>
+  </header>
+
+  <section class="verdict col" aria-label="Conclusion">
+    <span class="label">Conclusion</span>
+    <strong>A weak signal across large groups, close to a coin flip for one person.</strong>
+    <p>Faces carry a small statistical signal about political orientation. Applied to one person from one photo, the best published result is right about two times in three. The best-controlled result is right about 59% of the time. A coin flip is right 50% of the time.</p>
+  </section>
+
+  <section class="stack">
+    <h2>The studies</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Study</th><th>Photos</th><th>Reported</th><th>What it shows</th></tr></thead>
+        <tbody>
+          <tr><td>Kosinski 2021, <i>Scientific Reports</i></td><td class="num">1.09 M</td><td class="num">AUC .72</td><td>Dating-site and Facebook photos. "72%" is pairwise: pick the liberal from one liberal and one conservative. Humans scored .55.</td></tr>
+          <tr><td>Kosinski, Khambatta &amp; Wang 2024, <i>American Psychologist</i></td><td class="num">591</td><td class="num">r = .22</td><td>Lab photos with neutral expression, hair back and no makeup. Humans scored r = .21. Explains about 5% of the variation.</td></tr>
+          <tr><td>Same paper, politicians</td><td class="num">3,401</td><td class="num">r = .13</td><td>Out-of-sample check on real politicians' photos. The weakest result.</td></tr>
+          <tr><td>Rasmussen, Ludeke &amp; Klemmensen 2023, <i>Scientific Reports</i></td><td class="num">3,323</td><td class="num">61%</td><td>Danish election candidates, the main non-US sample. Predictions tracked smiling and, for women, attractiveness; the model also used areas outside the face.</td></tr>
+          <tr><td>Wang &amp; Kosinski 2018, <i>JPSP</i></td><td class="num">35,326</td><td class="num">AUC .81 / .74</td><td>Sexual orientation, men and women. Critics showed grooming and camera angle explain much of it.</td></tr>
+          <tr><td>Kosinski 2017, <i>Psychological Science</i></td><td class="num">large</td><td class="num">null</td><td>Facial width-to-height ratio does not predict behaviour. Kosinski's own result against physiognomy.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>Personality, sexual orientation and AI models</h2>
+    <p class="col">Studies of other traits show the same pattern: small effects in large samples, and a signal that tracks self-presentation and demographics.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Study</th><th>Sample</th><th>Reported</th><th>What it shows</th></tr></thead>
+        <tbody>
+          <tr><td>Kachur et al. 2020, <i>Scientific Reports</i></td><td class="num">12,447</td><td class="num">mean r = .24</td><td>Big Five from selfies. The data came from the employer of three of the five authors.</td></tr>
+          <tr><td>Hu et al. 2017, <i>Scientific Reports</i></td><td class="num">834</td><td class="num">0.7–4% var.</td><td>3D face scans of Han Chinese adults (CAS-MPG Shanghai, Fudan). Face shape explains very little of personality.</td></tr>
+          <tr><td>Jaeger et al. 2024, <i>Eur. J. Personality</i></td><td class="num">646 raters</td><td class="num">not accurate</td><td>Preregistered: human personality impressions from faces are not accurate, and people overestimate their accuracy.</td></tr>
+          <tr><td>Foo et al. 2022, <i>PSPB</i> (meta-analysis)</td><td class="num">—</td><td class="num">r = .14</td><td>Trustworthiness from faces: "unlikely to be of practical utility".</td></tr>
+          <tr><td>Guenzel et al. 2026, NBER</td><td class="num">≈ 96,000</td><td class="num">—</td><td>"Photo Big 5" from LinkedIn photos (Kachur model) predicts MBA graduates' pay and seniority. The authors warn against use in hiring.</td></tr>
+          <tr><td>Leuner 2019, arXiv</td><td class="num">20,910</td><td class="num">68% / 77%</td><td>Replication of the sexual-orientation study. A model on blurred photos still reached 63% / 72%, so much of the signal is not facial structure.</td></tr>
+          <tr><td>Jeon et al. 2026, <i>Political Analysis</i></td><td class="num">8,000 / model</td><td class="num">b = .41</td><td>GPT-4o, GPT-4o-mini and LLaVA rated identical ads with women as more liberal; the survey gap is .15. Gemini refused.</td></tr>
+          <tr><td>Hausladen et al. 2025, FAccT</td><td class="num">synthetic</td><td class="num">—</td><td>CLIP's social judgments of faces shift more with expression than with age, and with lighting about as much as with age.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>One person, one photo</h2>
+    <p class="col">Published scores are converted to the chance of labelling a single person correctly, with left and right equally common. Values come from <span class="mono">experiments/sim_single_photo_limits.py</span>.</p>
+    <figure>
+      <div class="chart">
+        <svg viewBox="0 0 640 250" role="img" aria-label="Single-person accuracy: politicians 55%, lab photos 59%, lab photos plus demographics 63%, naturalistic photos 66%. Coin flip 50%.">
+          <!-- x scale: 45% at x=250, 70% at x=620; 14.8 px per point -->
+          <g stroke="var(--rule)" stroke-width="1">
+            <line x1="250" y1="20" x2="250" y2="205"/>
+            <line x1="324" y1="20" x2="324" y2="205"/>
+            <line x1="398" y1="20" x2="398" y2="205"/>
+            <line x1="472" y1="20" x2="472" y2="205"/>
+            <line x1="546" y1="20" x2="546" y2="205"/>
+            <line x1="620" y1="20" x2="620" y2="205"/>
+          </g>
+          <line x1="324" y1="14" x2="324" y2="205" stroke="var(--chance)" stroke-width="2" stroke-dasharray="5 4"/>
+          <text x="330" y="14" style="fill: var(--chance)">coin flip 50%</text>
+          <g class="muted">
+            <text x="250" y="226" text-anchor="middle" class="muted">45%</text>
+            <text x="324" y="226" text-anchor="middle" class="muted">50%</text>
+            <text x="398" y="226" text-anchor="middle" class="muted">55%</text>
+            <text x="472" y="226" text-anchor="middle" class="muted">60%</text>
+            <text x="546" y="226" text-anchor="middle" class="muted">65%</text>
+            <text x="620" y="226" text-anchor="middle" class="muted">70%</text>
+          </g>
+          <!-- rows: y = 50, 95, 140, 185 -->
+          <g>
+            <text x="0" y="46">Politicians (2024)</text>
+            <text x="0" y="61" class="muted">r = .13</text>
+            <line x1="324" y1="50" x2="398" y2="50" stroke="var(--signal)" stroke-width="2"/>
+            <circle cx="398" cy="50" r="7" fill="var(--signal)"/>
+            <text x="412" y="54">55%</text>
+
+            <text x="0" y="91">Lab photos (2024)</text>
+            <text x="0" y="106" class="muted">r = .22</text>
+            <line x1="324" y1="95" x2="457" y2="95" stroke="var(--signal)" stroke-width="2"/>
+            <circle cx="457" cy="95" r="7" fill="var(--signal)"/>
+            <text x="471" y="99">59%</text>
+
+            <text x="0" y="136">Lab + demographics (2024)</text>
+            <text x="0" y="151" class="muted">r = .31</text>
+            <line x1="324" y1="140" x2="516" y2="140" stroke="var(--signal)" stroke-width="2"/>
+            <circle cx="516" cy="140" r="7" fill="var(--signal)"/>
+            <text x="530" y="144">63%</text>
+
+            <text x="0" y="181">Everyday photos (2021)</text>
+            <text x="0" y="196" class="muted">AUC .72</text>
+            <line x1="324" y1="185" x2="561" y2="185" stroke="var(--signal)" stroke-width="2"/>
+            <circle cx="561" cy="185" r="7" fill="var(--signal)"/>
+            <text x="575" y="189">66%</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>The highest figure comes from uncontrolled photos, where smiles, beards, glasses and camera angle do much of the work. Controlling for these brings it down to 59%.</figcaption>
+    </figure>
+
+    <div class="twofig">
+      <div class="stat">
+        <span class="label">Test with 10 photos per side</span>
+        <span class="n mono">39–78%</span>
+        <p>95% range around an observed 60%. Twenty photos can't tell a weak real effect from chance.</p>
+      </div>
+      <div class="stat">
+        <span class="label">Same test, true accuracy 59%</span>
+        <span class="n mono">28% / 22%</span>
+        <p>How often it looks useless (at or below 50%) or impressive (70% or more), purely by luck.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>CCTV and public-space security</h2>
+    <p class="col">Scenario: a crowd of 100,000 includes 10 people who intend violence. We give the face model the best published score (AUC .72), which no study has shown for violent intent, and set it to catch half of them.</p>
+    <div class="twofig">
+      <div class="stat"><span class="label">Real threats flagged</span><span class="n good mono">5</span><p>Half of the 10.</p></div>
+      <div class="stat"><span class="label">Innocent people flagged</span><span class="n bad mono">20,487</span><p>About 4,100 for every real threat. Precision 0.024%.</p></div>
+    </div>
+    <ul class="clean col">
+      <li><b>Politics isn't threat.</b> The studies measure ordinary left/right self-identification. Violent extremists are a tiny minority on every side.</li>
+      <li><b>CCTV footage is worse.</b> Every result used clear, frontal photos. No study shows the signal survives low resolution, angles or motion blur.</li>
+      <li><b>Law.</b> The EU AI Act Art. 5(1)(g) bans inferring political opinions from biometrics. In the US: Illinois BIPA, Texas CUBI, California CPRA, FTC enforcement (Rite Aid, 2023), city bans.</li>
+      <li><b>What does have evidence:</b> crowd-density and flow anomalies, abandoned objects, fight and fall detection, perimeter intrusion, and authorised post-incident search.</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h2>Cambridge Analytica and psychographic targeting</h2>
+    <ul class="clean col">
+      <li><b>Origin.</b> Kosinski, Stillwell and Graepel (2013) showed that Facebook Likes predict personality and politics. Cambridge Analytica first asked Stillwell for the myPersonality data; he refused, citing data protection. Aleksandr Kogan then collected data on up to 87 million users through his own quiz app (ICO 2018).</li>
+      <li><b>What the regulator found.</b> The ICO's 2020 letter calls CA's methods "well recognised processes using commonly available technology" and says real-world accuracy on new people "was likely much lower". GSR data could not have been used in the Brexit referendum.</li>
+      <li><b>Does targeting work?</b> Matz et al. 2017 reported up to 40% more clicks; Eckles et al. 2018 showed Facebook's ad delivery undermines that comparison. Tappin et al. 2023 found targeting on more than one attribute added nothing. Generative AI now writes personality-matched messages at scale (Simchon et al. 2024; Matz et al. 2024).</li>
+      <li><b>Data.</b> Public: ICO, FTC and DCMS records. Not public: the harvested profiles (deletion ordered by the FTC, seized copies destroyed by the ICO) and myPersonality (sharing stopped in 2018). The project links to the official record only.</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h2>Who builds trait classifiers</h2>
+    <p class="col">The face models with documented deployment classify ethnicity, not politics. Reported cases: SenseTime (US Treasury 2021, Uyghur identification), a Huawei–Megvii "Uyghur alert" test (IPVM 2020), Uyghur detection by Hikvision, Dahua and Uniview (IPVM), and police procurement in 16 provinces (NYT 2019). Chinese university work includes Shanghai Jiao Tong (criminality, 2016), Dalian Minzu (ethnicity, Expression of Concern), and personality studies at the CAS Institute of Psychology, CAS-MPG Shanghai with Fudan, and NWPU Xi'an. Outside China: Stanford (Kosinski), the University of Southern Denmark, the Kachur group (Russia/UK) and Faception (Israel).</p>
+    <p class="col">China's law treats biometrics as sensitive personal information (PIPL 2021, Art. 28–29). The 2025 face-recognition Measures exempt R&amp;D and algorithm training (Art. 2(2)), so face-to-trait research falls only under the PIPL.</p>
+  </section>
+
+  <section class="stack">
+    <h2>What the model may really be seeing</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Confound</th><th>Why it matters</th><th>Controlled in 2024?</th></tr></thead>
+        <tbody>
+          <tr><td>Expression</td><td>Smiling differs between groups in some samples</td><td><span class="pill ok">yes</span></td></tr>
+          <tr><td>Head pose, camera angle</td><td>Selfie angle changes apparent jaw, nose and forehead</td><td><span class="pill ok">yes</span></td></tr>
+          <tr><td>Grooming</td><td>Beards, glasses, makeup and hair follow subcultures</td><td><span class="pill ok">yes</span></td></tr>
+          <tr><td>Age, gender, ethnicity</td><td>Correlate with both politics and appearance</td><td><span class="pill mid">partly</span></td></tr>
+          <tr><td>Who gets sampled</td><td>Volunteers and dating-site users aren't the population</td><td><span class="pill warn">no</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>GitHub survey</h2>
+    <p class="col">No public repository reproduces Kosinski's face-to-politics pipeline, and he didn't release the images. Useful finds: <a href="https://github.com/jcpeterson/omi">One Million Impressions</a> (how people <i>judge</i> faces, on synthetic faces), Chicago Face Database tools, and general face libraries (<a href="https://github.com/deepinsight/insightface">InsightFace</a>, <a href="https://github.com/serengil/deepface">DeepFace</a>). A few "physiognomy" apps make claims with no validation, which is good material for the video.</p>
+  </section>
+
+  <section class="stack">
+    <h2>Status</h2>
+    <div class="status">
+      <div class="done stack">
+        <h3>Done</h3>
+        <ul>
+          <li>Literature review and critiques</li>
+          <li>Effect-size simulation (E1)</li>
+          <li>CCTV and base-rate analysis</li>
+          <li>GitHub survey, bibliography and BibTeX</li>
+          <li>62 new sources, 9 in Chinese; DOIs checked (25 Oct)</li>
+          <li>Chinese translation of the site and report</li>
+          <li>Shared rules for Claude, Kimi and Codex</li>
+          <li>Video outline (9 sections)</li>
+        </ul>
+      </div>
+      <div class="todo stack">
+        <h3>Open</h3>
+        <ul>
+          <li>Check Kosinski's data-availability statements</li>
+          <li>Find a replication of the 2024 study (none found on 25 Oct)</li>
+          <li>Verify the US law entries and the blocked sources</li>
+          <li>Video script, storyboard and render</li>
+        </ul>
+      </div>
+    </div>
+    <div class="files">docs/        00 scope · 01 literature · 02 metrics · 03 critiques · 04 open questions · 05 CCTV
+references/  bibliography.md · references.bib · github-survey.md
+experiments/ sim_single_photo_limits.py (+ output)
+agents/      LOG.md · claude-opus-5-5/ · kimi/ · codex/
+video/       outline · storyboard · assets · renders
+data/raw/    received photo, not classified</div>
+  </section>
+
+  <footer>
+    <span class="label">Credits</span>
+    <p>Principal investigator: <b>Bart Sakwerda</b>. Research orchestration, literature and GitHub survey, simulation: <b>Claude Opus 5.5</b> (Anthropic). Planned contributors: Kimi, ChatGPT Codex.</p>
+    <h2 id="sources">Sources</h2>
+    <p>Sources are grouped by topic below. Each entry was opened online on 24–25 Oct 2026 unless tagged. Full list with status: <a href="https://github.com/barts83eu/facial-analysis-lefty-people-2026/blob/main/references/bibliography.md">references/bibliography.md</a>.</p>
+<!-- Grouped sources, English. Included into site/index.html and report/index.html at build time (include line: "#include sources-en").
+     Canonical list with status: references/bibliography.md. Chinese version: sources/sources.zh.html. -->
+<style>
+.sources { display: grid; gap: .6rem; }
+.sources details { border-top: 1px solid currentColor; border-color: color-mix(in srgb, currentColor 25%, transparent); padding: .55rem 0 .2rem; }
+.sources summary { cursor: pointer; font-weight: 700; list-style-position: outside; }
+.sources summary small { font-weight: 400; opacity: .7; }
+.sources ol { margin: .5rem 0 .6rem; padding-left: 1.4rem; display: grid; gap: .45rem; font-size: .88rem; line-height: 1.5; }
+.sources li span { opacity: .78; }
+.sources .tag { display: inline-block; font-size: .7rem; line-height: 1.3; padding: 0 .35em; border: 1px solid currentColor; opacity: .8; margin-left: .3em; vertical-align: 1px; }
+.sources .note { font-size: .82rem; opacity: .78; margin: .2rem 0 0; }
+</style>
+<div class="sources">
+
+<details open>
+<summary>Political orientation from faces <small>· 5</small></summary>
+<ol>
+<li>Kosinski, M. (2021). Facial recognition technology can expose political orientation from naturalistic facial images. <i>Scientific Reports</i> 11, 100. <a href="https://doi.org/10.1038/s41598-020-79310-1">doi</a> <span>— 1,085,795 dating-site and Facebook photos (US, UK, Canada); pairwise AUC .72, human raters .55.</span></li>
+<li>Kosinski, M., Khambatta, P., &amp; Wang, Y. (2024). Facial recognition technology and human raters can predict political orientation from images of expressionless faces even when controlling for demographics and self-presentation. <i>American Psychologist</i> 79(7), 942–955. <a href="https://doi.org/10.1037/amp0001295">doi</a> · <a href="https://arxiv.org/abs/2303.16343v4">arXiv</a> <span>— 591 lab photos: algorithm r = .22, humans r = .21, r = .31 with age, gender and ethnicity; 3,401 politicians r = .13.</span></li>
+<li>Rasmussen, S. H. R., Ludeke, S. G., &amp; Klemmensen, R. (2023). Using deep learning to predict ideology from facial photographs. <i>Scientific Reports</i> 13, 5257. <a href="https://doi.org/10.1038/s41598-023-31796-1">doi</a> <span>— 3,323 Danish candidates, 61% accuracy. Predictions tracked smiling and, for women, attractiveness; the model also used areas outside the face.</span></li>
+<li>Lindholm, A., Hjorth, F., &amp; Schuessler, J. (2025). Facial finetuning: using pretrained image classification models to predict politicians' success. <i>Political Science Research and Methods</i> 13(4), 1031–1041. <a href="https://doi.org/10.1017/psrm.2024.38">doi</a> <span>— 7,080 Danish politicians; model scores for attractiveness and trustworthiness correlate with votes.</span></li>
+<li>Rule, N. O., &amp; Ambady, N. (2010). Democrats and Republicans can be differentiated from their faces. <i>PLoS ONE</i> 5(1), e8733. <a href="https://doi.org/10.1371/journal.pone.0008733">doi</a> <span>— human judges above chance on candidate photos.</span></li>
+</ol>
+</details>
+
+<details>
+<summary>Personality from faces <small>· 10</small></summary>
+<ol>
+<li>Kachur, A., Osin, E., Davydov, D., Shutilov, K., &amp; Novokshonov, A. (2020). Assessing the Big Five personality traits using real-life static facial images. <i>Scientific Reports</i> 10, 8487. <a href="https://doi.org/10.1038/s41598-020-65358-6">doi</a> <span>— 12,447 volunteers, 31,367 photos; mean r = .24 with self-reports. Three of the five authors worked for the company that supplied the data.</span></li>
+<li>Guenzel, M., Kogan, S., Niessner, M., &amp; Shue, K. (2026). AI personality extraction from faces: Labor market implications. NBER Working Paper 34808. <a href="https://www.nber.org/papers/w34808">NBER</a> <span>— LinkedIn photos of about 96,000 MBA graduates; "Photo Big 5" scores (Kachur model) predict pay, seniority and job moves. The authors warn against use in hiring.</span></li>
+<li>Hu, S., Xiong, J., Fu, P., et al. (2017). Signatures of personality on dense 3D facial images. <i>Scientific Reports</i> 7, 73. <a href="https://doi.org/10.1038/s41598-017-00071-5">doi</a> <span>— 3D scans of 834 Han Chinese adults (CAS-MPG Shanghai, Fudan); face shape explains 0.67–3.95% of personality variance.</span></li>
+<li>Xu, J., Tian, W., Lv, G., Liu, S., &amp; Fan, Y. (2021). Prediction of the Big Five personality traits using static facial images of college students with different academic backgrounds. <i>IEEE Access</i> 9, 76822–76832. <a href="https://doi.org/10.1109/ACCESS.2021.3076989">doi</a> <span>— Northwestern Polytechnical University, Xi'an; 13,347 student photo–questionnaire pairs; "above 70%" accuracy on binned classes, not comparable with correlations.</span></li>
+<li>Cai, L., &amp; Liu, X. (2022). Identifying Big Five personality traits based on facial behavior analysis. <i>Frontiers in Public Health</i> 10, 1001828. <a href="https://doi.org/10.3389/fpubh.2022.1001828">doi</a> <span>— Institute of Psychology, CAS; facial movement in 30-second videos, N = 82, r = .39–.48, no independent test sample.</span></li>
+<li>Jaeger, B., Sleegers, W. W. A., Stern, J., Penke, L., &amp; Jones, A. L. (2024). Testing perceivers' accuracy and accuracy awareness when forming personality impressions from faces. <i>European Journal of Personality</i> 38(6), 907–927. <a href="https://doi.org/10.1177/08902070231225728">doi</a> <span>— preregistered: human face impressions of personality are not accurate, and people overestimate their accuracy.</span></li>
+<li>Foo, Y. Z., Sutherland, C. A. M., Burton, N. S., Nakagawa, S., &amp; Rhodes, G. (2022). Accuracy in facial trustworthiness impressions: Kernel of truth or modern physiognomy? A meta-analysis. <i>Personality and Social Psychology Bulletin</i> 48(11), 1580–1596. <a href="https://doi.org/10.1177/01461672211048110">doi</a> <span>— face-level r = .14, "unlikely to be of practical utility".</span></li>
+<li>Hinds, J., &amp; Joinson, A. (2024). Digital data and personality: A systematic review and meta-analysis. <i>Psychological Bulletin</i> 150(6), 727–766. <a href="https://doi.org/10.1037/bul0000430">doi</a> <span>— benchmark across all digital footprints: computer prediction pooled ρ = .30 (42 studies).</span></li>
+<li>Kosinski, M. (2017). Facial width-to-height ratio does not predict self-reported behavioral tendencies. <i>Psychological Science</i> 28(11), 1675–1682. <a href="https://doi.org/10.1177/0956797617716929">doi</a> <span>— a null result from Kosinski himself.</span></li>
+<li>刘晨, 温芳芳, 佐斌 (2019). 以貌取人可行吗？——基于面孔的特质推理及准确性. 《心理科学》42(1), 150–156. <a href="https://jps.ecnu.edu.cn/CN/Y2019/V42/I1/150">jps.ecnu.edu.cn</a><span class="tag">中文</span> <span>— Central China Normal University review: face-based trait inference has "moderate accuracy" that depends on target, perceiver, culture and context.</span></li>
+</ol>
+</details>
+
+<details>
+<summary>Sexual orientation from faces <small>· 7</small></summary>
+<ol>
+<li>Wang, Y., &amp; Kosinski, M. (2018). Deep neural networks are more accurate than humans at detecting sexual orientation from facial images. <i>Journal of Personality and Social Psychology</i> 114(2), 246–257. <a href="https://doi.org/10.1037/pspa0000098">doi</a> <span>— 35,326 dating-site images; pairwise accuracy 81% (men) and 74% (women) from one image.</span></li>
+<li>Leuner, J. (2019). A replication study: Machine learning models are capable of predicting sexual orientation from facial images. <a href="https://arxiv.org/abs/1902.10739">arXiv 1902.10739</a> <span>— 20,910 new dating-site photos: 68% / 77%. A model on blurred photos still reached 63% / 72%, so much of the signal is not facial structure.</span></li>
+<li>Agüera y Arcas, B., Todorov, A., &amp; Mitchell, M. (2018). Do algorithms reveal sexual orientation or just expose our stereotypes? <i>Medium</i>. <a href="https://gwern.net/docs/www/medium.com/2b3924a875937ddbd65ab929c6d4a39d22ff7e3e.html">archive</a> <span>— glasses, makeup, facial hair and selfie angle differ between groups.</span></li>
+<li>Gelman, A., Mattson, G., &amp; Simpson, D. (2018). Gaydar and the fallacy of decontextualized measurement. <i>Sociological Science</i> 5, 270–280. <a href="https://doi.org/10.15195/v5.a12">doi</a> <span>— the classifier measures self-presentation on a dating site, not orientation in the population.</span></li>
+<li>GLAAD &amp; Human Rights Campaign (2017). Joint statement on the Stanford study.<span class="tag">unverified</span> <span>— called it "dangerous and flawed"; the primary page was not reachable, quotes come from press reports.</span></li>
+<li>积木 (2017). 看脸的世界？通过面部识别技术，AI 可以了解许多个人信息. 爱范儿. <a href="https://www.ifanr.com/909100">ifanr.com</a><span class="tag">中文</span> · 方嘉文 (2017). 你以为人工智能看出了"直"或"弯"？它只是看出了你的偏见. 爱范儿. <a href="https://www.ifanr.com/914194">ifanr.com</a><span class="tag">中文</span> <span>— Chinese coverage of the study and of the Western critiques.</span></li>
+<li>柯鸣 (2018). 性取向被识别后，AI伦理的边界又在哪里？ 36氪. <a href="https://www.36kr.com/p/1722704281601">36kr.com</a><span class="tag">中文</span> <span>— commentary on AI ethics after the study, with a Sun Yat-sen University relationship-recognition model.</span></li>
+</ol>
+<p class="note">No peer-reviewed replication on a new population (2020–2026) and no test of vision-language models for sexual orientation was found.</p>
+</details>
+
+<details>
+<summary>AI models and stereotypes <small>· 3</small></summary>
+<ol>
+<li>Jeon, S., Lee, M. H. J., Montgomery, J. M., &amp; Lai, C. K. (2026). From faces to politics: Vision-language models (sometimes) link visual demographic characteristics to ideological labels. <i>Political Analysis</i> 34(4), 613–621. <a href="https://doi.org/10.1017/pan.2026.10038">doi</a> <span>— GPT-4o, GPT-4o-mini and LLaVA rated identical ads with women as more liberal (b = .41 against a survey gap of .15); Gemini refused to rate faces.</span></li>
+<li>Hausladen, C. I., Knott, M., Camerer, C. F., &amp; Perona, P. (2025). Social perception of faces in a vision-language model. <i>FAccT '25</i>, 639–659. <a href="https://doi.org/10.1145/3715275.3732041">doi</a> · <a href="https://arxiv.org/abs/2408.14435">arXiv</a> <span>— CLIP's judgments shift with expression more than with age, and with lighting about as much as with age.</span></li>
+<li>Peterson, J. C., Uddenberg, S., Griffiths, T. L., Todorov, A., &amp; Suchow, J. W. (2022). Deep models of superficial face judgments. <i>PNAS</i> 119(17), e2115228119. <a href="https://doi.org/10.1073/pnas.2115228119">doi</a> · <a href="https://github.com/jcpeterson/omi">One Million Impressions</a> <span>— models how people judge synthetic faces.</span></li>
+</ol>
+</details>
+
+<details>
+<summary>Critiques and the history of physiognomy <small>· 7</small></summary>
+<ol>
+<li>Agüera y Arcas, B., Mitchell, M., &amp; Todorov, A. (2017). Physiognomy's new clothes. <i>Medium</i>. <a href="https://ethicsatwork.nd.edu/resources/physiognomys-new-clothes/">summary</a></li>
+<li>Stark, L., &amp; Hutson, J. (2022). Physiognomic artificial intelligence. <i>Fordham Intellectual Property, Media &amp; Entertainment Law Journal</i> 32(4). <a href="https://ir.lawnet.fordham.edu/iplj/vol32/iss4/2">Fordham</a> <span>— defines "physiognomic AI" and argues for legal bans.</span></li>
+<li>Andrews, M., Smart, A., &amp; Birhane, A. (2024). The reanimation of pseudoscience in machine learning and its ethical repercussions. <i>Patterns</i> 5(9), 101027. <a href="https://doi.org/10.1016/j.patter.2024.101027">doi</a> <span>— discusses Kosinski 2024, Wang &amp; Kosinski 2018, Wu &amp; Zhang 2016 and Kachur 2020.</span></li>
+<li>Todorov, A., Olivola, C. Y., Dotsch, R., &amp; Mende-Siedlecki, P. (2015). Social attributions from faces. <i>Annual Review of Psychology</i> 66, 519–545. <a href="https://doi.org/10.1146/annurev-psych-113011-143831">doi</a> · Todorov, A. (2017). <i>Face Value</i>. Princeton University Press.</li>
+<li>Wu, X., &amp; Zhang, X. (2016). Automated inference on criminality using face images. <a href="https://arxiv.org/abs/1611.04135">arXiv 1611.04135</a> <span>— Shanghai Jiao Tong University; ID photos of convicted men against web photos of others, a sampling confound. Version 3 (2017) is the authors' reply to critics.</span></li>
+<li>虞涵棋, 杨漾 (2017). 谷歌研究员质疑"看脸识罪犯"，交大教授撰文：我被扣帽子了. 澎湃新闻. <a href="https://m.thepaper.cn/newsDetail_forward_1685972">thepaper.cn</a><span class="tag">中文</span> <span>— Wu Xiaolin's response; reports 1,856 photos and 89% claimed accuracy.</span></li>
+<li>Eckles, D., Gordon, B. R., &amp; Johnson, G. A. (2018). Field studies of psychologically targeted ads face threats to internal validity. <i>PNAS</i> 115(23). <a href="https://doi.org/10.1073/pnas.1805363115">doi</a> <span>— Facebook's ad delivery means the Matz 2017 arms were not randomised comparisons.</span></li>
+</ol>
+</details>
+
+<details>
+<summary>Cambridge Analytica and psychographic targeting <small>· 14</small></summary>
+<ol>
+<li>Kosinski, M., Stillwell, D., &amp; Graepel, T. (2013). Private traits and attributes are predictable from digital records of human behavior. <i>PNAS</i> 110(15), 5802–5805. <a href="https://doi.org/10.1073/pnas.1218772110">doi</a> <span>— Facebook Likes predict personality, politics and sexual orientation.</span></li>
+<li>Youyou, W., Kosinski, M., &amp; Stillwell, D. (2015). Computer-based personality judgments are more accurate than those made by humans. <i>PNAS</i> 112(4), 1036–1040. <a href="https://doi.org/10.1073/pnas.1418680112">doi</a></li>
+<li>University of Cambridge Psychometrics Centre. myPersonality. <a href="https://www.psychometrics.cam.ac.uk/node/888">psychometrics.cam.ac.uk</a> <span>— "no longer active and data is no longer being shared"; over 6 million volunteers until 2012.</span></li>
+<li>Information Commissioner's Office (2018). <i>Investigation into the use of data analytics in political campaigns</i>. <a href="https://ico.org.uk/media2/migrated/2260271/investigation-into-the-use-of-data-analytics-in-political-campaigns-final-20181105.pdf">ICO (PDF)</a> <span>— up to 87 million Facebook users; Stillwell refused Cambridge Analytica access to myPersonality, so Kogan built his own app; £500,000 penalty for Facebook.</span></li>
+<li>Denham, E. (2020). Letter to the DCMS Committee on the ICO investigation. <a href="https://cy.ico.org.uk/media2/migrated/2618383/20201002_ico-o-ed-l-rtl-0181_to-julian-knight-mp.pdf">ICO (PDF)</a> <span>— the models were "well recognised processes using commonly available technology"; real-world accuracy on new people "was likely much lower"; GSR data could not have been used in the Brexit referendum.</span></li>
+<li>House of Commons DCMS Committee (2019). <i>Disinformation and 'fake news': Final Report</i>, HC 1791. <a href="https://dera.ioe.ac.uk/id/eprint/33370/1/1791.pdf">PDF</a> · Oral evidence of C. Wylie, 27 Mar 2018, HC 363. <a href="https://committees.parliament.uk/oralevidence/7803/html/">parliament.uk</a><span class="tag">partly verified</span></li>
+<li>US Federal Trade Commission (2019). Final settlement with Cambridge Analytica's former CEO and the app developer. <a href="https://www.ftc.gov/news-events/news/press-releases/2019/12/ftc-grants-final-approval-settlement-former-cambridge-analytica-ceo-app-developer-over-allegations">ftc.gov</a> · $5 billion penalty for Facebook. <a href="https://www.ftc.gov/news-events/news/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions-facebook">ftc.gov</a> <span>— the harvested data and derived models had to be deleted.</span></li>
+<li>Matz, S. C., Kosinski, M., Nave, G., &amp; Stillwell, D. J. (2017). Psychological targeting as an effective approach to digital mass persuasion. <i>PNAS</i> 114(48), 12714–12719. <a href="https://doi.org/10.1073/pnas.1710966114">doi</a> <span>— 3.5 million people reached; up to 40% more clicks and 50% more purchases.</span></li>
+<li>Tappin, B. M., Wittenberg, C., Hewitt, L. B., Berinsky, A. J., &amp; Rand, D. G. (2023). Quantifying the potential persuasive returns to political microtargeting. <i>PNAS</i> 120(25), e2216261120. <a href="https://doi.org/10.1073/pnas.2216261120">doi</a> <span>— targeting on more than one attribute added nothing; gains may not need large amounts of personal data.</span></li>
+<li>Simchon, A., Edwards, M., &amp; Lewandowsky, S. (2024). The persuasive effects of political microtargeting in the age of generative AI. <i>PNAS Nexus</i> 3(2), pgae035. <a href="https://doi.org/10.1093/pnasnexus/pgae035">doi</a> · Matz, S. C., et al. (2024). The potential of generative AI for personalized persuasion at scale. <i>Scientific Reports</i> 14, 4692. <a href="https://doi.org/10.1038/s41598-024-53755-0">doi</a></li>
+<li>Gibney, E. (2018). The scant science behind Cambridge Analytica's controversial marketing techniques. <i>Nature</i>. <a href="https://doi.org/10.1038/d41586-018-03880-4">doi</a> · Allen, J., &amp; Abbruzzese, J. (2018). Cambridge Analytica's effectiveness called into question. NBC News. <a href="https://www.nbcnews.com/politics/politics-news/cambridge-analytica-s-effectiveness-called-question-despite-alleged-facebook-data-n858256">nbcnews.com</a></li>
+<li>Bakir, V. (2020). Psychological operations in digital political campaigns: Assessing Cambridge Analytica's psychographic profiling and targeting. <i>Frontiers in Communication</i> 5, 67. <a href="https://doi.org/10.3389/fcomm.2020.00067">doi</a> · Hersh, E. D. (2015). <i>Hacking the Electorate</i>. Cambridge University Press. <a href="https://doi.org/10.1017/cbo9781316212783">doi</a></li>
+<li>Lomas, N. (2020). Latest Cambridge Analytica leaks ("Hindsight Files"). TechCrunch. <a href="https://techcrunch.com/2020/01/06/facebook-data-misuse-and-voter-manipulation-back-in-the-frame-with-latest-cambridge-analytica-leaks/">techcrunch.com</a> <span>— internal documents released by Brittany Kaiser; no public index found.</span></li>
+<li>DeepTech深科技 (2018). "剑桥分析"究竟如何通过"点赞"来影响投票倾向？ 安全内参. <a href="https://www.secrss.com/articles/1828">secrss.com</a><span class="tag">中文</span> <span>— Chinese explainer; notes that evidence the method swung elections is lacking.</span></li>
+</ol>
+<p class="note"><b>Data.</b> Public: the ICO, FTC and DCMS documents above. Not public: the profiles harvested by Kogan's app (deletion ordered by the FTC; seized copies destroyed by the ICO) and the myPersonality dataset (sharing stopped in 2018). This project links to the official record and does not use leaked copies.</p>
+</details>
+
+<details>
+<summary>Who builds it: companies and labs <small>· 9</small></summary>
+<ol>
+<li>US Treasury (10 Dec 2021). Sanctions on SenseTime. <a href="https://home.treasury.gov/news/press-releases/jy0526">treasury.gov</a> <span>— says its software "can determine a target's ethnicity, with a particular focus on identifying ethnic Uyghurs". SenseTime called the accusations unfounded.</span></li>
+<li>US Treasury (16 Dec 2021). Chinese military-industrial complex companies, incl. Megvii, Yitu, CloudWalk. <a href="https://home.treasury.gov/news/press-releases/jy0538">treasury.gov</a></li>
+<li>IPVM (2020). Huawei / Megvii "Uyghur alert" test report. <a href="https://ipvm.com/reports/huawei-megvii-uygur">ipvm.com</a> <span>— Huawei: "simply a test"; Megvii: not designed to label ethnic groups.</span></li>
+<li>Rollet, C. (2020). Uniview Uyghur recognition. IPVM. <a href="https://ipvm.com/reports/uniview-uyghur">ipvm.com</a> <span>— an SDK ethnicity code listing only Uyghurs; also cites Hikvision (2019) and Dahua (2020).</span></li>
+<li>Asher-Schapiro, A. (2021). Chinese tech patents tools that can detect, track Uighurs. Thomson Reuters Foundation. <a href="https://www.context.news/surveillance/chinese-tech-patents-tools-that-can-detect-track-uighurs">context.news</a> <span>— Huawei + CAS, Megvii and Alibaba patent filings; company replies included.</span></li>
+<li>Wang, C., Zhang, Q., Liu, W., Liu, Y., &amp; Miao, L. (2019). Facial feature discovery for ethnicity recognition. <i>WIREs Data Mining and Knowledge Discovery</i> 9(1), e1278. <a href="https://doi.org/10.1002/widm.1278">doi</a> · IPVM (2021) on its ethics. <a href="https://ipvm.com/reports/eth-rec-ethics">ipvm.com</a> <span>— Dalian Minzu University with Curtin University; 300 Uyghur, Tibetan and Korean students; Expression of Concern, no retraction registered.</span></li>
+<li>Mozur, P. (2019). One month, 500,000 face scans: How China is using A.I. to profile a minority. <i>The New York Times</i>. <a href="https://www.nytimes.com/2019/04/14/technology/china-surveillance-artificial-intelligence-racial-profiling.html">nytimes.com</a><span class="tag">partly verified</span></li>
+<li>Human Rights Watch (2017). China: Voice biometric collection threatens privacy. <a href="https://www.hrw.org/news/2017/10/22/china-voice-biometric-collection-threatens-privacy">hrw.org</a> <span>— iFlytek; voice, not face.</span></li>
+<li>Globes (2016). Israeli co Faception claims it can spot terrorists. <a href="https://en.globes.co.il/en/article-israeli-co-faception-claims-it-can-spot-terrorists-1001127220">globes.co.il</a> <span>— 15 "classifiers" at a claimed 80%, no published validation.</span></li>
+</ol>
+</details>
+
+<details>
+<summary>Law: EU, China, US <small>· 5</small></summary>
+<ol>
+<li>Regulation (EU) 2024/1689 (AI Act), Art. 5(1)(g). <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">EUR-Lex</a> <span>— bans biometric categorisation that infers race, political opinions, religion, sex life or sexual orientation.</span></li>
+<li>《中华人民共和国个人信息保护法》 (2021), Art. 28–29. <a href="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm">cac.gov.cn</a><span class="tag">中文</span> <span>— biometrics and religious belief are sensitive personal information; separate consent required. No named ban on inferring politics.</span></li>
+<li>最高人民法院关于审理使用人脸识别技术处理个人信息相关民事案件适用法律若干问题的规定, 法释〔2021〕15号. <a href="https://www.court.gov.cn/xinshidai/xiangqing/315851.html">court.gov.cn</a><span class="tag">中文</span> <span>— face verification, identification or analysis in public places in breach of law infringes personality rights.</span></li>
+<li>国家互联网信息办公室、公安部《人脸识别技术应用安全管理办法》 (2025), in force 1 June 2025. <a href="https://www.cac.gov.cn/2025-03/21/c_1744174262156096.htm">cac.gov.cn</a><span class="tag">中文</span> <span>— Art. 2(2) exempts R&amp;D and algorithm training; filing required above 100,000 people.</span></li>
+<li>US: Illinois BIPA, Texas CUBI, California CPRA, FTC enforcement (Rite Aid, 2023).<span class="tag">from memory</span></li>
+</ol>
+</details>
+
+</div>
+  </footer>
+</div>
+
+</body>
+</html>
