@@ -4,6 +4,8 @@
 # Deploy: scripts/build-pages.sh && scripts/deploy-pages.sh
 set -e
 cd "$(dirname "$0")/.."
+. site/links.env
+[ -n "$R2U_URL" ] || { echo "site/links.env: R2U_URL is empty" >&2; exit 1; }
 rm -rf _site
 wrap() {
   mkdir -p "$(dirname "$2")"
@@ -13,11 +15,12 @@ wrap() {
     printf '<style>body{margin:0}img{max-width:100%%}[hidden]{display:none!important}</style>\n'
     printf '</head>\n<body>\n'
     awk '/<!--#include sources-en-->/ { system("cat sources/sources.en.html"); next }
-         /<!--#include sources-zh-->/ { system("cat sources/sources.zh.html"); next } { print }' "$1"
+         /<!--#include sources-zh-->/ { system("cat sources/sources.zh.html"); next } { print }' "$1" | sed "s|__R2U_URL__|$R2U_URL|g"
     printf '\n</body>\n</html>\n'
   } > "$2"
 }
 wrap site/index.html _site/index.html
+wrap site/codex-v1/index.html _site/codex-v1/index.html
 cp -R site/assets _site/assets
 wrap report/index.html _site/report/index.html
 [ -f site/zh/index.html ] && wrap site/zh/index.html _site/zh/index.html zh-Hans

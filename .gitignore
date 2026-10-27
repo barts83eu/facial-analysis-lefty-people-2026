@@ -10,3 +10,8 @@ _cf/
 data/owner/
 agents/claude-opus-5-5/shots/
 section-index/.wrangler/
+agents/codex/runtime/
+agents/codex/codex-v1-shots/*.png
+section-index/_out/
+agents/claude-opus-5-5/road-to-unfreedom/
+agents/claude-opus-5-5/budotsmedia-sitemap.txt

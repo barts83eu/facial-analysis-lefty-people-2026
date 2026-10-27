@@ -7,6 +7,8 @@ an explainer video (see [`video/`](video/)).
 
 ## Live pages
 
+- Codex iteration v1: https://budotsmedia.com/ghostinthemachine/facial-recognition-politics/codex-v1/
+  — source `site/codex-v1/`; preserves the original page and shares its source list.
 - budotsmedia.com: https://budotsmedia.com/ghostinthemachine/facial-recognition-politics/ (report: `…/report/`)
   — Cloudflare Worker `ghostinthemachine-facial-recognition-politics` (`wrangler.jsonc`);
   update with `scripts/build-budotsmedia.sh && npx wrangler deploy`
@@ -22,7 +24,8 @@ an explainer video (see [`video/`](video/)).
 |---|---|
 | Principal investigator, project owner | **Bart Sakwerda** |
 | Workflow orchestration, literature & GitHub survey, docs | **Claude Opus 5.5** (Anthropic), via Claude Code |
-| Contributing agents (planned) | Kimi, ChatGPT Codex — see [`agents/`](agents/) |
+| Site remix and interactive study comparison (Codex v1) | **ChatGPT Codex** (OpenAI) |
+| Contributing agents (planned) | Kimi — see [`agents/`](agents/) |
 
 ## Research question
 

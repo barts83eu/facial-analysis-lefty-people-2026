@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "overflow": false,
+      "fonts": {
+        "title": true,
+        "mono": true
+      },
+      "scriptErrors": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overflow": false,
+      "fonts": {
+        "title": true,
+        "mono": true
+      },
+      "scriptErrors": 0
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "overflow": false,
+      "fonts": {
+        "title": true,
+        "mono": true
+      },
+      "scriptErrors": 0
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "overflow": false,
+      "fonts": {
+        "title": true,
+        "mono": true
+      },
+      "scriptErrors": 0
+    }
+  ],
+  "noScriptEvidenceTable": true
+}

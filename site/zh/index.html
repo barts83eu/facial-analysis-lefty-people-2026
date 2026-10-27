@@ -69,6 +69,13 @@ p { margin: 0; }
 .meme { margin: 0; width: clamp(260px, 38vw, 460px); max-width: 100%; display: grid; gap: .5rem; }
 .meme img { width: 100%; height: auto; display: block; border: 1px solid var(--line); box-shadow: 0 0 28px rgba(255,180,58,.18); }
 .meme figcaption { max-width: 46ch; }
+.meme a { display: block; color: inherit; }
+.meme a:hover img, .meme a:focus-visible img { border-color: var(--cyan); }
+.r2u { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: .75rem; align-items: center; width: clamp(260px, 38vw, 460px); max-width: 100%; color: var(--phosphor); text-decoration: none; border: 1px solid var(--line); padding: .5rem; }
+.r2u img { width: 100%; height: auto; display: block; }
+.r2u b { display: block; font-size: .9rem; }
+.r2u:hover, .r2u:focus-visible { border-color: var(--cyan); }
+@media (max-width: 560px) { .r2u { width: 100%; } }
 @media (max-width: 560px) { .meme { width: 100%; } }
 
 /* Stats */
@@ -124,9 +131,10 @@ em { font-style: normal; font-weight: 700; }
     </div>
     <div class="hero-art">
       <figure class="meme">
-        <img src="../assets/political-compass-meme.webp" width="789" height="789" alt="互联网政治坐标迷因：20×20 网格，纵轴为威权—自由意志，横轴为经济左—右，格中是标志、旗帜和公众人物的面孔">
+        <a href="__R2U_URL__" aria-label="打开相关档案《Road to Unfreedom》（Bart Sakwerda 著）"><img src="../assets/political-compass-meme.webp" width="789" height="789" alt="互联网政治坐标迷因：20×20 网格，纵轴为威权—自由意志，横轴为经济左—右，格中是标志、旗帜和公众人物的面孔"></a>
         <figcaption class="tiny">互联网政治坐标 · 网络迷因，作者不详 · 位置只是观点；本页检验人脸是否携带这种信号</figcaption>
       </figure>
+      <a class="r2u" href="__R2U_URL__"><img src="../assets/road-to-unfreedom.jpg" width="1200" height="750" loading="lazy" alt="Road to Unfreedom title over a red theatre curtain and a road running to a city skyline"><span><span class="tiny">相关档案</span><b>Road to Unfreedom</b><span class="tiny">英国、美国、法国和波兰，1981–2026：改变人们能说什么、做什么、拒绝什么的法律</span></span></a>
     </div>
   </div>
 </section>

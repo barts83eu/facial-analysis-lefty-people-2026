@@ -4,6 +4,8 @@
 # Deploy: scripts/build-budotsmedia.sh && npx wrangler deploy
 set -e
 cd "$(dirname "$0")/.."
+. site/links.env
+[ -n "$R2U_URL" ] || { echo "site/links.env: R2U_URL is empty" >&2; exit 1; }
 BASE=/ghostinthemachine/facial-recognition-politics
 URL="https://budotsmedia.com$BASE"
 OUT="_cf$BASE"
@@ -20,7 +22,7 @@ wrap() {
     printf '<style>body{margin:0}img{max-width:100%%}[hidden]{display:none!important}</style>\n'
     printf '</head>\n<body>\n'
     awk '/<!--#include sources-en-->/ { system("cat sources/sources.en.html"); next }
-         /<!--#include sources-zh-->/ { system("cat sources/sources.zh.html"); next } { print }' "$1"
+         /<!--#include sources-zh-->/ { system("cat sources/sources.zh.html"); next } { print }' "$1" | sed "s|__R2U_URL__|$R2U_URL|g"
     printf '\n</body>\n</html>\n'
   } > "$2"
 }
@@ -29,6 +31,7 @@ DESC_REPORT="Research report: Kosinski's face and politics studies, effect sizes
 DESC_SITE_ZH="已发表研究对“从人脸预测政治倾向”的结论，以及它无法从一个人的一张照片中得出的结论。Budots Media，Ghost in the Machine。"
 DESC_REPORT_ZH="研究报告：Kosinski 的人脸与政治倾向研究、效应量、单张照片的局限、对 CCTV 的适用性、批评与文献来源。"
 wrap site/index.html "$OUT/index.html" "$URL/" "$DESC_SITE" en
+wrap site/codex-v1/index.html "$OUT/codex-v1/index.html" "$URL/codex-v1/" "$DESC_SITE" en
 cp -R site/assets "$OUT/assets"
 wrap report/index.html "$OUT/report/index.html" "$URL/report/" "$DESC_REPORT" en
 # Optional Chinese versions (site/zh/, report/zh/)

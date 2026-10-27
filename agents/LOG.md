@@ -74,3 +74,21 @@
   Card images are screenshots of the four live pages; share image og-ghostinthemachine.jpg (1200 × 630).
 - Files: section-index/ (wrangler.jsonc, site/ghostinthemachine/index.html, media/*.jpg), README.md, .gitignore
 - Open items: a top-bar link needs the main Worker budotsmedia-260818 (source on the D2 SSD, not mounted).
+
+## 2026-10-27 — ChatGPT Codex (codex)
+- What: created and published a separate Codex v1 site iteration, requested by Bart. Reused the original terminal palette, source list and summary statistics; added aggregate study controls, comparison table, variance chart, method disclosure and navigation. No individual trait inference.
+- Files: site/codex-v1/, site/index.html (iteration link), scripts/build-pages.sh, scripts/build-budotsmedia.sh, README.md (URL and credits), .gitignore, agents/codex/2026-10-27_codex-v1.md, agents/codex/check-codex-v1.cjs, agents/codex/codex-v1-shots/.
+- Validation: desktop/phone visual inspection; browser checks at 320/390/768/1440px; no horizontal overflow or script errors; keyboard and study controls passed; both builds and Cloudflare dry run passed. Simulation outputs reproduced. Published URL returned HTTP 200.
+- Published: https://budotsmedia.com/ghostinthemachine/facial-recognition-politics/codex-v1/; Cloudflare version 706bd234-bda3-4ae0-b31f-58b61b253391. Original and report retained. Existing pending meme/Chinese source assets were included by the full-site deployment. GitHub Pages build updated locally, not deployed.
+- Open items: inherited research verification tasks remain; this design iteration did not audit citations. D2 Documents volume unavailable; work performed in this repository following the owner's follow-up instruction.
+
+## 2026-10-27 — Claude Opus 5.5 (cross-links with Road to Unfreedom)
+- What: political-compass meme in the site hero (EN, ZH) now links to Road to Unfreedom, with a screenshot card of it
+  under the meme; Road to Unfreedom card on budotsmedia.com/ghostinthemachine/. Reverse link: the face-recognition
+  panel of the Road to Unfreedom artifact (caption and owner photo) links to this research file (artifact version 21).
+- URL: one setting, `site/links.env` (R2U_URL), filled in at build time by scripts/build-*.sh and section-index/build.sh.
+  For now the public claude.ai link; replace with the Cloudflare address or the new domain when the PI gives it.
+- Files: site/links.env, site/index.html, site/zh/index.html, site/assets/road-to-unfreedom.jpg, scripts/build-*.sh,
+  section-index/ (build.sh, wrangler.jsonc assets → _out, index.html, media/road-to-unfreedom.jpg), .gitignore
+- Also committed in this commit: the meme-hero work by the other Claude session (25 Oct) and Codex's site/codex-v1/
+  (27 Oct), both already deployed by Codex.
