@@ -1,8 +1,5 @@
 <title>Face Politics Terminal</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;700&family=Silkscreen&display=swap">
 <style>
 /* Layout: amber-phosphor CRT terminal; full-width parallax bands, each with a ~70ch console column. Single dark theme by design. */
 :root {
@@ -13,9 +10,10 @@
   --cyan: #6fd6e8;
   --alert: #ff6b4a;
   --line: #3a2f1c;
-  --title: "Bebas Neue", "Arial Narrow", Impact, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  --tiny: "Silkscreen", "JetBrains Mono", monospace;
+  /* amber-terminal v3: one system monospace stack for every role (no web fonts, no display or pixel faces) */
+  --mono: Consolas, "Cascadia Mono", "SF Mono", Menlo, "DejaVu Sans Mono", "Liberation Mono", "Courier New", monospace;
+  --title: var(--mono);
+  --tiny: var(--mono);
   color-scheme: dark;
 }
 html { background: var(--void); }
@@ -44,19 +42,24 @@ body::after {
   display: grid; gap: 1.75rem;
 }
 .console { max-width: 70ch; display: grid; gap: 1rem; min-width: 0; }
-.ghost { font-family: var(--title); color: var(--phosphor); opacity: .06; line-height: .85; white-space: nowrap; font-size: clamp(9rem, 30vw, 24rem); position: absolute; }
+.ghost { font-family: var(--title); font-weight: 700; color: var(--phosphor); opacity: .06; line-height: .85; white-space: nowrap; font-size: clamp(9rem, 30vw, 24rem); position: absolute; }
 .lograin { font: 400 11px/1.5 var(--mono); color: var(--phosphor-dim); opacity: .16; white-space: pre; padding: 0 2rem; }
 
 /* Type */
-h1, h2 { font-family: var(--title); font-weight: 400; letter-spacing: .03em; text-transform: uppercase; margin: 0; line-height: .95; text-wrap: balance; text-shadow: 0 0 18px rgba(255,180,58,.35); }
-h1 { font-size: clamp(3.2rem, 11vw, 8rem); }
-h2 { font-size: clamp(2.2rem, 6vw, 4rem); }
+h1, h2 { font-family: var(--title); font-weight: 700; letter-spacing: 0; text-transform: uppercase; margin: 0; line-height: 1; text-wrap: balance; text-shadow: 0 0 2px rgba(255,180,58,.9), 0 0 14px rgba(255,180,58,.5), 0 0 40px rgba(255,180,58,.25); }
+h2::before { content: "> "; color: var(--phosphor-dim); text-shadow: none; }
+h1 { font-size: clamp(2.5rem, 6.4vw, 5.75rem); }
+h2 { font-size: clamp(1.75rem, 4.4vw, 3.25rem); }
 p { margin: 0; }
-.tiny { font: 400 8px/1.6 var(--tiny); letter-spacing: .06em; text-transform: uppercase; color: var(--phosphor-dim); -webkit-font-smoothing: none; font-smooth: never; }
-.tiny16 { font: 400 16px/1.3 var(--tiny); -webkit-font-smoothing: none; font-smooth: never; }
+.tiny { font: 400 11px/1.5 var(--tiny); letter-spacing: .08em; text-transform: uppercase; color: var(--phosphor-dim); }
+.tiny16 { font: 400 14px/1.3 var(--tiny); text-transform: uppercase; }
 .prompt { color: var(--cyan); }
 .prompt::before { content: "budots@lab:~$ "; color: var(--phosphor-dim); }
-.cursor::after { content: "█"; animation: blink 1.1s steps(1) infinite; margin-left: .15em; }
+.cursor::after { content: "█"; animation: blink 1.1s steps(1) infinite; margin-left: .15em; text-shadow: 0 0 2px rgba(255,180,58,.9), 0 0 14px rgba(255,180,58,.5), 0 0 40px rgba(255,180,58,.25); }
+/* matrix rain: falling hex columns behind the hero title (amber-terminal MatrixRain) */
+.mrain { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.mrain span { position: absolute; top: 0; writing-mode: vertical-rl; text-orientation: upright; font: 700 14px/1 var(--mono); letter-spacing: .15em; color: var(--phosphor); opacity: var(--o, .22); text-shadow: 0 0 6px var(--phosphor); transform: translateY(-100%); animation: fall var(--t, 9s) linear infinite; animation-delay: var(--d, 0s); }
+@keyframes fall { to { transform: translateY(var(--bh, 900px)); } }
 @keyframes blink { 50% { opacity: 0; } }
 .hl { color: var(--void); background: var(--phosphor); padding: 0 .3em; }
 .alert { color: var(--alert); }
@@ -81,7 +84,7 @@ p { margin: 0; }
 /* Stats */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .cell { background: var(--screen); padding: 1.1rem 1.2rem; display: grid; gap: .35rem; align-content: start; min-width: 0; }
-.big { font-family: var(--title); font-size: 3rem; line-height: 1; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.big { font-family: var(--title); font-weight: 700; font-size: clamp(2rem, 3.4vw, 2.75rem); line-height: 1; letter-spacing: -.02em; text-shadow: 0 0 2px rgba(255,180,58,.9), 0 0 14px rgba(255,180,58,.5), 0 0 40px rgba(255,180,58,.25); font-variant-numeric: tabular-nums; }
 .cell p { font-size: .86rem; color: var(--phosphor-dim); }
 
 /* ASCII bars */
@@ -105,13 +108,14 @@ p { margin: 0; }
 @media (max-width: 560px) { .card { grid-template-columns: 1fr; } }
 
 footer .inner { padding-block: 3rem; }
-@media (prefers-reduced-motion: reduce) { .layer { transform: none !important; } .cursor::after { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .layer { transform: none !important; } .cursor::after { animation: none; } .mrain span { animation: none; transform: translateY(calc(var(--d, 0s) / -1s * 40px)); } }
 </style>
 
 <div class="vignette" aria-hidden="true"></div>
 
 <!-- HERO -->
 <section class="band hero">
+  <div class="mrain" id="mrain" aria-hidden="true"></div>
   <div class="layer" data-speed="0.35" aria-hidden="true"><pre class="lograin" id="rain"></pre></div>
   <div class="layer" data-speed="-0.15" aria-hidden="true"><span class="ghost" style="right:-2vw; top:38%">AUC</span></div>
   <div class="inner">
@@ -326,6 +330,20 @@ footer .inner { padding-block: 3rem; }
     el.textContent = s;
   }
   rain("rain", 90); rain("rain2", 70); rain("rain3", 70); rain("rain4", 60);
+
+  // Matrix rain behind the hero title: columns of hex digits and symbols falling at different speeds
+  var mr = document.getElementById("mrain");
+  if (mr) {
+    var glyphs = "0123456789ABCDEF<>/\\|=+*#$%", html = "", w = Math.max(320, mr.offsetWidth), ncol = Math.round(w / 34);
+    for (var c = 0; c < ncol; c++) {
+      var len = 12 + Math.floor(Math.random() * 16), str = "";
+      for (var j = 0; j < len; j++) str += glyphs[Math.floor(Math.random() * glyphs.length)];
+      html += '<span style="left:' + ((c + Math.random() * .6) / ncol * 100).toFixed(2) + '%;--t:' + (6 + Math.random() * 8).toFixed(1) + 's;--d:-' + (Math.random() * 14).toFixed(1) + 's;--o:' + (.12 + Math.random() * .18).toFixed(2) + '">' + str + '</span>';
+    }
+    mr.innerHTML = html;
+    var setBh = function () { mr.style.setProperty("--bh", (mr.offsetHeight + 40) + "px"); };
+    setBh(); window.addEventListener("resize", setBh);
+  }
 
   // Terminal-style ASCII render of the logo
   var img = document.getElementById("logo"), pre = document.getElementById("ascii-logo");

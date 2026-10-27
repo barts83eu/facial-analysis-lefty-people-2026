@@ -25,20 +25,22 @@ Source: the Face Politics Terminal site, https://budotsmedia.com/ghostinthemachi
 
 | Role | Face | Use |
 |---|---|---|
-| `title` | Terminal mono, 700, uppercase | h1 `display-1`, h2 `display-2`, stat numbers `stat` |
+| `title` | Terminal mono, 700, uppercase, huge, glowing | h1 `display-1` (with block cursor), h2 `display-2` (with `> ` prefix), stat numbers `stat` |
 | `mono` | Terminal mono, 400/700 | all running text, rows, ASCII bars, log rain |
 | `tiny` | Terminal mono, 11px uppercase, 0.08em | eyebrows, credits, placeholder sizes |
 
-One face for everything: a plain technical monospace, the stack `Consolas, "Cascadia Mono", "SF Mono", Menlo, "DejaVu Sans Mono", "Liberation Mono", "Courier New", monospace`. System fonts only, no web fonts. Hierarchy comes from size, weight and uppercase, never from a second typeface. For Chinese pages add `Noto Sans SC` after the stack (titles at 700, no uppercase).
+One face for everything: a plain technical monospace, the stack `Consolas, "Cascadia Mono", "SF Mono", Menlo, "DejaVu Sans Mono", "Liberation Mono", "Courier New", monospace`. System fonts only, no web fonts. Hierarchy comes from size, weight, uppercase and phosphor glow, never from a second typeface. Titles look like a 1980s console printing in big characters: huge bold mono, tight tracking, `glow-text` bloom, a `> ` prompt on h2 and a blinking `█` at the end of the live heading. For Chinese pages add `Noto Sans SC` after the stack (titles at 700, no uppercase).
 
 ## Motion
 
-- Block cursor `█` after the command: `animation: blink 1.1s steps(1) infinite` (50% opacity 0).
-- Parallax layers as above. Nothing else moves. `prefers-reduced-motion` stops both.
+- Block cursor `█` (`.at-cursor`) after the command and after the hero title: `animation: blink 1.1s steps(1) infinite` (50% opacity 0). One blinking cursor per screen.
+- Typed-on titles (`.at-type`, `--chars` = text length): characters appear one step at a time over 1.8s, once.
+- Matrix rain (`.at-rain` inside `.at-stage`): vertical columns of hex digits and symbols falling behind a title at `opacity-matrix`; hero and section openers only.
+- Parallax layers as above. Nothing else moves. `prefers-reduced-motion` stops all of it.
 
 ## Components
 
-`Prompt` (command line with blinking cursor), `ConsoleBand` (eyebrow, heading, text in a band), `StatGrid`, `AsciiBars`, `Rows` (label/value list), `PhotoSlot` (placeholder that prints its size), `SourceList` (grouped, collapsible sources). Class names are in `components/bundle.css`, prefixed `at-`.
+`Headline` (huge glowing console title, typed on, blinking cursor), `MatrixRain` (falling characters behind a title), `Prompt` (command line with blinking cursor), `ConsoleBand` (eyebrow, heading, text in a band), `StatGrid`, `AsciiBars`, `Rows` (label/value list), `PhotoSlot` (placeholder that prints its size), `SourceList` (grouped, collapsible sources). Class names are in `components/bundle.css`, prefixed `at-`.
 
 ## Rules
 
