@@ -99,3 +99,9 @@
   Tokens copied from site/index.html; components Prompt, ConsoleBand, StatGrid, AsciiBars, Rows, PhotoSlot,
   SourceList; cover. Registered in ~/llm-context (skills/style/SKILL.md, AGENTS.md), pushed.
 - Files: design-system/amber-terminal/project/*
+
+## 2026-10-27 — claude-opus-5-5
+- What: amber-terminal design system, owner comment "terminals use Consolas, no weird fonts". Another Claude session published the switch (v4, 14:30): every type role on one system mono stack (Consolas, Cascadia Mono, SF Mono, Menlo, DejaVu Sans Mono, Liberation Mono, Courier New); Bebas Neue, JetBrains Mono, Silkscreen and the Google Fonts import removed. Local copy synced to that version; three component notes (PhotoSlot, StatGrid, ConsoleBand) still named the pixel/display faces and were corrected (artifact v5). `/style` register entry in ~/llm-context updated and pushed.
+- Also: Road to Unfreedom comment "animate and link those titles" was done and resolved by another session (v23, 14:13); my parallel draft was not published (agents/claude-opus-5-5/road-to-unfreedom/index-v23-unpublished.html, git-ignored).
+- Files: design-system/amber-terminal/project/ (tokens.json, components/bundle.css, README.md, design-system.json, components/Cover/preview.html, components/{PhotoSlot,StatGrid,ConsoleBand}/README.md), agents/LOG.md
+- Open items: site/index.html still uses Bebas Neue and Silkscreen, so the live site no longer matches the design system; switch on the owner's word. The Silkscreen-for-placeholder-sizes rule in ~/llm-context does not apply to this system now.
